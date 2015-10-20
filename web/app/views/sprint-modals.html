@@ -1,0 +1,191 @@
+<!--create-sprint-modal-->
+<div class="modal fade common-modal" id="create-sprint-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <form action="" name="sprintForm">
+				    <div class="modal-header">
+				      	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      	<h4 class="modal-title assign-task-heading">Create Sprint</h4>
+				    </div>
+
+				    <div class="modal-body">
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" name="sprintName" id="sprintName" type="text" placeholder="Enter Sprint Name" ng-model='sprint.name' required>
+				        </div>
+				        <div class="border-bottom-grey">
+				            <span>Start Date</span>
+				            <div class="calender-box" >
+				              	<div id="datepicker-sprint-start" class="input-group date" data-date-format="mm/dd/yyyy">
+			                		<input  class="date form-control" type="text" readonly ng-model="sprint.startDate"/>
+			                		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                	</div>
+			            	</div>
+				        </div>
+				        <div class="border-bottom-grey">
+				            <span>End Date&nbsp;&nbsp;</span>
+				            <div class="calender-box" >
+				              	<div id="datepicker-sprint-end" class="input-group date" data-date-format="mm/dd/yyyy">
+			                		<input  class="date form-control" type="text" readonly ng-model="sprint.endDate"/>
+				                	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				              	</div>
+				            </div>
+				        </div>
+				  	</div>
+				    <div class="modal-footer">
+				      	<button type="button" ng-disabled="sprintForm.sprintName.$error.required" class="btn-green" ng-click="createSprint(sprint)">Create Sprint</button>
+				    </div>
+			  </form>
+		</div>
+	</div>
+</div><!-- modal-->
+
+<!--create-sprint-modal-->
+<div class="modal fade common-modal" id="edit-sprint-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <form action="" name="sprintForm">
+				    <div class="modal-header">
+				      	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      	<h4 class="modal-title assign-task-heading">Create Sprint</h4>
+				    </div>
+
+				    <div class="modal-body">
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" name="sprintName" id="sprintName" type="text" placeholder="Enter Sprint Name" ng-model='sprint.name' required>
+				        </div>
+				        <div class="border-bottom-grey">
+				            <span>Start Date</span>
+				            <div class="calender-box" >
+				              	<div id="datepicker-sprint-start" class="input-group date" data-date-format="mm/dd/yyyy">
+			                		<input  class="date form-control" type="text" readonly ng-model="sprint.startDate"/>
+			                		<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                	</div>
+			            	</div>
+				        </div>
+				        <div class="border-bottom-grey">
+				            <span>End Date&nbsp;&nbsp;</span>
+				            <div class="calender-box" >
+				              	<div id="datepicker-sprint-end" class="input-group date" data-date-format="mm/dd/yyyy">
+			                		<input  class="date form-control" type="text" readonly ng-model="sprint.endDate"/>
+				                	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				              	</div>
+				            </div>
+				        </div>
+				  	</div>
+				    <div class="modal-footer">
+				      	<button type="button" ng-disabled="sprintForm.sprintName.$error.required" class="btn-green" ng-click="createSprint(sprint)">Create Sprint</button>
+				    </div>
+			  </form>
+		</div>
+	</div>
+</div><!-- modal-->
+
+<!--modal-->
+<div class="modal fade common-modal" id="create-backlog-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <form action="" name="backlogForm">
+				    <div class="modal-header">
+				      	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      	<h4 class="modal-title assign-task-heading">Create Backlog</h4>
+				    </div>
+
+				    <div class="modal-body">
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" name="backlogName" type="text" placeholder="Enter backlog Name" ng-model='backlog.name' required>
+				        </div>
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" type="text" placeholder="Enter backlog description" ng-model='backlog.description' required>
+				        </div>
+				  	</div>
+				    <div class="modal-footer">
+				      	<button type="button" class="btn-green" ng-click="createBacklog(backlog)">Create backlog</button>
+				    </div>
+			  </form>
+		</div>
+	</div>
+</div><!-- modal-->
+
+<!--modal-->
+<div class="modal fade common-modal" id="edit-backlog-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <form action="" name="backlogForm">
+				    <div class="modal-header">
+				      	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      	<h4 class="modal-title assign-task-heading">Edit Backlog</h4>
+				    </div>
+
+				    <div class="modal-body">
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" name="backlogName" id="backlogName" type="text" placeholder="Enter backlog Name" ng-model='editBacklogData.name' required>
+				        </div>
+				        <div class="project-title border-bottom-grey">
+				            <input class="modal-input" type="text" placeholder="Enter backlog description" ng-model='editBacklogData.description' required>
+				        </div>
+				  	</div>
+				    <div class="modal-footer">
+				      	<button type="button" ng-disabled="backlogForm.backlogName.$error.required" class="btn-green" ng-click="editBacklog(editBacklogData)">Save</button>
+				    </div>
+			  </form>
+		</div>
+	</div>
+</div><!-- modal-->
+
+
+<!-- modal for task -->
+<div class="modal fade" id="task-modal">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="assign-task-heading">Assign Task</h4>
+			</div>
+			<form action="">
+				<div class="modal-body">
+					<div class="border-bottom-grey">
+					  <input class="modal-input tasktitle" type="text" placeholder="Task Title" ng-model='backlogtask.name'>
+					</div>
+
+					<div class="project-desc border-bottom-grey project-desc">
+					  <textarea class="taskdesc" name="" id="" placeholder="Task Description" ng-model='backlogtask.description'></textarea>
+					</div>
+
+					<div class="clearfix border-bottom-grey" style="display: inline-flex;">
+						<!-- <div class="project-select">
+						  	<select class="modal-select taskproject" ng-model="task.project" ng-change = "fetchUsers(task.project)">
+						      	<option value="">Project</option>
+						      	<option ng-repeat="project in projects" id ="{{project.id}}" value="{{project.id}}" >{{project.name}}</option>
+						  	</select>
+						</div> -->
+
+					<!-- </div> -->
+						<span ng-if="project.users.length == 0" class="signup-page nopeople">No Members</span>
+						<div class="project-select">
+							<span>Assign To : </span>
+						  <select class="modal-select taskassigned" ng-model="backlogtask.assignedTo" ng-if="backlog.project.usersRole.length != 0" id="backlog-task"> 
+						      <option value="">Assign To</option>
+						      <!-- <option ng-repeat="member in project.users | filter:{ id: '!'+user.id}"  value="{{member.id}}">{{member.name}}</option> -->
+						      <!-- <option ng-repeat="member in project.users"  value="{{member.id}}" ng-disabled="member.id == user.id">{{member.name}}</option> -->
+						      <option ng-repeat="member in backlog.project.usersRole"  value="{{member.user}}">{{member.name}}</option>
+						  </select>
+						</div>
+						
+						<span>Due date : </span>
+						<div class="calender-box" style="width:30%;">
+						  <div id="datepicker-backlog" class="input-group date" data-date-format="mm/dd/yyyy">
+						  	<!-- <span>Due date : </span> -->
+						    <input  class="date form-control" type="text" readonly ng-model="duedate"/>
+						    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						  </div>
+						</div>
+
+					</div>
+				</div>
+			  <div class="modal-footer">
+			    <button type="submit" ng-disabled="creatingTask" class="btn-green assignbtn" ng-click='createBacklogTask(backlogtask,duedate)'>Assign</button>
+			  </div>
+			</form>
+		</div>
+    </div>
+</div>

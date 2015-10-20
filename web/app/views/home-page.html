@@ -1,0 +1,63 @@
+<div id="wrapper">
+
+<!--   <div id="fixed">
+    <div class = "logo">
+      <h1></h1>
+    </div>
+    <div class = "header-links">
+      <ul>
+        <li><a href="javascript:"><img src="../img/chat-icon.png" alt="chat-icon"></a></li>
+        <li><a href="javascript:"><img src="../img/notification.png" alt="notification"></a></li>
+        <li><a href="javascript:"><img src="../img/user-icon.png" alt="user-icon"></a></li>  
+        <li><a href="javascript:"><img src="../img/search-icon.png" alt="search-icon"></a></li>
+      </ul>
+    </div>--><!--end header links-->
+  <!-- </div>--><!-- end fixed -->
+
+  <div class="empty-div"> 
+    <headernavigation userdata="user"></headernavigation>
+  </div>
+  <div class="content">
+
+    <sidebar></sidebar>
+
+    <section id="container" class="clearfix">
+    
+      <div id="left">
+
+        <my-contacts></my-contacts><!-- my-contacts is a directive -->
+
+        <my-workspaces></my-workspaces>
+
+        <my-projects projects="projects" ></my-projects>  
+
+        <div ng-if = "user.role == 'admin'" style="margin-bottom:10px;">
+        <projects-admin></projects-admin>
+        </div>
+       
+
+         <div id="tasks">
+          <my-tasks></my-tasks>
+        </div><!--end tasks -->
+
+        <!-- <div id="events">
+          <my-events></my-events>
+        </div> --><!--end events-->
+
+      </div><!--end left-->
+
+      <div id="right" class="clearfix">
+
+        <updateactivity activities1="activities1" projects="projects" ></updateactivity>
+
+         <div id="activities">
+          <activities list="activities1"></activities>
+        </div><!--end activities -->
+
+      </div><!--end right-->
+
+      <!--modal for creating project-->
+      <div ng-include="'views/modals.html'"></div><!--modal-->
+    </section><!-- end container-->
+  </div><!--end content-->
+</div><!--end wrapper-->

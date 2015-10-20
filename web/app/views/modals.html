@@ -1,0 +1,282 @@
+<div class="modal fade" id="project-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title assign-task-heading">New Project</h4>
+        </div>
+        <form action="">
+          <div class="modal-body">
+            <div class="project-title border-bottom-grey">
+              <input class="modal-input Newproject-title" type="text" placeholder="Project Title" ng-model='project.name'>
+            </div>
+
+            <div class="project-desc border-bottom-grey">
+              <textarea name="" class="Newproject-description" placeholder="describe your project here.." ng-model='project.description'>{{workspaces}}</textarea>
+            </div>
+            
+            <div class="clearfix border-bottom-grey" ng-controller="workspaceCtrl">
+                <span class="workspace-select">Select workspace : </span>
+              <select class="modal-select Newproject-workspace" ng-model="project.workspace" >
+                  <option value="">Workspace select</option>
+                  <option ng-repeat="workspace in workspaces" id ="{{workspace.id}}" value="{{workspace.id}}">{{workspace.name}}</option>
+              </select>
+              <p ng-if="workspaces.length==0" class="signup-page">Please create a workspace</p>
+              <button ng-if="workspaces.length==0"  ng-click="workspaceRedirect()">
+                Create Workspace
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" ng-disable="creatingProject" class="btn-green" ng-click='addNewProject(project)'>Create Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!-- modal for task -->
+<div class="modal fade" id="task-modal" ng-controller="projectController">
+    <div class="modal-dialog" ng-controller="taskPageCtrl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="assign-task-heading">Assign Task</h4>
+        </div>
+        <form action="">
+          <div class="modal-body">
+            <div class="border-bottom-grey">
+              <input class="modal-input tasktitle" type="text" placeholder="Task Title" ng-model='task.name'>
+            </div>
+
+            <div class="project-desc border-bottom-grey project-desc">
+              <textarea class="taskdesc" name="" id="" placeholder="Task Description" ng-model='task.description'></textarea>
+            </div>
+            
+            <div class="clearfix border-bottom-grey" style="display: inline-flex;">
+              <!-- <span class="select-project">Select Project : </span> -->
+           <!--  <div class="select-style"> -->
+            <div class="project-select" ng-if="!(pageUrl.indexOf('project')>0)">
+                  <select class="modal-select taskproject" ng-model="task.project" ng-change = "fetchUsers(task.project)">
+                      <option value="">Project</option>
+                      <option ng-repeat="project in projects" id ="{{project.id}}" value="{{project.id}}" >{{project.name}}</option>
+                  </select>
+            </div>
+           
+            <!-- </div> -->
+            <span ng-if="project.users.length == 0" class="signup-page nopeople">No Members</span>
+            <div class="project-select">
+
+              <select class="modal-select taskassigned" ng-model="task.assignedTo" ng-if="project.users.length != 0"  
+              ng-disabled="project.users == undefined">
+                  <option value="">Assign To</option>
+                  <!-- <option ng-repeat="member in project.users | filter:{ id: '!'+user.id}"  value="{{member.id}}">{{member.name}}</option> -->
+                  <!-- <option ng-repeat="member in project.users"  value="{{member.id}}" ng-disabled="member.id == user.id">{{member.name}}</option> -->
+                  <option ng-repeat="member in project.users"  value="{{member.id}}">{{member.name}}</option>
+              </select>
+            </div>
+         
+           <div class="calender-box" >
+            <!-- <input type="text" class="date" name="date" id="date" ng-model="task.duedate"
+            placeholder="Duedate"> -->
+              <div id="datepicker" class="input-group date" data-date-format="mm/dd/yyyy">
+                <input  class="date form-control" type="text" readonly ng-model="task.duedate"/>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+         
+            </div>
+          </div>
+          <div class="modal-footer" >
+            <button type="submit" ng-disabled="creatingTask" class="btn-green assignbtn" ng-click='createTask(task.name,task.description,task.project,task.assignedTo,task.duedate)'>Assign</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!-- Edit project modal -->
+<div class="modal fade common-modal" id="edit-project-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title assign-task-heading">Edit Project</h4>
+        </div>
+        <form action="">
+          <div class="modal-body">
+            <div class="project-title border-bottom-grey">
+              <input class="modal-input" type="text" placeholder="Project Title" ng-model='project.name'>
+            </div>
+
+            <div class="project-desc border-bottom-grey">
+              <textarea name="" id="" placeholder="describe your project here.." ng-model='project.description' value="{{project.description}}"></textarea>
+            </div>
+            
+            <div class="clearfix border-bottom-grey">
+              <span>Select workspace : </span>
+             
+            <select class="modal-select workspace-select" id="leaveCode" ng-model="project.workspace" >
+                <option value="" >Select Workspace</option>
+                <option ng-repeat="workspace in workspaces" id ="{{workspace.id}}" value="{{workspace.id}}">{{workspace.name}}</option>
+            </select>
+          
+            <p ng-if="workspaces.length==0" class="signup-page">Please create a workspace</p>
+            <p ng-if="showeditError" class="signup-page">Please fill all the details</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-green" ng-click='editProject(project.name,project.description,project.workspace)'>Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+
+<!-- add new contact modal -->
+<div class="modal fade" id="contacts-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title assign-task-heading">New Contact</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="project-title border-bottom-grey">
+					<input class="modal-input email" type="text" placeholder="Should be an e-mail" ng-model='contact.email'>
+          <p ng-show="emailError" class="signup-page">*Enter valid Email</p>
+				</div>
+      </div>
+
+
+			<div class="modal-footer">
+				<button type="button" class="btn-green" ng-click="addNewContact(contact)">Add Contact</button>
+			</div>
+		</div>
+	</div>
+</div><!-- modal -->
+
+<!-- create new workspace -->
+<div class="modal fade" id="workspace-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" name="workspaceForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title assign-task-heading">New Workspace</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="project-title border-bottom-grey">
+            <input class="modal-input workspacename" name="workspaceName" id="workspaceName" type="text" placeholder="Enter Workspace Name" ng-model='workspace.name' required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" ng-disabled="workspaceForm.workspaceName.$error.required" class="btn-green" ng-click="addNewWorkspace(workspace)">Create Workspace</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><!-- modal-->
+
+<!-- Edit workspace -->
+<div class="modal fade common-modal" id="edit-workspace-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" name="workspaceForm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title assign-task-heading">Edit Workspace</h4>
+        </div>
+
+        <div class="modal-body">
+         <div class="project-title border-bottom-grey">
+            <input class="modal-input" name="workspaceName" id="workspaceName" type="text" placeholder="Edit Workspace Name" ng-model='workspace.name' required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" ng-disabled="workspaceForm.workspaceName.$error.required" class="btn-green" ng-click="editWorkspace(workspace.name)">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><!-- modal-->
+
+<!-- Contacts List Modal for adding projects or tasks -->
+<div class="modal fade" id="contact-list-modal" ng-controller="contactController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title assign-task-heading">Select Contact to Update</h4>
+        </div>
+    
+        <div class="modal-body">
+          <!-- <div class="border-bottom-grey project-update" ng-repeat = "contact in contacts" id="{{contact.id}}">
+            <div class="pro-mem-list" style="overflow:hidden;">
+                <div class="p-list-check" style="float:left;">
+                    <p>
+                       <input  type="checkbox" value="{{contact.id}}" ng-change="sync(bool, contact)" ng-model="bool" id="{{contact.id}}" ng-checked="isChecked(contact.id)"> {{contact.name}}
+                    </p>
+                </div>
+                <div class="p-list-pm-select" style="float:right; padding-right:10px;">
+                    <select>
+                        <option value="member">Developer</option>
+                        <option value="pm">ProjectManager</option>
+                    </select>
+                </div>
+            </div>
+          </div> -->
+          <div class="border-bottom-grey project-update" ng-repeat = "contact in contacts | orderBy:'name'" id="{{contact.id}}">
+            <div class="pro-mem-list" style="overflow:hidden;">
+                <div class="p-list-check" style="float:left;">
+                    <p>
+                       <input  type="checkbox" value="{{contact.id}}" ng-change="sync(bool, roleInProject.name, contact, $index)" ng-model="bool" id="{{contact.id}}" ng-checked="isChecked(contact.id)"> {{contact.name}}
+                    </p>
+                </div>
+                <div class="p-list-pm-select" style="float:right; padding-right:10px;" ng-if="myRole == 'manager' || user.role == 'admin'">
+                    <!-- <select ng-model="roleInProject" ng-change="updateRoll(roleInproject,contact, $index)">
+                        <option value="member">Developer</option>
+                        <option value="pm">ProjectManager</option>
+                    </select> -->
+                    <select ng-model="roleInProject" ng-options="pos as pos.name for pos in positions" ng-change="updateroll(contact,roleInProject.name)">
+                    </select>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn-green" ng-click="updateProjectMembers()" ng-disabled="memberAdded">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><!-- modal-->
+
+<!-- Contacts List Modal for adding projects or tasks -->
+<div class="modal fade" id="view-image-modal" ng-controller="resetPasswordCtrl">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <p style="color: rgba(22, 95, 71, 0.99);">Password Changed Successfully!</p>
+    </div>
+   
+  </div>
+</div>
+
+<div class="modal fade" id="login-spinner-modal" ng-controller="userController">
+  <div class="modal-dialog ">
+    <div class="modal-content loginmodal" style="
+    height: 450px;
+">
+      <div class="modal-spinner" style="
+    text-align: center;
+    margin-top: 97px;"><img src="img/spinner.gif" alt="Spinner Image"></div>
+    </div>
+  </div>
+</div>

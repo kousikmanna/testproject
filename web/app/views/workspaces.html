@@ -1,0 +1,40 @@
+<div class="empty-div"> 
+  <headernavigation></headernavigation>
+</div>
+<div class="content">
+    <sidebar></sidebar>
+    <div class="common-div">
+	    <div class="home-page3">
+			<div class="home-page3-head clearfix">
+				<span class="blue-head">List of Workspaces</span>
+				<button ng-if="user.role == 'admin'" class="btn-green pull-right" data-toggle="modal" data-target="#workspace-modal">Create Workspce</button>
+				<input class="search-list" type="text" ng-model="name" placeholder="search here">
+			</div>
+
+			<div class="home-page3-profile clearfix" >
+				<!-- <p class="project-name" ng-repeat = "workspace in workspaces | filter:name track by $index">
+					<button ng-if="user.role == 'admin'" class="close-btn" title="delete this workspace" ng-click="deleteWorkspace(workspace.id)">x</button>
+					<a href="#/workspaces/{{workspace.id}}">{{workspace.name}}</a>
+				</p> -->
+				<ul class="project-name" ng-if="user.role == 'admin'">
+					<li  ng-repeat ="workspace in workspaces | filter:name track by $index">
+						<a  href="#/workspaces/{{workspace.id}}">{{workspace.name}}</a>
+							<button  class="delete-btn" title="delete this Project" ng-click="deleteWorkspace(workspace.id)" >Delete</button>
+							<a  href="#/workspaces/{{workspace.id}}"><button class="view-btn" title="view this Project">View</button></a>
+					</li>
+					
+				</ul>
+				<!-- <p class="filter-notification" ng-show="(workspaces | filter:name).length == 0">No Results Found!</p> -->
+				<ul class="project-name" ng-if="user.role == 'user'">
+					<li  ng-repeat = "workspace in workspaces | filter:name track by $index">
+						<a  href="#/workspaces/{{workspace.id}}">{{workspace.name}}</a>
+						<a  href="#/workspaces/{{workspace.id}}"><button  class="view-btn" title="view this Project">View</button></a>
+					</li>
+
+				</ul>
+				<p class="filter-notification" ng-show="(workspaces | filter:name).length == 0">No Results Found!</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include="'views/modals.html'"></div>

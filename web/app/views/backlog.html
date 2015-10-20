@@ -1,0 +1,60 @@
+<div id="wrapper" class="sprint-page">
+
+	<div class="empty-div"> 
+   		<headernavigation userdata="user"></headernavigation>
+ 	</div>
+ 	
+ 	<div class="content">
+ 		<sidebar></sidebar>
+		<section id="container" class="clearfix">
+    		<div class="project-list">
+				<h4 class="modal-title">{{backlog.name}}
+					 <a href=""><button ng-if="user.role == 'admin' || myRole == 'manager'" class="delete-btn btn-sprint-delete pull-right" title="delete this Project" ng-click="removeBacklog(backlog)">Delete</button></a>
+					<button ng-if="user.role == 'admin' || myRole == 'manager'" class="btn-green pull-right" title="Edit this backlog" data-toggle="modal" data-target="#edit-backlog-modal">Edit</button>
+				</h4>
+				<p class="project-description">{{backlog.description}}</p>
+					
+    			<!-- <div class="project-dropdown">
+    				<select>
+				    	<option value="">Select Project</option>
+				    	<option id ="workspace-{{workspace.id}}" value="{{project.id}}" ng-repeat="project in projects">{{project.name}}</option>
+					</select>
+				</div> -->
+			</div>
+    		<div id="left">
+				<div id="tasks">
+					<div id="taskscroll">
+						<h2><a class="blue-head" href="/#/task-page"> Tasks </a><span class="number">{{backlog.task.length}}</span> 
+							<a  data-toggle="modal" data-target="#task-modal" title="Assign-task" ><img src="img/task-icon.png" alt="attach-files" class="task-icon" ></a>
+						</h2>
+						<div id="project-1" ng-repeat = "task in backlog.task" >
+							<div class="col-md-7 tasks-repeat">
+								<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Completed' " class="left-column"><img src="img/completed-icon.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+								<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'In progress' " class="left-column"><img src="img/in-progress.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+								<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Not started'" class="left-column"><img src="img/not-completed.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+							</div>
+							<div class="col-md-5 tasks-repeat">
+								<p class="right-column">{{task.duedate | date}} </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+                <!-- <div id="tasks">
+		          <my-tasks></my-tasks>
+		        </div>  -->
+
+    		</div>
+	  		<div id="right" class="clearfix">
+	        	<div ng-if = "projectUsersList.indexOf(loggedUser) > -1">
+	        		<updateactivity activities1="activities1"></updateactivity>
+	        	</div>
+		        <div id="activities">
+		          	<activities list="activities1" type="project"></activities>
+		        </div><!--end activities-->
+      		</div>
+      	</section>
+ 	</div>
+</div>
+<!-- <div ng-include="'views/modals.html'"></div> -->
+<div ng-include="'views/sprint-modals.html'"></div>

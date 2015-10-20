@@ -1,0 +1,28 @@
+<div class="empty-div"> 
+  <headernavigation></headernavigation>
+</div>
+  <div class="content">
+    <sidebar></sidebar>
+    <div class="common-div" ng-controller = "resetPasswordCtrl">
+      <div id="account-settings-nav">
+        <span id="account-settings-span">Settings</span>
+        <a href="/#/notification-settings"><span class="account-settings-hover">Notifications</span></a>
+        <a href="/#/privacy"><span class="account-settings-hover">Privacy</span></a>
+      </div>
+      <div id="password1">
+        <div ng-show = "requirederror"><p class="error-changepassword">*Please fill all the fields</p></div>
+        <div id="change-password">
+          <span>Change Password:</span>
+        </div>
+        <div id="account-settings-password">
+          <input type="Password" placeholder="Current Password" ng-model="oldPassword">
+          <input type="Password" placeholder="New Password" ng-model="newPasswordFirst">
+          <input type="Password" placeholder="New Password" ng-model="newPasswordSecond">
+          <button id="change-password-button" ng-click="changePassword()">Change Password</button>
+        </div>
+        <div class="signup-page"> {{error}}</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+<div ng-include="'views/modals.html'"></div>

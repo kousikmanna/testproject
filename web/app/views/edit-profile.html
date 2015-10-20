@@ -1,0 +1,74 @@
+<div class="empty-div"> 
+  <headernavigation userdata="user"></headernavigation>
+</div>
+<form action="">
+  <div class="content">
+    <sidebar></sidebar>
+    <div class="common-div">
+      <div class="profile">
+        <div class="profile-head">
+          <span class="name">My Profile</span>
+          <button ng-click="updateUser(user)" type="submit" ng-disabled="imageUploadStatus">Save</button>
+          <a href="/#/profile"><button>Cancel</button></a>
+          <div class="clear"></div>
+        </div>
+        <div class="basic-profile">
+          <div class="bio">
+            <img ng-if="user.avatar != null" class="pro-pic" src="{{user.avatar}}" width="50px;">
+            <!-- <img ng-if="user.avatar != null" class="pro-pic" src="https://s3-ap-southeast-1.amazonaws.com/mantra-dash/avatar/{{user.avatar}}"> -->
+            
+            <img ng-if="user.avatar == '' || user.avatar == undefined || user.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+            
+            <p ng-show="imageUploadStatus">
+              <img class="loader-profile"src="img/spinner.gif" alt="Spinner Image">
+            </p>
+            
+            <span class="upload-btn">
+              <input type="file" onchange="angular.element(this).scope().uploadImage(this)" name="uploadImage" class="fileupload" ng-model="user.avatar">
+            </span>
+            <!-- <span ng-click="deleteImage(user.avatar)">delete Image</span> -->
+
+            <div class="info">
+              <span class="designation" class="profile-text">
+                <input type="text" placeholder="name" value="{{user.name}}" ng-model="user.name">
+              </span>
+              <span class="designation" class="profile-text">
+                <input type="text" placeholder="designation" value="{{user.designation}}" ng-model="user.designation">
+              </span>
+            </div>
+            <div class="clear"></div>
+          </div>
+
+          <div class="contact-info">
+            <p class="heading">Contact Information</p>
+              <div class="contact-info-content">
+                <p>
+                  <span class="headings">Email:</span><span>{{user.email}}</span>
+                </p>
+                <p>
+                  <span class="headings">Mobile:</span><span><input type="text" value="{{user.phone}}" ng-model="user.phone"></span>
+                </p>
+                <p><span class="headings">Skype:</span><span><input type="text" value="{{user.skypeId}}" ng-model="user.skypeId"></span>
+                </p>
+                <p>
+                  <span class="headings">Web:</span><span><input type="text" value="{{user.websiteUrl}}" ng-model="user.websiteUrl"></span>
+                </p>
+              </div>
+              <!-- <div class="contact-grey-right">
+                <li>{{user.email}}</li>
+                <li><input type="text" value="{{user.phone}}" ng-model="user.phone"></li>
+                <li><input type="text" value="{{user.skypeId}}" ng-model="user.skypeId"></li>
+                <li><input type="text" value="{{user.websiteUrl}}" ng-model="user.websiteUrl"></li>
+              </div> -->
+              <!-- <div class="clear"></div> -->
+          </div>
+          <div class="clear"></div>
+        </div>
+         <div>
+            <span class="profile-text head-info">About Me</span>
+            <textarea class="description" ng-model = "user.aboutMe"></textarea>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+<div ng-controller="taskPageCtrl" id="thisdiv" class="margin-top-ten">
+	<div id="taskscroll">
+		<div ng-if = "path.indexOf('home')>0">
+			<h2><a class="blue-head" href="/#/task-page"> Tasks </a><span class="number">{{tasks.length}}</span> 
+				<a  data-toggle="modal" data-target="#task-modal" title="Assign-task" ><img src="img/task-icon.png" alt="attach-files" class="task-icon" ></a>
+			</h2>
+			<div id="project-1" ng-repeat = "task in tasks" >
+				<div class="col-md-7 tasks-repeat">
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Completed' " class="left-column"><img src="img/completed-icon.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'In progress' " class="left-column"><img src="img/in-progress.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Not started'" class="left-column"><img src="img/not-completed.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+				</div>
+				<div class="col-md-5 tasks-repeat">
+					<p class="right-column">{{task.duedate | date}} </p>
+				</div>
+			</div>
+	    </div>
+	    <div ng-if="path.indexOf('project')>0">
+	    	<h2><a class="blue-head" href="/#/task-page"> Tasks </a><span class="number">{{(tasks | filter :projId).length }}</span> 
+				<a  data-toggle="modal" data-target="#task-modal" title="Assign-task" ><img src="img/task-icon.png" alt="attach-files" class="task-icon" ></a>
+			</h2>
+			<div  id="project-1" ng-repeat = "task in tasks | filter:projId" >
+				<div class="col-md-7 tasks-repeat">
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Completed' " class="left-column"><img src="img/completed-icon.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'In progress' " class="left-column"><img src="img/in-progress.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+					<a href="#/task-details/{{task.id}}"><p ng-if="task.status == 'Not started'" class="left-column"><img src="img/not-completed.png" alt="completed">&nbsp;&nbsp;{{task.name}}</p></a>
+				</div>
+				<div class="col-md-5 tasks-repeat">
+					<p class="right-column">{{task.duedate | date}} </p>
+				</div>
+			</div>
+	    </div>
+	</div>
+	
+</div>
+
+<div ng-include="'views/modals.html'"></div>
+
+
+

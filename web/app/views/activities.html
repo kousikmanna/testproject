@@ -1,0 +1,133 @@
+<!-- activities.html -->
+<h2 class="blue-head">Activities<input class="search-list-activity ng-pristine ng-valid" type="text" ng-model="name" placeholder="search activities"></h2>
+
+<div id="acts">
+	<div class="activity" ng-repeat="activity in activities1 | filter : name">
+		<div>
+			<div class="clearfix" >
+				<div class="acts-img col-md-1">
+					<img ng-if="!user.avatar || user.avatar == '' || user.avatar == undefined || user.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+					<!-- {{activity.user.avatar}} -->
+					<img ng-if="user.avatar" class="pro-pic-small ng-scope" src="{{activity.user.avatar}}">
+				</div>
+				<div class="acts-discription col-md-11" >
+					<p >
+						<a href="#/profile/{{activity.user.id}}"><span>{{activity.user.name}} </span></a>{{activity.description}}
+					</p>
+					<ul class="clearfix">
+						<li class="like-comment timer"><a href="#/project/{{activity.project.id}}"><span>@{{activity.project.name}}</span></a> {{activity.createdAt | date:'short'}}</li>
+						<li class="like-comment" ng-init="indexNo=$index" ng-click="showCommentBox=!showCommentBox"> <img src="img/reply-icon.png" alt="comment"></li>
+						<li class="like-comment">{{activity.comments.length}}</li>
+						
+						<li ng-if="activity.likes.indexOf(user.id) == -1" class="like-comment" ng-click="likeActivity(activity)"><a href="javascript:"><img src="img/heart-icon.png"></a></li>
+
+
+						<li ng-if="activity.likes.indexOf(user.id)>-1" class="like-comment" ng-click="likeActivity(activity)"><a href="javascript:"><img src="img/heart-icon-green2.png"></a></li>
+					
+						<li class="like-comment">{{activity.likes.length}}</li>
+
+						<li class="like-comment" ng-if="user.id == activity.user.id" ng-click="ActivityDelete(activity,activity.id)"><img class="activity-delete-icon"src="img/delete.png">Delete</li>
+						<li class="like-comment" ng-if="user.id == activity.user.id" ng-click = "editActivity(activity)"><img class="activity-delete-icon" src="img/edit-icon.png">Edit</li>
+
+					</ul>
+
+					<SPAN class="attachment-link" ng-if="activity.attachment">Attachment:<a   href="https://s3-ap-southeast-1.amazonaws.com/mantra-dash/attachments/{{activity.attachment}}" download>{{activity.attachment}}</a></SPAN>
+
+				</div><!--end acts-discription-->
+			</div><!--end acts-sub-->
+		</div>
+
+		<div ng-repeat="comment in activity.comments">
+			<!-- {{comment}} -->
+			<div class="acts-sub clearfix">
+				<div class="acts-img">
+					<img ng-if="!user.avatar || user.avatar == '' || user.avatar == undefined || user.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+					<!-- <img src="img/img-5.png" alt="profile-pic"> -->
+					<img ng-if="user.avatar" class="pro-pic-small ng-scope" src="{{comment.userInfo.avatar}}">
+				</div>
+				 <div class="acts-discription" >
+					<p>
+						<a href="#/profile/{{activity.userInfo.id}}"><span>{{comment.userInfo.name}} </span></a>{{comment.comment}}
+					</p>
+					<ul>
+						<li class="like-comment timer"> {{comment.createdAt | date:'short'}} </li>
+
+						<li ng-if="comment.likes.indexOf(user.id) == -1" class="like-comment" ng-click="likeComment(activity,comment.id,comment)"><a href="javascript:"><img src="img/heart-icon.png"></a></li>
+
+						<li ng-if="comment.likes.indexOf(user.id) >-1" class="like-comment" ng-click="likeComment(activity,comment.id,comment)"><a href="javascript:"><img src="img/heart-icon-green2.png"></a></li>
+					
+						<li class="like-comment">{{comment.likes.length}}</li>
+
+						<li class="like-comment"  ng-if="user.id == comment.userInfo.id" ng-click="deleteComment(comment.id)" ><img class="activity-delete-icon"src="img/delete.png">Delete</li>
+						<li class="like-comment"  ng-if="user.id == comment.userInfo.id" ng-click="editComment(comment)" ><img class="activity-delete-icon" src="img/edit-icon.png">Edit</li>
+
+					</ul>
+					
+					
+				</div><!--end acts-discription -->
+			</div><!--end acts-sub-->
+			
+		</div>
+		
+		<div id="comment-box" class="clearfix" ng-show="showCommentBox">
+			<form>
+				<input type="text" ng-model="activity.comment" class="commentbox">
+				
+				<div class="comment-box-footer clearfix">
+					<button type="submit" class="add-comment-btn btn pull-right" ng-click="addComment(activity); showCommentBox=!showCommentBox" ng-disabled="activity.comment.$error.required">Add Comment</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="activity-filter">
+		<p class="filter-notification" ng-if="(activities1 | filter:name).length == 0 && activities1.length !== 0">No Results Found!</p>
+	</div>
+    
+     <!-- edit activity modal -->
+          <div class="modal fade common-modal" id="edit-activity-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form action="">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title assign-task-heading">Edit Activity</h4>
+                  </div>
+              
+                  <div class="modal-body">
+                    <input class="modal-input"type="text" placeholder="{{currentActivity.description}}" ng-model="currentActivity.description" >
+                    {{activity}}
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="submit" class="btn-green" ng-click="editActivityModal(currentActivity)">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div><!-- modal--> 
+
+          <div class="modal fade common-modal" id="edit-comment-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <form action="">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title assign-task-heading">Edit Comment</h4>
+                  </div>
+              
+                  <div class="modal-body">
+                    <input class="modal-input"type="text" placeholder="{{currentComment.comment}}" ng-model="currentComment.comment" >
+                    {{comment}}
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="submit" class="btn-green" ng-click="editCommentModal(currentComment)">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div><!-- modal--> 
+ 
+
+</div><!--end acts-->
+

@@ -1,0 +1,62 @@
+<div class="empty-div"> 
+  <headernavigation userdata="user"></headernavigation>
+</div>
+<div class="content">
+  <sidebar></sidebar>
+  <div class="common-div">
+    <div class="profile">
+      <div class="profile-head">
+        <span class="nameuser">{{profile.name}}</span>
+
+        <div class="clear"></div>
+      </div>
+      <div class="basic-profile">
+        <div class="bio">
+          <img ng-if="profile.avatar && profile.avatar != null" class="pro-pic" src="{{profile.avatar}}">
+          <img ng-if="!profile.avatar || profile.avatar == '' || profile.avatar == undefined || profile.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+          
+          
+          <div class="info">
+            <span class="designation" class="profile-text">{{profile.designation}}</span>
+            <a href="/#/task-page"><li data-toggle="modal" data-target="#task-modal"><pre><img src="img/assign.png"> Assign Task</pre></li></a>
+            <!-- <li><pre><img src="../img/mail.png"> Message</pre></li> -->
+          </div>
+          
+          <div class="clear"></div>
+        </div>
+        <div class="contact-info">
+          <h4 class="head-info profile-text">Contact Information</h4>
+          <div class="contact-info-content">
+              <p>
+                <span>Email</span><span>{{profile.email}}</span>
+              </p>
+              <p ng-if="user.phone">
+                <span>Mobile</span><span>{{profile.phone}}</span>
+              </p>
+              <p ng-if="user.skypeId">
+                <span>Skype</span><span>{{profile.skypeId}}</span>
+              </p>
+              <p ng-if="user.websiteUrl">
+                <span>Web</span><a href="{{user.websiteUrl}}" target="_blank">{{profile.websiteUrl}}</a>
+              </p>
+          </div>
+        </div>
+      <div class="clear"></div>
+      </div>
+    <div ng-if="user.aboutMe">
+      <span class="profile-text head-info">About Me</span>
+      <div class="description">
+        <p>{{profile.aboutMe}}</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

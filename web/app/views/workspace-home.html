@@ -1,0 +1,61 @@
+<div id="wrapper">
+ <div class="empty-div"> 
+   <headernavigation userdata="info"></headernavigation>
+  </div>
+  <div class="content">
+   <sidebar></sidebar>
+
+     <section id="container" class="clearfix">
+      
+   <div class="workspace-list clearfix">
+    <span class="workspace-name">{{workspace[0].name}}
+     <button ng-if="user.role == 'admin'" class="btn-green pull-right" title="Edit this workspace" data-toggle="modal" data-target="#edit-workspace-modal">Edit</button>
+    </span>
+       <!-- <div class="workspacedropdown">
+        <select> -->
+         <!-- <option value="">Select Workspace</option> -->
+         <!-- <option ng-repeat="workspace in workspaces" id ="workspace-{{workspace.id}}" value="{{workspace.id}}" >{{workspace.name}}</option> -->
+     <!-- </select> -->
+     <!-- <button class="btn-green pull-right" data-toggle="modal" data-target="#workspace-modal">Create Workspace</button> -->
+    <!-- </div> -->
+   </div>
+      
+      <div id="left">
+       <div id="my-contacts">
+     <div class="mycontacts-header clearfix">
+      <h2 class="workspace-projects">Projects <span class="number">{{workspace[0].projects.length}}</span></h2>
+      <div id="project-1" ng-repeat = "project in workspace[0].projects">
+       <p class="left-column">
+       <a href="#/project/{{project.id}}">{{project.name}}</a>
+       </p>
+
+       <!-- <p class="right-column">{{project.user.length}} members</p> -->
+      </div>
+
+      
+     </div><!--end my contacts-header-->
+
+     <div class="profile-pics clearfix">
+
+      <ul class="clearfix">
+      <li ng-repeat="contact in Contact.list"><a href="#/profile1{{contact.id}}"><img src="img/img-1.png" alt="profile-pic"></a></li>
+      </ul>
+     </div><!--end profile pics-->  
+    </div>
+      
+      </div>
+     <div id="right" class="clearfix"> 
+
+       <updateactivity activities1="activities1"></updateactivity>
+         <div id="activities">
+            <activities list="activities1" type="workspace"></activities>
+         </div><!--end activities-->
+
+     </div> 
+  
+    
+      
+       </section>
+  </div>
+</div>
+<div ng-include="'views/modals.html'"></div>

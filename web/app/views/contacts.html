@@ -1,0 +1,140 @@
+<div class="empty-div"> 
+	<headernavigation></headernavigation>
+</div>
+<!-- <div class="content-contacts"> -->
+    <sidebar></sidebar>
+    <div class="common-div">
+	    <div class="home-page3 col-md-12">
+			<div class="col-md-8 contacts-header-sort">
+				<div class="contacts-header-section">
+					<span class="sort-by">Sort by</span>
+					<select class="home-page3-sort" ng-model="sort">
+						<option value="createdAt">Recently Added</option>
+						<option value="name">Name</option>
+					</select>
+					<!-- <button ng-if= "user.role == 'admin' " class="btn-green pull-right" data-toggle="modal" data-target="#contacts-modal">Add Contact</button> -->
+					<input class="search-list" type="text" ng-model="search.name" placeholder="Search contact">
+				</div>
+
+				<div class="col-md-12">
+					<div ng-repeat="contact in contacts | orderBy : sort | filter : search | filter : project" ng-if="user.id !== contact.id" class="contactslist clearfix">
+						<div class="col-md-1 home-page3-left">
+							<p>     
+								<img ng-if="contact.avatar != null" class="pro-pic" src="{{contact.avatar}}">
+
+	      						<img ng-if="contact.avatar == '' || contact.avatar == undefined || contact.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+	      					</p>
+						</div>
+						<div class="col-md-3 contact-name-email">
+							<a href="#/profile/{{contact.id}}">
+								<p class="contact-name">{{contact.name}}</p><br>
+								<p class="contact-designation">{{contact.email}}</p>
+							</a>
+						</div>
+						<div class="btns-contact">
+							<div class="btn-group actionbtndiv">
+								<button type="button" class="btn btn-default dropdown-toggle actionsbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></button>
+								<ul class="dropdown-menu actions-ul">
+									<li><a class="iconsdropdown" href="#/profile/{{contact.id}}"><img class="contacts-icons"src="img/user.png">View profile</a></li>
+									<li><a class="iconsdropdown" href="/#/task-page"><img class="contacts-icons"src="img/task.png">Assign task</a></li>
+									<li ng-if="user.role == 'admin'" ng-click="deleteContact(contact.id)"><a class="iconsdropdown" href=""><img class="contacts-icons"src="img/contactremove.png">Remove contact</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--  <p ng-show="(contacts | filter:project).length == 0">Nothing here!</p>
+					 <p ng-show="(contacts | filter:project).user == user">login Nothing here!</p> -->
+					  <p class="filter-notification" ng-show="(contacts | filter:project).length == 0 && contacts.length != 0">No Members Found!</p>
+					  <!-- <p class="filter-notification" ng-show="(contacts | filter:project).id == user.id">only u r in this project</p>
+ -->
+
+				</div>
+
+			</div>
+			<div class="col-md-3 contacts-section-right">
+		  		<div class="addmember col-md-12" ng-if= "user.role == 'admin'" >
+		  			<button  class="btn-green pull-right" data-toggle="modal" data-target="#contacts-modal">+ ADD NEW CONTACT</button>
+				</div>
+				<div class="dashcontacts">
+					<span>Dash Contacts ({{contacts.length}})</span>
+				</div>
+				<div class="project-filters">
+					<span>Filter:</span>
+					<select class="home-page3-sort" ng-model="project">
+						<option value="">All</option>
+						<option ng-repeat = "project in projects">{{project.name}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- </div> -->
+<div ng-include="'views/modals.html'"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="empty-div"> 
+  <headernavigation></headernavigation>
+</div>
+<div class="content">
+    <sidebar></sidebar>
+    <div class="common-div">
+	    <div class="home-page3">
+			<div class="home-page3-head clearfix">
+				<span>Sort by</span>
+				<select class="home-page3-sort" ng-model="sort">
+					<option value="createdAt">Recently Added</option>
+					
+					<option value="name">Name</option>
+					
+				</select>
+				<button ng-if= "user.role == 'admin' " class="btn-green pull-right" data-toggle="modal" data-target="#contacts-modal">Add Contact</button>
+				<input class="search-list" type="text" ng-model="name">
+			</div>
+
+			<div class="home-page3-profile clearfix">
+				<ul class="project-name">
+					<li  ng-repeat="contact in contacts | orderBy : sort | filter : name" ng-if="user.id !== contact.id" class="contactslist">
+						<img ng-if="contact.avatar != null" class="pro-pic" src="{{contact.avatar}}">
+
+  						<img ng-if="contact.avatar == '' || contact.avatar == undefined || contact.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+  						
+						<button  class="view-btn" title="view this Project" onclick="location.href='/#/project/project.id'">View</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include="'views/modals.html'"></div> -->

@@ -1,0 +1,15 @@
+<div id="my-projects" class="margin-top-ten">
+	<h2>
+		<span class="blue-head">List of Sprints</span>
+		<span class="number">{{sprints.length}}</span>
+		<span ng-if="user.role == 'admin' || myRole == 'manager'" class="pull-right plusbutton" data-toggle="modal" data-toggle="modal" data-target="#create-sprint-modal" title="create new sprint"><img class="contacts-icons"src="img/addicon2.png"></span>
+	</h2>
+	<div class="clearfix project-1" ng-repeat = "sprint in sprints">
+		<p>
+			<a class="home-projects" href="#/sprint/{{sprint.id}}">{{sprint.name}}</a>
+		</p>
+	</div>
+
+	<div ng-include="'views/sprint-modals.html'"></div>
+</div>
+

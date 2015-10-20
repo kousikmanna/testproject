@@ -1,0 +1,16 @@
+<!-- my-projects.html -->
+<div id="my-projects" class="clearfix margin-top-ten">
+	<h2>
+		<a href="/#/myprojects" class="blue-head">My Projects </a>
+		<span class="number">{{projects.length}}</span>
+	</h2>
+	<div class="project-1 col-md-12" ng-repeat = "project in projects"> 
+		<p class="col-md-10">
+			<a class="home-projects" href="#/project/{{project.id}}">{{project.name}}</a>
+		</p>
+		<!-- <p ng-if="project.users.length == 1"class="col-md-6 memberslength" >{{project.users.length}} Member</p>
+		<p ng-if="project.users.length > 1" class="col-md-6 memberslength" >{{project.users.length}} Members</p> -->
+
+	</div><!--end project-1-->
+</div>
+

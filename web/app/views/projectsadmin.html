@@ -1,0 +1,16 @@
+<!-- my-projects.html -->
+<div id="my-projects" class="margin-top-ten">
+	<h2>
+		<a href="/#/projects" class="blue-head">List of Projects </a>
+		<span class="number">{{projects.length}}</span>
+		<span class="pull-right plusbutton" data-toggle="modal" data-toggle="modal" data-target="#project-modal" title="create new project"><img class="contacts-icons"src="img/addicon2.png"></span>
+
+	<!-- <span ng-if="user.role == 'admin'" class="task-icon"data-toggle="modal" data-target="#project-modal" title="create new project">+</span> -->
+	</h2>
+	<div class="clearfix project-1" ng-if="user.role == 'admin'" ng-repeat = "project in projects" >
+		<p>
+			<a class="home-projects" href="#/project/{{project.id}}">{{project.name}}</a>
+		</p>
+
+	</div>
+</div>

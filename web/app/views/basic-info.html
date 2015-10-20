@@ -1,0 +1,29 @@
+<section id="login-page" ng-controller = "userController">
+	<h1>Set Password</h1>
+
+	<div id="signin-box">
+		<div class="input-container">
+			
+			<div class="signup-page" > {{error}}</div>
+			
+			<form action="" method="post" class="css-form" name="myForm" novalidate>
+				<div class="part">
+					<input class="common" type="text" name="name" id="name" placeholder="Name" ng-model="user.name" required>
+					<div  class="signup-page" ng-show="myForm.name.$dirty && myForm.name.$invalid">Name is Required
+					</div>
+				</div>
+				<div class="part">
+					<input class="common" type="password" name="password" id="password" placeholder="Password" ng-model="user.password" required>
+					<div  class="signup-page" ng-show="myForm.password.$dirty && myForm.password.$invalid">Password is Required
+					</div>
+				</div>
+				<div class="part">
+					<input class="common" type="password" name="password" id="confirm-password" placeholder="Confirm Password" ng-model="user.confirmPassword" required>
+					<div  class="signup-page" ng-show="myForm.password.$dirty && myForm.password.$invalid">Confirm Password is Required
+					</div>
+				</div>
+				<button class="signup-btn btn" type="submit" ng-disabled="user.password != user.confirmPassword" ng-click="basicInfo(user)">Set Password</button>
+			</form>			
+		</div><!--end input container-->
+	</div><!--end signin box-->
+</section><!--end login page-->

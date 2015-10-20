@@ -1,0 +1,56 @@
+<div class="empty-div"> 
+  <headernavigation userdata="user"></headernavigation>
+</div>
+<div class="content">
+  <sidebar></sidebar>
+  <div class="common-div">
+    <div class="profile">
+      <div class="profile-head">
+        <span class="name">{{user.name}}</span>
+        <a href="/#/editprofile"><button>Edit</button></a>
+        <div class="clear"></div>
+      </div>
+      <div class="basic-profile">
+        <div class="bio">
+          <img ng-if="user.avatar != null" class="pro-pic" src="{{user.avatar}}" width="50px;">
+          
+          <!-- <img ng-if="user.avatar != null" class="pro-pic" src="https://s3-ap-southeast-1.amazonaws.com/mantra-dash/avatar/{{user.avatar}}"> -->
+
+          <img ng-if="user.avatar == '' || user.avatar == undefined || user.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic">
+          
+          <div class="info">
+            <span class="designation" class="profile-text">{{user.designation}}</span>
+            <a href="/#/task-page"><li data-toggle="modal" data-target="#task-modal"><pre><img src="img/assign.png"> Assign Task</pre></li></a>
+            <!-- <li><pre><img src="../img/mail.png"> Message</pre></li> -->
+          </div>
+          
+          <div class="clear"></div>
+        </div>
+        <div class="contact-info">
+          <p class="heading">Contact Information</p>
+          <div class="contact-info-content">
+              <p>
+                <span class="headings">Email:</span><span>{{user.email}}</span>
+              </p>
+              <p ng-if="user.phone">
+                <span class="headings">Mobile:</span><span>{{user.phone}}</span>
+              </p>
+              <p ng-if="user.skypeId">
+                <span class="headings">Skype:</span><span>{{user.skypeId}}</span>
+              </p>
+              <p ng-if="user.websiteUrl">
+                <span class="headings">Web:</span><a href="{{user.websiteUrl}}" target="_blank">{{user.websiteUrl}}</a>
+              </p>
+          </div>
+        </div>
+      <div class="clear"></div>
+      </div>
+    <div ng-if="user.aboutMe">
+      <span class="profile-text head-info">About Me</span>
+      <div class="description">
+        <p>{{user.aboutMe}}</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

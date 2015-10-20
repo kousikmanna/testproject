@@ -1,0 +1,38 @@
+<section id="login-page" ng-controller = "userController">
+	<h1><img src="img/dash-black-logo.png" style="width:80px;"alt="Dash Black Logo"></h1>
+	<!-- <p class="top-p">Don't have account yet? <a href="#/signup">Join now</a></p> -->
+
+	<div id="signin-box">
+		<div class="input-container" ng-app="app">
+			
+			<div class="signup-page"> {{error}}</div>
+			
+			<form action="" method="post" class="css-form" name="myForm" novalidate>
+				<div class="part">
+					<input class="common" type="email" id="email" name="email" placeholder="Email address" ng-model="user.email" required>
+					<div class="signup-page" ng-show="myForm.email.$dirty && myForm.email.$invalid">Email is not Valid
+					</div>
+      				<!--<div ng-show="myForm.email.$error.required">Email is required.</div> -->
+          			<!--<div ng-show="myForm.email.$error.email">Invalid email address.</div><br> -->
+				</div>
+				<div class="part">
+					<input class="common" type="password" name="password" id="password" placeholder="Password" ng-model="user.password" required>
+			 		<!-- <div style="color:red" ng-show="myForm.password.$error.minlength">
+			 			Password is too short.
+			 		</div> -->
+			 		<!-- <div style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid"></div> -->
+					<!--<div ng-show="myForm.password.$error.required">Password is required.</div>  -->
+				</div>
+				<div class="checkbox clearfix"> 
+					<p class="i-agree forgot-password" ><a href="#/resetpasswordintiate" >Forgot password?</a></p>
+				</div>
+				<!-- <button class="signup-btn btn" type="submit" ng-click="login()">Sign In</button> -->
+				<!-- <p ng-show="loggingIn">
+		          <img class="login-image"src="img/spinner.gif" alt="Spinner Image">
+		        </p> -->
+    			<button class="signup-btn btn" type="submit" ng-click="login(user)" ng-disabled="myForm.email.$pristine && myForm.email.$invalid || myForm.password.$pristine && myForm.password.$invalid">Sign In</button>
+			</form>			
+		</div><!--end input container-->
+	</div><!--end signin box-->
+</section><!--end login page-->
+<div ng-include="'views/modals.html'"></div>

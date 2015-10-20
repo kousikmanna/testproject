@@ -1,0 +1,67 @@
+<div ng-controller="navigationCtrl" id="fixed">
+	
+	<div class="logo pull-left">
+		<a href="/#/home"><img src="img/dash-black-logo.png" alt="Dash Black Logo"></a>
+		<!-- <h1></h1>  -->
+	</div>
+
+	<div class = "header-links">
+		<ul class="header-links-ul"> 
+			<li class="header-links-li" ng-click = "dropdownchat()">
+				<a><img src="img/chat-icon.png" alt="chat-icon"></a>
+			</li>
+			<li class="header-links-li">
+				<a href="/#/info"><img src="img/notification.png" alt="notification"></a>
+			</li>
+			<li class="header-links-li" ng-click="dropdownprofile()">
+				<img src="img/user-icon.png" alt="user-icon">
+			</li>
+			<li class="header-links-li">
+				<a href="/#/search"><img src="img/search-icon.png" alt="search-icon"></a>
+			</li>
+		</ul>
+	</div><!--end header links-->
+	
+	<div class="user-profile-dd">
+		<div class="user-profile-dd-head">
+			<div class="user-profile-dd-head-left">
+
+				<img ng-if="user.avatar" class="pro-pic" src="{{user.avatar}}">
+            
+            	<img ng-if="user.avatar == '' || user.avatar == undefined || user.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic"></div>
+			<div class="user-profile-dd-head-right"><span>{{user.name}}</span>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="user-profile-dd-bottom">
+			<a href="/#/profile"><li>My profile</li></a>
+			<a href="/#/account-settings"><li>Account settings</li></a>
+			<a ng-click="logout()" ng-controller="userController"><li>Sign out</li></a>
+		</div>
+	</div>
+	<div class="chat-box">
+		<div class="chat-search-box">
+			<input class="chat-input" type="text" placeholder="Sudhakar Ponnusamy">
+		</div>
+		<div class="chat-icons">
+			<img class="chat-icon-left" src="img/add-user.png">
+			<img class="chat-icon-right" src="img/settings.png">
+			<div class="clear"></div>
+		</div>
+		<div class="chat-profiles">
+			<input class="chat-checks" id="check21" type="checkbox">
+			<img src="img/prof-pic.png">
+			<span>Sudhakar Ponnusamy</span>
+		</div>
+		<div class="chat-profiles">
+			<input class="chat-checks" id="check22" type="checkbox">
+			<img src="img/prof-pic.png">
+			<span>Sudhakar Ponnusamy</span>
+		</div>
+		<div class="chat-profiles">
+			<input class="chat-checks" id="check23" type="checkbox">
+			<img src="img/prof-pic.png">
+			<span>Sudhakar Ponnusamy</span>
+		</div>
+	</div>
+</div><!-- end fixed -->

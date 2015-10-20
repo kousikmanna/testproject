@@ -1,0 +1,71 @@
+<div id="wrapper">
+
+	<div class="empty-div"> 
+   		<headernavigation userdata="user"></headernavigation>
+ 	</div>
+ 	
+ 	<div class="content">
+ 		<sidebar></sidebar>
+		<section id="container" class="clearfix">
+    		<div class="project-list">
+
+				<h4 class="modal-title">{{project.name}}
+					<button ng-if="user.role == 'admin' || myRole == 'manager' " class="btn-green pull-right" title="Edit this workspace" data-toggle="modal" data-target="#edit-project-modal">Edit</button></h4>
+					<p class="project-description">{{project.description}}</p>
+					
+    			<!-- <div class="project-dropdown">
+    				<select>
+				    	<option value="">Select Project</option>
+				    	<option id ="workspace-{{workspace.id}}" value="{{project.id}}" ng-repeat="project in projects">{{project.name}}</option>
+					</select>
+				</div> -->
+			</div>
+    		<div id="left">
+    			<div id="my-contacts">
+					<div class="mycontacts-header clearfix">
+						<h2>Project members
+							<span class="number">{{project.users.length}}</span>
+							<!-- <span ng-if="user.role == 'admin' " class="pull-right plusbutton" -->
+							<span ng-if="user.role == 'admin' || myRole == 'manager' " class="pull-right plusbutton"
+							 data-toggle="modal" data-target="#contact-list-modal" ng-click = "itemsPush()" title="Add and remove project members"><img class="contacts-icons"src="img/addicon2.png"></span>
+						</h2>
+						<div id="project-1" ng-repeat = "member in project.users | orderBy:'name'"> <!-- for order by -->
+							<p class="left-column">
+								{{member.name}}
+							</p>
+						</div>	
+					</div><!--end my contacts-header-->
+					<div class="profile-pics clearfix">
+						<ul class="clearfix">
+						<li ng-repeat="contact in Contact.list"><a href="#/profile1{{contact.id}}"><img src="img/img-1.png" alt="profile-pic"></a></li>
+						</ul>
+					</div><!--end profile pics-->  
+				</div>
+
+                <div id="tasks">
+		          <my-tasks type="projectPage"></my-tasks>
+		        </div> 
+
+		        <div class="sprints">
+		        	<sprints> </sprints>
+		        </div>
+
+		        <div class="backlogs">
+		        	<backlogs type="projectPage"> </backlogs>
+		        </div>
+			
+
+    		</div>
+	  		<div id="right" class="clearfix">
+	        	<div ng-if = "projectUsersList.indexOf(loggedUser) > -1">
+	        		<updateactivity activities1="activities1"></updateactivity>
+	        	</div>
+		        <div id="activities">
+		          <activities list="activities1" type="project"></activities>
+		        </div><!--end activities-->
+      		</div>
+      	</section>
+ 	</div>
+</div>
+
+<div ng-include="'views/modals.html'"></div>

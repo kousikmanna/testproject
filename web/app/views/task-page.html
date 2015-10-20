@@ -1,0 +1,186 @@
+<div class="empty-div"> 
+  <headernavigation></headernavigation>
+</div>
+  <div class="content">
+    <sidebar></sidebar>
+    <div class="common-div clearfix">
+      <div class="task-head-nav">
+        <li class="active-task" ng-click="myTask($event)">My Tasks</li>
+        <li ng-click="assignedTask($event)">Others Task</li>
+        <!-- <li>All Task</li> -->
+        <button data-toggle="modal" data-target="#task-modal" class="task-head-button">Assign Task</button>
+        <div class="clear"></div>
+      </div>
+      <div class="task-body-nav">
+        <li class="active-task-body tasks-open" ng-if="showMyTask" ng-click="myTask($event)">Open</li>
+        <li class="active-task-body tasks-open" ng-if="showAssignedTask" ng-click="assignedTask($event)">Open</li>
+        <li ng-click="inProgress($event)">In Progress</li>
+        <li ng-click="completed($event)">Completed</li>
+        <select class="task-body-select" ng-model="task.project">
+          <option value="">All Projects</option>
+          <option ng-repeat="project in projects" id ="{{project.id}}" value="{{project.id}}" >{{project.name}}</option>
+        </select>
+      </div>
+      <div class="clearfix">
+        
+
+      <div class="messages">
+        <p ng-show="noTasks">No Tasks Assigned To You Yet</p>
+        <!-- <p ng-show="noTasksrecieved">No Tasks Assigned To You Yet</p>  -->
+        <p ng-show="noTasksAssigned">No Tasks Assigned By You</p>
+        <p ng-show="inProgressShow">No In Progress Tasks Found</p>
+        <p ng-show="completedShow">No Completed Tasks Found</p>
+      </div>
+      
+      <div ng-if="alltasks">
+      <div class="task-container clearfix" ng-repeat = "task in tasks | filter:task.project">
+        <div class="task-body-container1 clearfix">
+          <!-- {{task.assignedBy.avatar}}
+           {{task.assignedTo.avatar}} -->
+            <div class="col-md-12">
+                
+                <div class="col-md-8">
+                    <div class="task-head clearfix">
+                        <a href="#/task-details/{{task.id}}"><span class="task-open-heading pull-left">{{task.name}}</span></a>
+                        <a href="#/project/{{task.project.id}}" class="pull-left">{{task.project.name}}</a>
+                        <button  style="cursor:pointer" class="delete-task pull-right" ng-if="user.id == task.assignedBy.id" ng-click="taskDelete(task.id)"><img class="activity-delete-icon"src="img/delete.png">Delete</button>
+                        
+                    </div>
+                    <p>{{task.description}}</p>
+
+                </div>
+                <div class="col-md-4 task-detail">
+                    <div class="col-md-12" ng-if="showMyTask">
+                        <span class="col-md-4 align-middle task-assigned">assigned by:</span>
+                        <img ng-if="!task.assignedBy.avatar || task.assignedBy.avatar == '' || task.assignedBy.avatar == undefined || task.assignedBy.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic col-md-4 pro-pic-small ng-scope">
+                        <img ng-if="task.assignedBy.avatar && task.assignedBy.avatar != null" class="col-md-4 align-middle pro-pic-small ng-scope" src="{{task.assignedBy.avatar}}">
+                    </div>
+                    <div class="col-md-12" ng-if="showAssignedTask">
+                        <span class="col-md-4 align-middle task-assigned">assigned to:</span>
+                        <img class="col-md-1 pro-pic-small ng-scope" src="{{task.assignedTo.avatar}}">
+                    </div>
+                    <div class="clearfix">
+                        <li class="task-open-dates">Assigned Date:{{task.createdAt | date}}</li>
+                        <li class="task-open-dates">Due date:{{task.duedate | date}}</li> 
+                        <select ng-if="task.assignedBy.id != user.id || task.assignedBy.id == task.assignedTo.id " class="task-body-select" ng-model="task.status" ng-change="taskStatus(task.status,task.id)">
+                          <option value="Not started">status</option>
+                          <option value="In progress">InProgress</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                        <span ng-if="task.assignedBy.id == user.id">Status:{{task.status}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    
+    <div ng-if="progress">
+        <div  class="task-container clearfix" ng-repeat = "task in inProgressTasks | filter:task.project">
+            <div class="task-body-container1 clearfix">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="task-head clearfix">
+                            <a href="#/task-details/{{task.id}}"><span class="task-open-heading pull-left">{{task.name}}</span></a>
+                            <a href="#/project/{{task.project.id}}" class="pull-left">{{task.project.name}}</a>
+                            <button  style="cursor:pointer" class="delete-task pull-right" ng-if="user.id == task.assignedBy.id" ng-click="taskDelete(task.id)"><img class="activity-delete-icon"src="img/delete.png">Delete</button>
+                        
+                        </div>
+                        <p>{{task.description}}</p>
+
+                    </div>    
+                    
+                    
+                    <!-- <div class="col-md-2">
+                    </div> -->
+                    <div class="col-md-4 task-detail">
+                        <div class="col-md-12" ng-if="showMyTask">
+                            <span class="col-md-4 align-middle task-assigned">assigned by:</span>
+                            <img ng-if="!task.assignedBy.avatar || task.assignedBy.avatar == '' || task.assignedBy.avatar == undefined || task.assignedBy.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic col-md-4 pro-pic-small ng-scope">
+                            <img ng-if="task.assignedBy.avatar && task.assignedBy.avatar != null" class="col-md-4 align-middle pro-pic-small ng-scope" src="{{task.assignedBy.avatar}}">
+                        </div>
+                        <div class="col-md-12" ng-if="showAssignedTask">
+                            <span class="col-md-4 align-middle task-assigned">assigned to:</span>
+                            <img ng-if="!task.assignedTo.avatar || task.assignedTo.avatar == '' || task.assignedTo.avatar == undefined || task.assignedTo.avatar == null" src="img/default-pic.png" alt="No Image" class="col-md-1 align-middle pro-pic-small ng-scope">
+
+                            <img ng-if="task.assignedTo.avatar && task.assignedTo.avatar != null" class="col-md-1 pro-pic-small ng-scope" src="{{task.assignedTo.avatar}}">
+                        </div>
+                    
+                        <li class="task-open-dates">Assigned Date:{{task.createdAt | date}}</li>
+                        <li class="task-open-dates">Due date:{{task.duedate | date}}</li>
+                        <select ng-if="task.assignedBy.id != user.id" class="task-body-select" ng-model="task.status" ng-change="taskStatus(task.status,task.id)">
+                        <option value="Not started">Not started</option>
+                        <option value="In progress">InProgress</option>
+                        <option value="Completed">Completed</option>
+                        </select>
+                        <span ng-if="task.assignedBy.id == user.id">Status:{{task.status}}</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div ng-if="finished">
+        <div class="task-container clearfix" ng-repeat = "task in completedTasks | filter:task.project">
+            <div class="task-body-container1 clearfix">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="task-head clearfix">
+                            <a href="#/task-details/{{task.id}}"><span class="task-open-heading pull-left">{{task.name}}</span></a>
+                            <a href="#/project/{{task.project.id}}" class="pull-left">{{task.project.name}}</a>
+                            <button  style="cursor:pointer" class="delete-task pull-right" ng-if="user.id == task.assignedBy.id" ng-click="taskDelete(task.id)"><img class="activity-delete-icon"src="img/delete.png">Delete</button>
+                        
+                        </div>
+                        <p>{{task.description}}</p>
+                    </div>
+                    <!-- <div class="col-md-2">
+                    </div> -->
+                    <div class="col-md-4 task-detail">
+                        <div class="col-md-12" ng-if="showMyTask">
+                            <span class="col-md-4 align-middle task-assigned">assigned by:</span>
+                            <!-- <img class="col-md-1 pro-pic-small ng-scope" src="https://s3-ap-southeast-1.amazonaws.com/mantra-dash/avatar/{{task.assignedBy.avatar}}"> -->
+                            <img ng-if="!task.assignedBy.avatar || task.assignedBy.avatar == '' || task.assignedBy.avatar == undefined || task.assignedBy.avatar == null" src="img/default-pic.png" alt="No Image" class="pro-pic col-md-4 align-middle pro-pic-small ng-scope">
+                            <img ng-if="task.assignedBy.avatar && task.assignedBy.avatar != null" class="col-md-4 align-middle pro-pic-small ng-scope" src="{{task.assignedBy.avatar}}">
+                        </div>
+                        <div class="col-md-12" ng-if="showAssignedTask">
+                            <span class="col-md-4 align-middle task-assigned">assigned to:</span>
+                          <!-- <img class="col-md-1 pro-pic-small ng-scope" src="https://s3-ap-southeast-1.amazonaws.com/mantra-dash/avatar/{{task.assignedTo.avatar}}"> -->
+                            <img ng-if="!task.assignedTo.avatar || task.assignedTo.avatar == '' || task.assignedTo.avatar == undefined || task.assignedTo.avatar == null" src="img/default-pic.png" alt="No Image" class="col-md-1 pro-pic-small ng-scope">
+
+                            <img ng-if="task.assignedTo.avatar && task.assignedTo.avatar != null" class="col-md-1 pro-pic-small ng-scope" src="{{task.assignedTo.avatar}}">
+                        </div>
+                    
+
+                        <li class="task-open-dates">Assigned Date:{{task.createdAt | date}}</li>
+                        <li class="task-open-dates">Due date:{{task.duedate | date}}</li>
+                        <select ng-if="task.assignedBy.id != user.id" class="task-body-select" ng-model="task.status" ng-change="taskStatus(task.status,task.id)">
+                        <option value="Not started">Not started</option>
+                        <option value="In progress">InProgress</option>
+                        <option value="Completed">Completed</option>
+                        </select>
+                        <span ng-if="task.assignedBy.id == user.id">Status:{{task.status}}</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- <div class="task-body-right">
+	  <span>Assigned by</span>
+	  <img src="img/rightdp.png"><br>
+	  <div>
+	    <li><img src="img/reply.png"> 5</li>
+      <li><img src="img/heart.png"> 3</li>
+    </div>
+  </div> -->
+  <!-- <div class="clear">
+  </div> -->
+  
+  </div>
+  </div>
+  </div>
+
+
+  <div ng-include="'views/modals.html'"></div>

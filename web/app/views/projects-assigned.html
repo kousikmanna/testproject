@@ -1,0 +1,56 @@
+<div class="empty-div"> 
+  <headernavigation></headernavigation>
+</div>
+<div class="content">
+    <sidebar></sidebar>
+    <div class="common-div">
+	    <div class="home-page3">
+			<div class="home-page3-head clearfix">
+				<span class="blue-head">My Projects</span>
+				<input class="search-list" type="text" ng-model="name">
+			</div>
+			<div ng-if="user.projects.length == 0">
+				<p class="noprojects">No Projects Assigned To U Yet</p>
+			</div>
+
+			<div class="home-page3-profile clearfix">
+				<ul class="project-name">
+					<li  ng-repeat = "project in user.projects | filter:name">
+						<a  href="#/project/{{project.id}}">{{project.name}}</a>
+						<a  href="#/project/{{project.id}}"><button  class="view-btn" title="view this Project">View</button></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include="'views/modals.html'"></div>
+
+
+
+
+
+
+
+
+
+<!-- <div class="content">
+    <sidebar></sidebar>
+    <div class="common-div">
+	    <div class="home-page3">
+			<div class="home-page3-head clearfix">
+				<span>My Projects</span>
+				<input class="search-list" type="text" ng-model="name">
+			</div>
+
+			<div id="my-projects">
+				<div id="project-1" ng-repeat = "project in user.projects"> 
+					<p class="left-column">
+						<a href="#/project/{{project.id}}">{{project.name}}</a>
+					</p>
+				</div><!--end project-1-->
+			<!-- </div>
+		</div>
+	</div>
+</div>
+<div ng-include="'views/modals.html'"></div> --> 

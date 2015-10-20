@@ -1,0 +1,69 @@
+<div id="update" class="clearfix">
+
+	<h2 class="blue-head">Update an Activity</h2>
+
+	<form action="javascript:" method="" name="updateForm" class="activity-form" >
+  	
+    <input type="text" class="activity-description tag-user activity-form" name="description" ng-model="activity.description" required>
+    <!-- <input type="hidden" name="mentioned_id[]" value=""> -->
+    <!-- <div>
+      <ul ng-if="typeInProcess == true">   
+        <li ng-repeat="tag in tags | filter:activity.description"> {{tag.name}} </li>
+      </ul>
+    </div> -->
+    <div class="update-footer">
+      <div class="update-footer-icons">
+        <ul>
+          <li class="icons">
+            <input type="file" class="upload-icon" onchange="angular.element(this).scope().uploadAttachment(this)" ng-model="activity.attachment">
+            <img src="../img/attach-files.png" alt="attach-files">
+
+           <span>{{attach_name}}</span>
+
+          </li>
+
+
+          <!-- <li class="icons">
+            <input type="file" class="upload-icon" onchange="angular.element(this).scope().uploadImage(this)" ng-model="activity.image">
+            <img src="../img/camera-icon.png" alt="share-links">
+          </li> -->
+          <!-- <li class="icons">
+            <a href="javascript:">
+              <img src="../img/link-icon.png" alt="share-files" >
+            </a>
+          </li> -->
+        </ul>
+      </div><!--end update footer icons-->
+
+      <div class="update-footer-btn">
+        <!-- <span ng-show="loader">updating...</span> -->
+        <p ng-show="loader">
+          <img class="spinner-image"src="img/spinner.gif" alt="Spinner Image">
+        </p> 
+        <button type="submit" id="home-page-btn" ng-if="path.indexOf('home')>0" ng-disabled="updateForm.description.$error.required || processing" class="btn update-btn updateBtn" ng-click="updateActivity()">Update</button>
+        <button type="submit" id="project-page-btn" ng-if="path.indexOf('project')>0" ng-disabled="updateForm.description.$error.required" class="btn update-btn updateBtn" ng-click="updateInProject(activity.description)"> Update</button>
+        <button type="submit" id="task-page-btn" ng-if="path.indexOf('task-details')>0" ng-disabled="updateForm.description.$error.required" class="btn update-btn updateBtn" ng-click="updateInTask(activity.description)"> Update</button>
+
+        <div class="list-projects hide">
+          <ul>
+            <li ng-if="projects.length == 0">There are no Projects</li>
+            <li ng-repeat = "project in projects" ng-click="sendActivity(activity.description, project.id)">{{project.name}}</li>  
+          </ul>
+          <!-- <ul ng-if="user.role == 'admin'">
+            <li ng-if="projects.length == 0">There are no Projects</li>
+            <li ng-repeat = "project in projects" ng-click="sendActivity(activity.description, project.id)">{{project.name}}</li>  
+          </ul> -->
+        </div>
+      </div>
+      <!--<div class="projectlist">
+  			<div class="workspacedropdown">
+          <select>
+            <option value="">Select Project</option>
+            <option  value="{{project.id}}" ng-repeat = "project in projects.list">{{project.name}}</option>
+          </select>
+			  </div>
+		    <workspace><workspace/>
+      </div>-->
+   	</div><!--end update footer-->
+	</form>
+</div><!--end update-->
