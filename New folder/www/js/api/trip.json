@@ -1,0 +1,28 @@
+{
+    "objects": [
+    	{
+		"tripno" : 1001,                 
+		"created_date" : "20/10/2015",
+		"modified_date" : "20/10/2015",
+		"truckno" : "at01"            
+		}
+		// {
+		// "tripno" : 1002,                 
+		// "created_date" : "20/10/2015",
+		// "modified_date" : "20/10/2015",
+		// "truckno" : "at02"            
+		// },
+		// {
+		// "tripno" : 1003,                 
+		// "created_date" : "20/10/2015",
+		// "modified_date" : "20/10/2015",
+		// "truckno" : "at03"            
+		// },
+		// {
+		// "tripno" : 1004,                 
+		// "created_date" : "20/10/2015",
+		// "modified_date" : "20/10/2015",
+		// "truckno" : "at04"            
+		// }
+    ]
+}

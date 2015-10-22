@@ -1,0 +1,28 @@
+/*
+ * Release document - Digital Free Service Coupons
+ * CTS - v1.0.3
+ * ----------------------------------------------------------------------------------------
+ * Author: Akshay Kulshrestha
+ * Owner: Gladminds Connect Platform
+ * Website: http://www.gladminds.co
+ * Date Created: Wednesday, June 10th, 2015
+ * Last modified: Friday, June 19th, 2015
+ * GIT : *************
+*/
+
+
+v-1.0.2
+/* Implementations
+=======================================================================================================
+1. Clink enabled on the entire block -> home page
+2. Indent table (open and Inprogress), sorted by created date.
+3. Datatable plugin implemented, search bar enabled on the tables.
+4. Build Size optimization from 6MB to 1.4MB
+=======================================================================================================
+
+
+v-1.0.3
+/* Implementations
+=======================================================================================================
+1. Bug Fixing - Status change from Inprogress to open when seal no or container no is removed
+=======================================================================================================

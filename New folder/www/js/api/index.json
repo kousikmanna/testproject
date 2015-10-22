@@ -1,0 +1,12 @@
+{
+	"brand" : "Bajaj Auto Ltd",
+	"version_no" : "0.0.1",
+	"GCP_build_no" : "1.0.0",
+	"product":"",
+	"domain_name" : "",
+	"logo_url":"img/Bajaj_Logo.png",
+	"page_background" : "#FFF",
+	"user_register":"0",
+	"header_color" : "#1C92C5",
+	"footer_color" : "#1C92C5"
+}

@@ -1,0 +1,34 @@
+{
+    "brand": "Solidus",
+    "brand_logo" : "img/brand_logo.png",
+    "user":"Manish",
+    "profile_img":"img/placeholder.jpg",
+    "user_id":"3",
+    "type": "landing",
+    "list_img" : "arrow_img_path.png",
+    "legends": [
+        
+		{
+            "option_name": "Commercial Vechicle",
+            "className":"bajaj-bv-commercialVehicle",
+            "background": "",
+            "border" : "",
+            "img_path" : "../img/brand-re-wrap-bg.jpg",
+            "font_color":  "",
+            "url":[
+                {
+                    "name":"PartSmart",
+                    "href":"reckoner.html"
+                },
+            	{
+            		"name":"Loyalty",
+            		"href":"#"
+            	},
+            	{
+            		"name":"Electronic Parts Catalog",
+            		"href":"#"
+            	}]
+        }
+		
+    ]
+}

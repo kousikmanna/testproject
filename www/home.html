@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- 
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <meta content="width=300, initial-scale=1" name="viewport">
+    <meta name="description" content=""> -->
+  <!--   <title>Bajaj - CTS</title>
+    <link href="css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/pdi-style.css" rel="stylesheet"> -->
+     <title>Gladminds Connect Platform</title>
+
+    <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
+    <link href="css/plugins/pace/pace.css" rel="stylesheet">
+    <script src="js/plugins/pace/pace.js"></script>
+
+    <!-- GLOBAL STYLES - Include these on every page. -->
+    <link href="css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/plugins/datatables/datatables.css" rel="stylesheet">
+
+    <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- THEME STYLES - Include these on every page. -->
+    <link href="css/style2.css" rel="stylesheet">
+    <link href="css/plugins.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/breadcrumb.css">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .other_defects {
+        display: none
+    }
+    
+    #pdi_view {
+        display: none
+    }
+    
+    .btn-blue.active,
+    .btn-blue:active,
+    .btn-white.active,
+    .btn-white:active {
+        background-color: #2980b9
+    }
+    
+    .page-title .breadcrumb {
+        margin-bottom: 0;
+        background-color: #e0e7e8
+    }
+    
+    .page-title {
+        margin: 2% 0
+    }
+    
+    .page-title h1,
+    .circle-tile {
+        margin-bottom: 2%!important
+    }
+    
+    .row,
+    .portlet {
+        margin: 0!important
+    }
+    
+    .name .user_name,
+    .navbar-side .side-user .name {
+        font-size: 100%!important
+    }
+    
+    .side-user .logout_open {
+        font-size: 100%!important;
+        width: 100%;
+        float: left;
+        text-align: center
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-12 menu-page-mob">
+                        <div id="breadcrumb"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
+                            
+                                <ul id="myTab" class="nav nav-tabs">
+                                    <li class="active createGrn_OptLIst"><a href="#home" data-toggle="tab">Home</a>
+                                    </li>
+                                    <li class="createGrn_OptLIst"><a href="#profile" data-toggle="tab">Profile</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane fade active in" id="home">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" id="tabledetail">
+                                                    <table class="table table-condensed table_trip_data" style="border-collapse:collapse;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Trip No</th>
+                                                                <th>Date</th>
+                                                                <th>Truck No</th>
+                                                                <th>&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" id = "tripdetail">
+                                                                    
+                                                                    <td>1234</td>
+                                                                    <td>11.10.2014</td>
+                                                                    <td>MH12HD2233</td>
+                                                                    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                                    
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo1"> 
+                                                                      <table class="table table-striped">
+                                                                              <thead>
+                                                                                    <th>Invoice No</th>
+                                                                                    <th>Plant</th>
+                                                                                    <th>Qty</th>
+                                                                                    <th>Select</th>
+                                                                              </thead>
+                                                                              <tbody>
+                                                                                <tr>
+                                                                                    <td>7493040</td>
+                                                                                    <td>Pune</td>
+                                                                                    <td>90000</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr><tr>
+                                                                                    <td>7493040</td>
+                                                                                    <td>Pune</td>
+                                                                                    <td>90000</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr><tr>
+                                                                                    <td>7493040</td>
+                                                                                    <td>Pune</td>
+                                                                                    <td>90000</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr>
+                                                                              </tbody>
+                                                                        </table>
+                                                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                        </div>
+                                                                      
+                                                                      </div> </td>
+                                                                </tr>
+                                                                <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">    
+                                                                    <td>458899</td>
+                                                                    <td>15.10.2015</td>
+                                                                    <td>MH04XX9009</td>
+                                                                  <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo2"> 
+                                                                      <table class="table table-striped">
+                                                                            <thead>
+                                                                                <th>Invoice No</th>
+                                                                                <th>Plant</th>
+                                                                                <th>Qty</th>
+                                                                                <th>Select</th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                        </div>
+                                                                    </div> </td>
+                                                                </tr>
+
+                                                                <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">    
+                                                                    <td>458899</td>
+                                                                    <td>15.10.2015</td>
+                                                                    <td>MH04XX9009</td>
+                                                                  <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo3"> 
+                                                                      <table class="table table-striped">
+                                                                            <thead>
+                                                                                <th>Invoice No</th>
+                                                                                <th>Plant</th>
+                                                                                <th>Qty</th>
+                                                                                <th>Select</th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>89236348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                        </div>
+                                                                    </div> </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                </div>
+                                                                
+                                            </div> 
+                                                                
+                                        </div>
+       
+
+                                    </div>
+                                    <div class="tab-pane fade text-center clearfix" id="profile">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 clearfix search_invoice_block">
+                                            <div class="enter_invoice_block"><input type="text" placeholder="Invoice Number" class="search_invoice col-md-8 col-sm-8 col-xs-10"></div>
+                                            <div class="clearfix">
+                                                <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10">
+                                                <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10">
+                                            </div>
+                                            <button class="seachInvoiceButton">Search Invoice</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
+    <script src="js/plugins/moment/moment.min.js"></script>
+    <script src="js/plugins/popupoverlay/defaults.js"></script>
+    <!-- Logout Notification Box -->
+    <div id="logout">
+        <div class="logout-message">
+            <div class="logout-user-profile-img">
+            </div>
+            <h4 class="logout-username">
+            <!--
+                <script type="text/javascript">
+                    $(".logout-username").text(localStorage.getItem('user_name'));
+                    localStorage.getItem('user_name');
+                </script>
+             -->   
+            </h4>
+            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
+            <ul class="list-inline">
+                <li>
+                    <a class="btn btn-green" onclick="logout_user();">
+                        <strong>Logout</strong>
+                    </a>
+                </li>
+                <li>
+                    <button class="logout_close btn btn-green">Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="loading">
+        <div class="txt"></div>
+        <div class="bg"></div>
+    </div>
+    <div id="syncing">
+        <div class="txt"></div>
+        <div class="bg"></div>
+    </div>
+    <!-- /#logout -->
+    <!-- Logout Notification jQuery -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/sqLite.js"></script>
+    <script src="js/plugins/popupoverlay/logout.js"></script>
+    <!-- HISRC Retina Images -->
+    <script src="js/plugins/hisrc/hisrc.js"></script>
+    <script type="text/javascript" src="js/inc.js"></script>
+    <!-- THEME SCRIPTS -->
+    <script src="js/flex.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/home.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+{
+    "brand": "Bajaj",
+    "brand_logo" : "img/Bajaj_Logo.png",
+    "user":"Sagar Kapure",
+    "profile_img":"img/Sagar-Kapure.jpg",
+    "user_id":"3",
+    "type": "landing",
+    "user_role": "auditor",
+    "list_img" : "arrow_img_path.png",
+    "legends": [
+        {
+            "option_name": "Motorcycles",
+            "className":"bajaj-bv-motorcycles",
+            "background": "",
+            "border" : "",
+            "img_path" : "img/box-1.gif",
+            "font_color":  "",
+            "url":[
+            	{
+            		"name":"Digital Free Service Coupon",
+            		"href":"dfsc.html"
+            	},
+            	{
+            		"name":"Dealership Service Standards",
+            		"href":"dss-dealer.html"
+            	},
+            	{
+            		"name":"Electronic Parts Catalog",
+            		"href":"#"
+            	}]
+        },
+		{
+            "option_name": "Commercial Vechicle",
+            "className":"bajaj-bv-commercialVehicle",
+            "background": "",
+            "border" : "",
+            "img_path" : "img/Range_Yellow-re.gif",
+            "font_color":  "",
+            "url":[
+                {
+                    "name":"Parts Ready Rockoner",
+                    "href":"reckoner.html"
+                },
+            	{
+            		"name":"Loyalty",
+            		"href":"vehicleLoyalty.html"
+            	},
+            	{
+            		"name":"Electronic Parts Catalog",
+            		"href":"#"
+            	}]
+        },
+		{
+            "option_name": "International Business",
+            "className":"bajaj-bv-internaltionBusiness",
+            "background": "",
+            "border" : "",
+            "img_path" : "img/banner_2_zingzong.gif",
+            "font_color":  "",
+            "url":[
+            	{
+            		"name":"Electronic Parts Catalog",
+            		"href":"#"
+            	}]
+        },
+		{
+            "option_name": "Probiking",
+            "className":"bajaj-bv-probiking",
+            "background": "",
+            "border" : "",
+            "img_path" : "img/ktm_pic2.gif",
+            "font_color":  "",
+            "url":[
+            	{
+            		"name":"Electronic Parts Catalog",
+            		"href":"#"
+            	}]
+        }
+    ]
+}
