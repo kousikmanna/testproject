@@ -3,8 +3,11 @@ $(function() {
     document.addEventListener("deviceready", onDeviceReady, true);
     // showLoading();
 });
-
 function onDeviceReady() {
+     $(function() {
+    $( "#datepicker1").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
+    $( "#datepicker2").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
+    });
     // alert('Autosyncing');
 
     // $(".time_stamp").append(moment(localStorage.getItem('sync_date')).format('ll'));
@@ -209,22 +212,63 @@ arrColor = [{
 
 
 function details(result) {
-    alert('inside result in home.js');
+    alert('inside details');
     var trip_invoice;
-    console.log("details", result);
+    var trip_invoice5 = '';
+    var trip_invoice2='';
+    var trip_invoice6='';
+    var trip_invoiceItem='';
     var resLen = result.rows.length;
+    var trip_invoice4;
     console.log("resLen",  result.rows.length);
-    console.log("resLen",  result.rows.length);
-    for (var i = 0; i < resLen; i++) {
-        console.log("result.rows.item(i)",  result.rows.item(i));
-        console.log("result.rows.item(i)",  result.rows.item(i));
-        console.log("result.rows.item(i).tripno",  result.rows.item(i).tripno);
-        trip_invoice='<td>'+result.rows.item(i).tripno+'</td><td>'+result.rows.item(i).created_date+'</td><td>'+result.rows.item(i).truckno+'</td><td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>';
-     }
+    console.log("details", result);
+    DBHandler.getAllRecords2('invoice', invoiceDetails);
+    function invoiceDetails(result2) {
+        alert('inside invoiceDetails');
+        var resLen2 = result2.rows.length;
+        trip_invoice='<table class="table table-condensed table_trip_data" style="border-collapse:collapse;"><thead><tr><th>Trip No</th><th>Date</th><th>Truck No</th><th>&nbsp;</th></tr></thead><tbody>';
+        console.log("invoiceDetails", result2);
+        for (var i = 0; i < resLen; i++) {
+            console.log("result.rows.item(i)",  result.rows.item(i));
+            trip_invoice2='<tr data-toggle="collapse" data-target="#demo'+i+1+'" class="accordion-toggle" id = "tripdetail"><td>'+result.rows.item(i).tripno+'</td><td>'+result.rows.item(i).created_date+'</td><td>'+result.rows.item(i).truckno+'</td><td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td></tr>';
+            var trip_invoice_i='';
+            var trip_invoice3;
+        
+            for(var j = 0; j < resLen2; j++){
+                console.log("result2.rows.item(j)",  result2.rows.item(j));
+                console.log("result2.rows.item(j).invoiceno",  result2.rows.item(j).invoiceno);
+                trip_invoice3='<tr><td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo'+i+1+'"><table class="table table-striped"><thead><th>Invoice No</th><th>Plant</th><th>Qty</th><th>Select</th></thead><tbody>';
+                trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"><button class="createGrnButton">Craete GRN</button></div></div></td></tr>';
+                if(result.rows.item(i).tripno == result2.rows.item(j).tripno){
+                trip_invoice_i=trip_invoice_i + '<tr><td>'+result2.rows.item(j).invoiceno+'</td><td>'+result2.rows.item(j).plant+'</td><td>'+result2.rows.item(j).billqty+'</td><td><input type="checkbox" class="select_for_grn" /></td></tr>';
+                 console.log('trip_invoice_i',trip_invoice_i);
+                }
+                if(j == resLen2-1){
+                   trip_invoice5 = trip_invoice5 + trip_invoice3+trip_invoice_i+trip_invoice4;
+                   trip_invoice2=trip_invoice2+trip_invoice5;
+                   trip_invoice6=trip_invoice6+trip_invoice2;
+                   // console.log('trip_invoice6',trip_invoice6);
+                }
+                   
 
-     
-     
-    $("#tabledetail").append(trip_invoice);
-    hideLoading();
+                // if(i==resLen-1){
+                //     trip_invoice=trip_invoice + '</tbody></table>'
+                // }
+            }
+
+            // trip_invoice2=trip_invoice2+trip_invoice5;
+           
+            //trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"><button class="createGrnButton">Craete GRN</button></div></div></td></tr>';
+            if(i==resLen-1){
+                    trip_invoice=trip_invoice + trip_invoice6+'</tbody></table>';
+            }
+            // trip_invoiceItem=trip_invoice2+trip_invoice4
+
+        }
+        $("#tabledetail").append(trip_invoice);
+        // $("#tabledetail").append(tripdata);
+        hideLoading();
+    }
+    
 
 }

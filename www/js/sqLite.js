@@ -26,8 +26,20 @@ var DBHandler = {
         console.log('db');
         db.transaction(function(tx) {
             console.log('transaction');
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE trip", [], function(tx, result) {
+
+            //     }, onError);
+            // });
+
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE invoice", [], function(tx, result) {
+
+            //     }, onError);
+            // });
+
             tx.executeSql('CREATE TABLE IF NOT EXISTS trip ("tripno" INTEGER PRIMARY KEY, "created_date" DATETIME, "modified_date"  DATETIME, "truckno" VARCHAR)');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS invoice ("invoiceno" INTEGER PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "billqty" DOUBLE, "tripno" INTEGER)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS invoice ("invoiceno" INTEGER PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno" INTEGER)');
         });
 
 
@@ -117,6 +129,15 @@ var DBHandler = {
         });
     },
 
+    getAllRecords2:function(table, callback) {
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM " + table, [], function(tx, result2) {
+                console.log('getAllRecords2 result', result2);
+                callback(result2);
+            });
+        });
+    },
+
     saveAllRecords: function(values, callback) {
         console.log("values", values);
         //Date time fields in db
@@ -127,7 +148,7 @@ var DBHandler = {
             var obj = values[i];
             //Date time fields
 
-            var cRow = getLRValues(obj);
+            var cRow = getTripValues(obj);
             if (i != values.length - 1)
                 objValues = objValues + cRow + ", ";
             else
@@ -140,6 +161,39 @@ var DBHandler = {
        
         db.transaction(function(tx) {
             tx.executeSql("INSERT OR REPLACE INTO trip " + columns + " VALUES " + objValues, objValues,
+                function(tx, result) {
+                    console.log("result",result);
+                    console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
+                    if (callback != null)
+                        callback(result);
+                }, onError);
+        });
+
+    },
+    saveAllRecordsofInvoice:function(values, callback) {
+
+        console.log("values", values);
+        //Date time fields in db
+        var objValues = "";
+
+
+        for (var i = 0; i < values.length; i++) {
+            var obj = values[i];
+            //Date time fields
+
+            var cRow = getInvoiceValues(obj);
+            if (i != values.length - 1)
+                objValues = objValues + cRow + ", ";
+            else
+                objValues = objValues + cRow;
+                console.log('objValues',objValues);
+
+        }
+
+        var columns = "('invoiceno', 'plant', 'created_date', 'modified_date', 'billqty', 'tripno')";
+       
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO invoice " + columns + " VALUES " + objValues, objValues,
                 function(tx, result) {
                     console.log("result",result);
                     console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
@@ -280,7 +334,7 @@ function getValuePlaceHolder(columns) {
     return (valuePlaceHolder.length > 1) ? valuePlaceHolder.join(",") : valuePlaceHolder[0];
 }
           
-function getLRValues(obj) {
+function getTripValues(obj) {
         var tripno, created_date, modified_date, truckno;
         //checks for integer
         tripno = obj.tripno;
@@ -316,6 +370,44 @@ function getLRValues(obj) {
         return currentRow;
 }
 
+function getInvoiceValues(obj){
+     var invoiceno, plant, created_date, modified_date, billqty, tripno;
+
+        invoiceno = obj.invoiceno;
+        plant = obj.plant;
+        created_date = obj.created_date;
+        modified_date = obj.modified_date;
+        billqty = obj.billqty;
+        tripno = obj.tripno;
+        if (invoiceno == null || invoiceno == 'null' || invoiceno == '')
+            invoiceno = null;
+
+         if (plant == null || plant == 'null' || plant == '')
+            plant = null;
+        else
+            plant = "'" + plant + "'";
+
+        if (created_date == null || created_date == 'null' || created_date == '')
+            created_date = null;
+        else
+            created_date = "'" + created_date + "'";
+
+        if (modified_date == null || modified_date == 'null' || modified_date == '')
+            modified_date = null;
+        else
+            modified_date = "'" + modified_date + "'";
+
+        
+        if (billqty == null || billqty == 'null' || billqty == '')
+            billqty = null;
+
+         if (tripno == null || tripno == 'null' || tripno == '')
+            tripno = null;
+        var currentRow = "(" + invoiceno + ", " + plant + ", " + created_date + ", " + modified_date + ", " + billqty + ", " + tripno +")";
+        console.log(currentRow);
+
+        return currentRow;
+}
 
 
 function onError(tx, error) {

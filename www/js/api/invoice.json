@@ -5,7 +5,7 @@
 		"plant" : "Delhi",          
 		"created_date" : "20/10/2015",
 		"modified_date" : "20/10/2015",
-		"billqty" : 100000,
+		"billqty" : 100000.00,
 		"tripno" : 1001
 
 		},
@@ -14,7 +14,7 @@
 		"plant" : "Delhi",          
 		"created_date" : "20/10/2015",
 		"modified_date" : "20/10/2015",
-		"billqty" : 100000,
+		"billqty" : 100000.00,
 		"tripno" : 1001         
 		},
 		{
@@ -22,7 +22,7 @@
 		"plant" : "Delhi",          
 		"created_date" : "20/10/2015",
 		"modified_date" : "20/10/2015",
-		"billqty" : 100000,
+		"billqty" : 100000.00,
 		"tripno" : 1002      
 		},
 		{
@@ -30,7 +30,7 @@
 		"plant" : "Delhi",          
 		"created_date" : "20/10/2015",
 		"modified_date" : "20/10/2015",
-		"billqty" : 100000,
+		"billqty" : 100000.00,
 		"tripno" : 1002
 		}
     ]

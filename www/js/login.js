@@ -42,7 +42,7 @@ function loginCheck() {
             showLoading();
             $.ajax({
                 type: 'POST',
-                url: 'http://qa.bajaj.gladminds.co/v1/gm-users/login/',
+                 url: 'http://qa.bajaj.gladminds.co/v1/gm-users/login/',
                 // url: 'http://dash.mantralabsglobal.com/api/user/login/',
                 // url:'http://localhost:1337/user/login',
                 data: serilizedData,
@@ -114,11 +114,42 @@ function fetchDatabase(access_token) {
     });
 }
 
-function dataSaved(data) {
-    console.log('data');
-    hideLoading();
-    alert('data is saved');
-    window.location = "home.html";
-   // window.location = "create_grn.html";
+// function dataSaved(data) {
+//     console.log('data');
+//     hideLoading();
+//     alert('data is saved');
+//     window.location = "home.html";
+//    // window.location = "create_grn.html";
 
+// }
+function dataSaved(data) {
+    console.log('trip data');
+    alert('data is saved');
+     $.ajax({
+        type: 'GET',
+        url: 'js/api/invoice.json',
+        //data: serilizedData,
+        dataType: 'json',
+        success: function(log_data, status) {
+            console.log('GET log_data',log_data);
+            console.log('GET status',status);
+            console.log('log_data.objects',status);
+            // alert('First Sync Date is ' + printDate());
+            DBHandler.saveAllRecordsofInvoice(log_data.objects, dataSaved2);
+            // localStorage.setItem('sync_date', printDate());
+
+        },
+        error: function(e) {
+            console.log(e);
+            return false;
+        }
+    });
 }
+function dataSaved2(data) {
+    console.log('invoice data');
+    hideLoading();
+    alert('invoice data is saved');
+    window.location = "home.html";
+   
+}
+
