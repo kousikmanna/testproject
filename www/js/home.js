@@ -30,6 +30,32 @@ function onDeviceReady() {
         // DBHandler.getDashBoardCounts(createDashboard);
     }, 1000);
 
+    $("#searchInvoice").bind('click', function(e){
+        e.preventDefault();
+        showLoading();
+        var input_invoiceno = $("#invoiceno").val();
+        var invoiceno = input_invoiceno.trim();
+
+        var input_datepicker1 = $("#datepicker1").val();
+        var datepicker1 = input_datepicker1.trim();
+
+        var input_datepicker2 = $("#datepicker2").val();
+        var datepicker2 = input_datepicker2.trim();
+        var searchObj={
+            invoiceno  : invoiceno, 
+            fromDate : datepicker1,
+            toDate   : datepicker2
+        };
+        DBHandler.searchInvoice(searchObj, searchInvoiceCallback);
+        // if((email == 'ticl_dealer@bajajauto.co.in') && (password == "dealer123")) {
+        //     window.location.href = "create_grn.html";
+        // } else {
+        //     $("#error-msg-login-window").css("display", "block");
+        //     hideLoading();
+        // }
+
+    });
+
 }
 
 // function syncDatabase() {
@@ -271,4 +297,14 @@ function details(result) {
     }
     
 
+}
+
+function searchInvoiceCallback(result){
+    var resLen = result.rows.length;
+    console.log('resLen', resLen);
+    for (var i = 0; i < resLen; i++) {
+         var invoiceno = result.rows.item(i).invoiceno;
+         console.log('searchInvoiceCallback invoiceno', invoiceno);
+    }
+    console.log('searchInvoiceCallback result', result);
 }

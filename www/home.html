@@ -127,12 +127,14 @@
                                     </div>
                                     <div class="tab-pane fade text-center clearfix" id="profile">
                                         <div class="col-md-12 col-sm-12 col-xs-12 clearfix search_invoice_block">
-                                            <div class="enter_invoice_block"><input type="text" placeholder="Invoice Number" class="search_invoice col-md-8 col-sm-8 col-xs-10"></div>
+                                            <div class="enter_invoice_block">
+                                              <input type="text" placeholder="Invoice Number" id="invoiceno" class="search_invoice col-md-8 col-sm-8 col-xs-10">
+                                            </div>
                                             <div class="clearfix">
                                                 <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10" id="datepicker1">
                                                 <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10" id="datepicker2">
                                             </div>
-                                            <button class="seachInvoiceButton">Search Invoice</button>
+                                            <button class="seachInvoiceButton" id="searchInvoice">Search Invoice</button>
                                         </div>
                                     </div>
                                     

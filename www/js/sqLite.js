@@ -203,7 +203,7 @@ var DBHandler = {
         });
 
     },
-   
+
     // gets number of rows in particular table
     getTableCount: function(table, callback) {
         var isCallback = false;
@@ -234,6 +234,21 @@ var DBHandler = {
         // }, 5000);
     },
 
+    searchInvoice: function(values, callback){
+        var invoiceno = values.invoiceno;
+        var fromDate = values.fromDate;
+        var toDate = values.toDate;
+        console.log('values',values);
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT invoiceno FROM invoice WHERE invoiceno LIKE "+"'"+invoiceno+"%"+"'" +"AND created_date >= "+"'"+fromDate+"'"+"AND created_date <= "+"'"+toDate+"'",
+                values,
+                function(tx, result) {
+                    console.log('result',result);
+                    callback(result);
+                }, onError);
+        });
+
+    },
     // ---------------------------------------------------------------
     // Update record with passed condition and values
     // Params: @table => name of the table
