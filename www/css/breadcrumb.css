@@ -13,8 +13,8 @@
 #breadcrumb,#breadcrumb2 {
 	float:left;
 	display:block;
-	margin-top:12px;
-	width:100%;
+	/*width:100%;*/
+	margin-top: 13px;
 }
 
 #breadcrumb ul,#breadcrumb2 ul {

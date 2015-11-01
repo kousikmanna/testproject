@@ -12,12 +12,13 @@ function loginCheck() {
 
     // var producturl="http://api.afterbuy.co/afterbuy/v1/consumers/product-details/?access_token=<>";
 
-    if (!isNetworkAvailable()) {
-        $("#error-msg-login-window").html("Network Unavailable. Please connect to internet and retry");
-        $("#error-msg-login-window").css("display", "block");
-        $('#error-msg').css('visibility', 'visible');
-        return false;
-    } else {
+    // if (!isNetworkAvailable()) {
+    //     $("#error-msg-login-window").html("Network Unavailable. Please connect to internet and retry");
+    //     $("#error-msg-login-window").css("display", "block");
+    //     $('#error-msg').css('visibility', 'visible');
+    //     return false;
+    // } else {
+
 
         var un = $('#Email').val();
         var pw = $('#Passwd').val();
@@ -41,27 +42,53 @@ function loginCheck() {
             // window.location = "home.html";
             showLoading();
             $.ajax({
-                type: 'POST',
-                 url: 'http://qa.bajaj.gladminds.co/v1/gm-users/login/',
-                // url: 'http://dash.mantralabsglobal.com/api/user/login/',
-                // url:'http://localhost:1337/user/login',
-                data: serilizedData,
+                //
+                // type: 'POST',
+                //  url: 'http://qa.bajaj.gladminds.co/v1/gm-users/login/',
+                // data: serilizedData,
+                // dataType: 'json',
+                // success: function(log_data, status) {
+                //     console.log('log_data',log_data);
+                //     console.log('status',status);
+                //     alert(log_data.status);
+                //     if (log_data.status == 1) {
+
+                //         localStorage.setItem('access_token', log_data.access_token)
+                //             // sessionStorage.setItem('user_group',log_data.user_group);
+                //         localStorage.setItem('user_id', un);
+                //         // alert(log_data.login_id+","+log_data.user_group+","+log_data.rep_manager_id);
+                //         // localStorage.setItem("isRegistered", true);
+
+                //         fetchDatabase(log_data.access_token);
+
+                //     } else if (log_data.status == 0) {
+                //         //alert(status);
+                //         $("#error-msg-login-window").html(log_data.message);
+                //         localStorage.setItem("isRegistered", false);
+                //         $("#error-msg-login-window").css("display", "block");
+                //     }
+                //     hideLoading();
+
+                // },
+                //
+                 type: 'GET',
+                 url: 'js/api/user.json',
+                // data: serilizedData,
                 dataType: 'json',
                 success: function(log_data, status) {
                     console.log('log_data',log_data);
                     console.log('status',status);
-                    alert(log_data.status);
-                    if (log_data.status == 1) {
+                    // alert(log_data.status);
+                    if (log_data.email == "ticl_dealer@bajajauto.co.in" && log_data.password== "dealer123") {
 
-                        localStorage.setItem('access_token', log_data.access_token)
+                        localStorage.setItem('email', log_data.email)
                             // sessionStorage.setItem('user_group',log_data.user_group);
-                        localStorage.setItem('user_id', un);
+                        // localStorage.setItem('user_id', un);
                         // alert(log_data.login_id+","+log_data.user_group+","+log_data.rep_manager_id);
                         // localStorage.setItem("isRegistered", true);
 
-                        fetchDatabase(log_data.access_token);
-
-                    } else if (log_data.status == 0) {
+                        fetchDatabase(log_data.email);
+                    } else{
                         //alert(status);
                         $("#error-msg-login-window").html(log_data.message);
                         localStorage.setItem("isRegistered", false);
@@ -83,17 +110,88 @@ function loginCheck() {
             });
         }
         return false;
-    }
+    // }
 }
 
-function fetchDatabase(access_token) {
+// function fetchDatabase(access_token) {
+//     //http://qa.bajaj.gladminds.co/v1/container-lrs/?access_token=<access_token>
+//     console.log("Access Token::"+access_token);
+//     var serilizedData = JSON.stringify({
+//         "access_token": access_token
+//     });
+//     console.log(access_token);
+//     $.ajax({
+//         type: 'GET',
+//         url: 'js/api/trip.json',
+//         //data: serilizedData,
+//         dataType: 'json',
+//         success: function(log_data, status) {
+//             console.log('GET log_data',log_data);
+//             console.log('GET status',status);
+//             console.log('log_data.objects',status);
+//             // alert('First Sync Date is ' + printDate());
+//             DBHandler.saveAllRecords(log_data.objects, dataSaved);
+//             // localStorage.setItem('sync_date', printDate());
+
+//         },
+//         error: function(e) {
+//             console.log(e);
+//             return false;
+//         }
+//     });
+// }
+function fetchDatabase(email) {
     //http://qa.bajaj.gladminds.co/v1/container-lrs/?access_token=<access_token>
-    console.log("Access Token::"+access_token);
-    var serilizedData = JSON.stringify({
-        "access_token": access_token
-    });
-    console.log(access_token);
+    console.log("email::"+email);
+    // var serilizedData = JSON.stringify({
+    //     "access_token": access_token
+    // });
+    // console.log(access_token);
     $.ajax({
+        type: 'GET',
+        url: 'js/api/dealer.json',
+        //data: serilizedData,
+        dataType: 'json',
+        success: function(log_data, status) {
+            console.log('GET log_data',log_data);
+            console.log('GET status',status);
+            console.log('log_data.objects',status);
+            // alert('First Sync Date is ' + printDate());
+            DBHandler.saveRecordofDealer(log_data.objects, saveRecordofDealerCallback);
+            // localStorage.setItem('sync_date', printDate());
+
+        },
+        error: function(e) {
+            console.log(e);
+            return false;
+        }
+    });
+
+    // $.ajax({
+    //     type: 'GET',
+    //     url: 'js/api/trip.json',
+    //     //data: serilizedData,
+    //     dataType: 'json',
+    //     success: function(log_data, status) {
+    //         console.log('GET log_data',log_data);
+    //         console.log('GET status',status);
+    //         console.log('log_data.objects',status);
+    //         // alert('First Sync Date is ' + printDate());
+    //         DBHandler.saveAllRecords(log_data.objects, dataSaved);
+    //         // localStorage.setItem('sync_date', printDate());
+
+    //     },
+    //     error: function(e) {
+    //         console.log(e);
+    //         return false;
+    //     }
+    // });
+}
+
+function saveRecordofDealerCallback(result){
+    // alert('inside saveRecordofDealerCallback');
+    console.log('saveRecordofDealerCallback');
+     $.ajax({
         type: 'GET',
         url: 'js/api/trip.json',
         //data: serilizedData,
@@ -112,8 +210,8 @@ function fetchDatabase(access_token) {
             return false;
         }
     });
-}
 
+}
 // function dataSaved(data) {
 //     console.log('data');
 //     hideLoading();
@@ -123,8 +221,9 @@ function fetchDatabase(access_token) {
 
 // }
 function dataSaved(data) {
+    // alert('inside dataSaved');
     console.log('trip data');
-    alert('data is saved');
+    // alert('data is saved');
      $.ajax({
         type: 'GET',
         url: 'js/api/invoice.json',
@@ -145,11 +244,40 @@ function dataSaved(data) {
         }
     });
 }
+
 function dataSaved2(data) {
     console.log('invoice data');
-    hideLoading();
-    alert('invoice data is saved');
-    window.location = "home.html";
-   
+    // hideLoading();
+    // alert('invoice data is saved');
+    // window.location = "create_grn.html";
+    $.ajax({
+        type: 'GET',
+        url: 'js/api/chassis.json',
+        dataType: 'json',
+        success: function(log_data, status) {
+            console.log('GET log_data',log_data);
+            console.log('GET status',status);
+            console.log('log_data.objects',status);
+            // alert('saveAllRecordsofInvoiceCallback');
+            DBHandler.saveRecordsofChassis(log_data.objects, saveRecordsofChassisCallback);
+
+        },
+        error: function(e) {
+            console.log(e);
+            return false;
+        }
+    });
 }
+
+function saveRecordsofChassisCallback(result) {
+    // alert('saveRecordsofChassisCallback');
+    console.log('invoice data');
+    hideLoading();
+    // alert('invoice data is saved');
+    // window.location = "create_grn.html";
+    // DBHandler.saveAllRecordsofInvoice(log_data.objects, dataSaved2);
+    window.location = "create_grn.html";
+}
+
+
 

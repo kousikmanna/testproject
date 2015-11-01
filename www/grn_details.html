@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gladminds Connect Platform</title>
+    
+    <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
+    <link href="css/plugins/pace/pace.css" rel="stylesheet">
+    <script src="js/plugins/pace/pace.js"></script>
+
+    <!-- GLOBAL STYLES - Include these on every page. -->
+    <link href="css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/plugins/datatables/datatables.css" rel="stylesheet">
+
+    <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- THEME STYLES - Include these on every page. -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/jquery.timepicker.min.css">
+    <!-- CUSTOM CSS - Pne -->
+    <link href="css/PnE.css" rel="stylesheet">
+    <!--<script type="text/javascript" src="js/underscore-min.js"></script>-->
+     <script type="text/javascript" src="js/underscore.js"></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/template" id="chassisSearchTemplate">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header chassisListHeader">
+                    <button type="button" class="close chassisListClose" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Chassis #</h4>
+                </div>
+
+                <div class="modal-body clearfix">
+                    <div class="clearfix">
+                        <table class="text-left table table-striped table-bordered table-hover">
+                            <thead></thead>
+                            <tbody>
+
+                                <% for(var i=0; i<length; i++) {%>
+                                    <tr>
+                                        <td id="td100<%= i %>"><%= resultData.item(i).chassisno %></td>
+                                        <td><input type="checkbox" id="<%= i %>" name="select_for_chessisno[]" class="select_for_chessisno"/></td>
+                                    </tr>
+                               <% }; %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer truckLayout_actionBlk">
+                    <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn groupChassis" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="chassisTemplate">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" class="acc_parent_block" href="#collapse<%= chassisno %>">
+                        <%= chassisno %>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse<%= chassisno %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <ul class="donate-now">
+                                <li>
+                                    <input type="radio" id="damage11" class="complaintType" name="amount" checked="checked"/>
+                                    <label for="damage11">Damage</label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="shortage11" class="complaintType" name="amount" />
+                                    <label for="shortage11">Shortage</label>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="damage_details clearfix">
+
+                    <h5>Damage Location<i class="fa fa-plus getChassisLabel plusStyle" data-toggle="modal" data-target="#damageLocation"></i></h5>
+                    <div class="damageClauses">
+                        <select class="damageDesc_1">
+                            <option>Select Damage</option>
+                            <option>Front mirror</option>
+                            <option>Rear Mirror</option>
+                            <option>Head Light</option>
+                            <option>Left Indicator</option>
+                            <option>Right Indicator</option>
+                        </select>
+
+                        <select class="damageDesc_2">
+                            <option>Damage Type</option>
+                            <option>Slightly Broken</option>
+                            <option>Major Damage</option>
+                            <option>Others</option>
+                        </select>
+
+                        <select class="damageDesc_3">
+                            <option>Damage Type</option>
+                            <option>Accident</option>
+                            <option>Traffic</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div class="shortageClauses">
+                        <select class="damageDesc_1">
+                            <option>Select Shortage</option>
+                            <option>Front mirror</option>
+                            <option>Rear Mirror</option>
+                            <option>Head Light</option>
+                            <option>Left Indicator</option>
+                            <option>Right Indicator</option>
+                        </select>
+
+                        <select class="damageDesc_3">
+                            <option>Shortage Type</option>
+                            <option>Accident</option>
+                            <option>Traffic</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="attchmentBlock">
+                    <h5>Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <style type="text/css">
+        body {
+            background: rgb(239, 236, 236) !important;
+        }
+        .nav-tabs, .nav-pills {
+           margin-bottom: 10px !important;
+        }
+
+        #myTab {
+            background: #636363;
+        }
+
+        .nav-tabs > li > a {
+            color: #FFF !important;
+        }
+
+        .nav-tabs > li:hover > a {
+            color: #000 !important;
+        }
+
+        .nav-tabs > li.active > a {
+            color: #000 !important;
+        }
+
+        .page-content-ease-in {
+            background: none;
+        }
+        .signOutIcon {
+            margin-top: 8px;
+        }
+    </style>
+    <script type="text/template" id="grnDetailTemplate">
+     <button class="display-none openChassisTable" data-toggle="modal" data-target="#selectChassis">open Chassis</button>
+
+    </script>
+        
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- <div class="json-header"></div> -->
+        <div id="page-wrapper" style="background: rgb(239, 236, 236);">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-md-12 menu-page-mob padding-zero">
+                        <div id="breadcrumb"></div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
+                            
+
+                        <div class="">
+                            <div class="portlet-heading">
+                                <div class="portlet-title">
+                                    <i class="fa fa-arrow-left go_back_arrow">&nbsp;</i><img src="img/Bajaj_Logo.png" class="img-responsive bajaj_header_logo">
+                                      <a class="logout_open" href="#"> <i class="fa fa-power-off signOutIcon pull-right"></i></a>
+                                    
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            
+                            <ul id="myTab" class="nav nav-tabs">
+                                <li class="active grn_details_tab details_1"><a href="#home" data-toggle="tab">GRN Details</a>
+                                </li>
+                                <li class="grn_details_tab details_2"><a href="#profile" data-toggle="tab">Damage/Shortage</a>
+                                </li>
+                                <li class="grn_details_tab details_3"><a href="#report" data-toggle="tab">Report</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in " id="home">
+                                    <div class="grnBasicDetailArea">
+                                        <div class="grn_detail_block clearfix col-md-12 col-sm-12 col-xs-12 padding-zero">
+                                            <h5>Reporting Time</h5>
+                                        </div>
+                                        <div class="clearfix reportingDateTimeArea">
+                                            <input type="text" id="datepicker3" class="reporting_date sandbox-container" placeholder="Reporting Date" value="" />
+                                            <input type="text" id="reportingTime" class="reporting_time" placeholder="Time"/>
+                                        </div>
+                                        <div class="clearfix uploadDateTimeArea">
+                                            <input type="text" id="datepicker4" class="reporting_date sandbox-container" placeholder="Uploading Date" />
+                                            <input type="text" id="uploadingTime" class="reporting_time" placeholder="Time" value=""/>
+                                        </div>
+                                        <h5 class="seactionBrk">Delivery</h5>
+                                        <select class="damageReason" name="reason" id="reason">
+                                            <option>With Accident delivery</option>
+                                            <option>Manual mistake</option>
+                                            <option>Others</option>
+                                        </select>
+                                        <h5 class="seactionBrk">Reason for delay</h5>
+                                        <select class="damageReason" name="reasonForDelay" id="reasonForDelay">
+                                            <option>Accident</option>
+                                            <option>Traffic</option>
+                                            <option>Others</option>
+                                        </select>
+                                        <h5 class="seactionBrk">Approximate Delay : <span>8</span> Days</h5>
+                                        </div>
+                                    <div class="text-center"><a href="#profile" id ="grndetail" data-toggle="tab" class="grnDetailsNext">Next</a></div>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+                                    <div class="chassisBlock">
+                                        <h5>Get Chassis Number</h5>
+                                        <div class="getChassisNumber clearfix">
+                                            <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/>
+                                            <label class="getChassisLabel">Scan</label>
+                                            <!-- <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i> -->
+                                            <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i>
+                                        </div>
+
+                                        <div class="accordian_parent clearfix" id="chassisDetail">
+                                            <!-- <div class="panel-group" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" class="acc_parent_block" href="#collapseOne">
+                                                                MD2A11CZDCCD65199
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="clearfix">
+                                                                <ul class="donate-now">
+                                                                    <li>
+                                                                        <input type="radio" id="damage11" class="complaintType" name="amount" checked="checked"/>
+                                                                        <label for="damage11">Damage</label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="radio" id="shortage11" class="complaintType" name="amount" />
+                                                                        <label for="shortage11">Shortage</label>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                            <div class="damage_details clearfix">
+
+                                                        <h5>Damage Location<i class="fa fa-plus getChassisLabel plusStyle" data-toggle="modal" data-target="#damageLocation"></i></h5>
+                                                        <div class="damageClauses">
+                                                            <select class="damageDesc_1">
+                                                                <option>Select Damage</option>
+                                                                <option>Front mirror</option>
+                                                                <option>Rear Mirror</option>
+                                                                <option>Head Light</option>
+                                                                <option>Left Indicator</option>
+                                                                <option>Right Indicator</option>
+                                                            </select>
+
+                                                            <select class="damageDesc_2">
+                                                                <option>Damage Type</option>
+                                                                <option>Slightly Broken</option>
+                                                                <option>Major Damage</option>
+                                                                <option>Others</option>
+                                                            </select>
+
+                                                            <select class="damageDesc_3">
+                                                                <option>Damage Type</option>
+                                                                <option>Accident</option>
+                                                                <option>Traffic</option>
+                                                                <option>Others</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="shortageClauses">
+                                                            <select class="damageDesc_1">
+                                                                <option>Select Shortage</option>
+                                                                <option>Front mirror</option>
+                                                                <option>Rear Mirror</option>
+                                                                <option>Head Light</option>
+                                                                <option>Left Indicator</option>
+                                                                <option>Right Indicator</option>
+                                                            </select>
+
+                                                            <select class="damageDesc_3">
+                                                                <option>Shortage Type</option>
+                                                                <option>Accident</option>
+                                                                <option>Traffic</option>
+                                                                <option>Others</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="attchmentBlock">
+                                                        <h5>Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>
+                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <!-- <div class="panel-group" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" class="acc_parent_block" href="#collapseTwo">
+                                                                MD2A11CZDCCD65134
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="clearfix">
+                                                                <ul class="donate-now">
+                                                                    <li>
+                                                                        <input type="radio" id="damage12" name="amount" checked="checked"/>
+                                                                        <label for="damage12">Damage</label>
+                                                                    </li>
+                                                                    <li>
+                                                                        <input type="radio" id="shortage12" name="amount" />
+                                                                        <label for="shortage12">Shortage</label>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
+                                                            <div class="damage_details clearfix">
+
+                                                            
+
+                                                        <h5>Damage Location<i class="fa fa-plus getChassisLabel plusStyle" data-toggle="modal" data-target="#damageLocation"></i></h5>
+
+                                                        <select class="damageDesc_1">
+                                                            <option>Select Damage</option>
+                                                            <option>Accident</option>
+                                                            <option>Traffic</option>
+                                                            <option>Others</option>
+                                                        </select>
+
+                                                        <select class="damageDesc_2">
+                                                            <option>Damage Type</option>
+                                                            <option>Accident</option>
+                                                            <option>Traffic</option>
+                                                            <option>Others</option>
+                                                        </select>
+
+                                                        <select class="damageDesc_3">
+                                                            <option>Damage Type</option>
+                                                            <option>Accident</option>
+                                                            <option>Traffic</option>
+                                                            <option>Others</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="attchmentBlock">
+                                                        <h5>Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>
+                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div><!-- chassisDetail-->
+
+
+                                        <div class="text-center"><a href="#report" data-toggle="tab" id="reportDetail" class="grnDetailsreport">Next</a></div>
+                                    </div><!-- End of chassis Block-->
+                                </div>
+                                <div class="tab-pane fade" id="report">
+                                    <div class="grnBlock" id="dealerDetail">
+                                        <!-- <div class="col-md-12 col-sm-12 col-xs-12 padding-zero clearfix">    
+                                            <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+                                                <img src="img/Bajaj_Logo.png" class="img-responsive bajaj_logo_grn">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 padding-zero gtnTitleBlock">
+                                                <p class="grnTitle">Goods Receipt Note</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 padding-zero clearfix dearlerInfoBlock"></div>
+                                        <label class="dealerInfo">GRN #: </label><span class="dearlerValues">0000000000989749</span><br>
+                                        <label class="dealerInfo">Dealer Name: </label><span class="dearlerValues">Sai Service station Ltd</span><br>
+                                        <label class="dealerInfo">Dealer Code: </label><span class="dearlerValues">10369</span><br>
+                                        <label class="dealerInfo">PDI Manager: </label><span class="dearlerValues">Srinivas M.N</span> -->
+                                    </div>
+
+                                    <div id ="invoiceDetail" class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                       <!--  <h4>Invoice Details</h4> -->
+                                        <!-- <table class="invoiceTableTemp table table-striped table-bordered table-hover">
+                                            <thead class="invoiceTable">
+                                                <th>S.N</th>
+                                                <th>Invice No.</th>
+                                                <th>Date</th>
+                                                
+                                                <th>Trip No</th>
+                                                <th>Billed Qty</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>201998239</td>
+                                                    <td>11.07.2015</td>
+                                                    
+                                                    <td>371129</td>
+                                                    <td>12</td>
+                                                </tr>
+                                            </tbody>
+                                        </table> -->
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                        <h4>Damage Details</h4>
+                                        <table class="invoiceTableTemp table table-striped table-bordered table-hover">
+                                            <thead class="invoiceTable">
+                                                <th>S.N</th>
+                                                <th>Chassis No</th>
+                                                <th>Damage Part</th>
+                                                <th>Damage Type</th>
+                                                
+                                                <th>Cause</th>
+                                                <th>Location</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2053439</td>
+                                                    <td>Head Light</td>
+                                                    <td>Some type</td>
+                                                    
+                                                    <td>Accident</td>
+                                                    <td>Front</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2053439</td>
+                                                    <td>Head Light</td>
+                                                    <td>Some type</td>
+                                                    
+                                                    <td>Accident</td>
+                                                    <td>Front</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                        <h4>Shortage Details</h4>
+                                        <table class="invoiceTableTemp table table-striped table-bordered table-hover">
+                                            <thead class="invoiceTable">
+                                                <th>S.N</th>
+                                                <th>Brand Varient</th>
+                                                <th>Shortage Part</th>
+                                                <th>Shortage Qty</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2053439</td>
+                                                    <td>Head Light</td>
+                                                    <td>Some type</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>2053439</td>
+                                                    <td>Head Light</td>
+                                                    <td>Some type</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                        <h4>Driver Details</h4>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+                                            <p class="driverSummery">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+                                            <label>Driver Photo and Signature</label>
+                                            <div class="driverPhotoAndSign clearfix">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                        <h4>Attachments</h4>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <img src="img/attachment.PNG" class="img-responsive">
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <p>The front is found broken.</p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+                                            <i class="fa fa-2x fa-trash-o"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <h4>PDI Manager Signature</h4>
+                                            <div class="pdiManagerSignArea"></div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <button class="sendGRNbutton grnActionButton">Send GRN</button>
+                                            <button class="printButton grnActionButton">Print</button>
+                                        </div>
+                                    </div>
+
+                                    
+                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- /.portlet -->
+
+                    
+                        </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    </div>
+    <footer class="bajaj-footer"></footer>
+    <button class="display-none openChassisTable" data-toggle="modal" data-target="#selectChassis">open Chassis</button>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+     <script src="js/plugins/jquery.timepicker.min.js"></script>
+    <script type="text/javascript" src="js/inc/inc.js"></script>
+
+    <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
+    <script src="js/plugins/popupoverlay/defaults.js"></script>
+    <!--BOOTSTRAP DATE PICKER SCRIPT-->
+    <script src="js/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <div id="logout">
+        <div class="logout-message">
+            <div class="logout-user-profile-img">
+            </div>
+            <h4 class="logout-username">
+                TICL_Dealer
+            </h4>
+            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
+            <ul class="list-inline">
+                <li>
+                    <a class="btn btn-green" onclick="logout_user();">
+                        <strong>Logout</strong>
+                    </a>
+                </li>
+                <li>
+                    <button class="logout_close btn btn-green">Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="damageLocation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+    <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Damage Location in Truck</h4>
+      </div>
+      <div class="modal-body clearfix">
+        <div class="clearfix">
+            <ul class="donate-now">
+                <li>
+                    <input type="radio" id="upperDeck" name="amount" />
+                    <label for="upperDeck">Upper Deck</label>
+                </li>
+                <li>
+                    <input type="radio" id="lowerDeck" name="amount" />
+                    <label for="lowerDeck">Lower Deck</label>
+                </li>
+
+            </ul>
+        </div>
+        <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+            <!-- <th rowspan="5">Driver</th> -->
+            <thead class="">
+                <th colspan="5" class="text-right">Driver</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>C1</td>
+                    <td>C2</td>
+                    <td>C3</td>
+                    <td>C4</td>
+                </tr>
+                <tr>
+                    <td>R1</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>R2</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td>R3</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td>R4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td>R5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td>R6</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td>R7</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr><tr>
+                    <td></td>
+                    <td colspan="4">Rear side of truck</td>
+                </tr>
+            </tbody>
+        </table>
+        
+      </div>
+      <div class="modal-footer truckLayout_actionBlk">
+        <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn actAddEmployee" data-dismiss="modal">Save</button>
+      </div>
+        </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="selectChassis" class="modal fade" role="dialog">
+        <!-- <div class="modal-dialog">
+
+           
+            <div class="modal-content">
+                <div class="modal-header chassisListHeader">
+                    <button type="button" class="close chassisListClose" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Chassis #</h4>
+                </div>
+
+                <div class="modal-body clearfix">
+                    <div class="clearfix">
+                        <table class="text-left table table-striped table-bordered table-hover">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td>MD2A7097897899</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td>MD2A7074937099</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td>MD43380979799</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td>MD2A54649355</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer truckLayout_actionBlk">
+                    <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn groupChassis" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+
+
+<footer class="bajaj-footer"><span>All rights reserved by Bajaj Auto Ltd.</span><br><span>Powered by <a href="//gladminds.co/#products" target="_blank">GladMinds Connect Platform</a></span><br><span>0.0.1</span></footer>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/sqLite.js"></script>
+    <script src="js/flex.js"></script>
+    <script src="js/header.js"></script>
+
+    <script src="js/plugins/popupoverlay/logout.js"></script>
+    <script src="js/plugins/hisrc/hisrc.js"></script>
+    <script type="text/javascript" src="js/mainMenu.js"></script>
+    <script type="text/javascript" src="js/plugins/moment/moment.min.js"></script>
+    <script src="js/plugins/datatables/jquery.dataTables.js"></script>
+
+    <!--PURCHASE ORDER SCRIPT-->
+    <script type="text/javascript" src="js/version.js"></script>
+    <script type="text/javascript" src="js/grn_details.js"></script>
+<div id="loading">
+  <div class="txt"></div>
+  <div class="bg"></div>
+</div>
+</body>
+</html>

@@ -37,9 +37,34 @@ var DBHandler = {
 
             //     }, onError);
             // });
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE grn_trip", [], function(tx, result) {
 
+            //     }, onError);
+            // });
+
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE grn_invoice", [], function(tx, result) {
+
+            //     }, onError);
+            // });
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE grn_detail", [], function(tx, result) {
+
+            //     }, onError);
+            // });
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE grn_chassis", [], function(tx, result) {
+
+            //     }, onError);
+            // });
+            tx.executeSql('CREATE TABLE IF NOT EXISTS dealer ("dealer_name" VARCHAR, "dealer_code" VARCHAR, "pdi_manager" VARCHAR)');    
             tx.executeSql('CREATE TABLE IF NOT EXISTS trip ("tripno" INTEGER PRIMARY KEY, "created_date" DATETIME, "modified_date"  DATETIME, "truckno" VARCHAR)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS invoice ("invoiceno" INTEGER PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno" INTEGER)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_trip ("tripno"  INTEGER PRIMARY KEY, "created_date" DATETIME, "modified_date"  DATETIME, "truckno" VARCHAR)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_invoice ("invoiceno" INTEGER PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno"  INTEGER)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_detail ("grn_number" VARCHAR, "reporting_date" DATETIME, "reporting_time" DATETIME, "uploading_date" DATETIME, "uploading_time" DATETIME, "delay_type" VARCHAR, "reason_of_delay" VARCHAR)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassis ("chassisno" VARCHAR, "damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR, "shortage_city" VARCHAR, "invoiceno" INTEGER)');    
         });
 
 
@@ -54,6 +79,7 @@ var DBHandler = {
                 }, onError);
         });
     },
+
 
     // ---------------------------------------------------------------
     // Creates table with the name and columns passed
@@ -138,6 +164,93 @@ var DBHandler = {
         });
     },
 
+    getChassisRecords: function(table, condition, callback){
+        
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM " + table + " WHERE " + condition, [], function(tx, result) {
+                // tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
+                console.log('getChassis Records result', result);
+                callback(result);
+            });
+        });
+    },
+    
+    saveRecordofDealer: function(values, callback){
+         console.log("values", values);
+        //Date time fields in db
+        var objValues = "";
+
+        for (var i = 0; i < values.length; i++) {
+            var obj = values[i];
+            //Date time fields
+
+            var cRow = getDealerValues(obj);
+            if (i != values.length - 1)
+                objValues = objValues + cRow + ", ";
+            else
+                objValues = objValues + cRow;
+                console.log('objValues',objValues);
+
+        }
+
+        var columns = "('dealer_name', 'dealer_code', 'pdi_manager')";
+       
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO dealer " + columns + " VALUES " + objValues, objValues,
+                function(tx, result) {
+                    console.log("result",result);
+                    console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
+                    if (callback != null)
+                        callback(result);
+                }, onError);
+        });
+
+    },
+
+    saveRecordsofGrn_trip_invoice: function(values, callback){
+        console.log("values", values);
+        console.log("tripno", values[0]);
+        console.log("created_date", values[1]);
+        var obj1={
+            tripno: values[0],
+            created_date: values[1],
+            modified_date: null,
+            truckno: values[2]
+        };
+        var obj2={
+            invoiceno: values[3],
+            plant: values[4],
+            created_date: null,
+            modified_date: null,
+            billqty: values[5],
+            tripno: values[0]
+        };
+        var objValues1 = getTripValues(obj1);
+        var objValues2 = getInvoiceValues(obj2);
+        var tripColumns = "('tripno', 'created_date', 'modified_date', 'truckno')";
+        var invoiceColumns = "('invoiceno', 'plant', 'created_date', 'modified_date', 'billqty', 'tripno')";
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO grn_trip " + tripColumns + " VALUES " + objValues1,
+                objValues1,
+                function(tx, result) {
+                    console.log("insertID", result.insertId,
+                        "rows affected", result.rowsAffected);
+                }, onError);
+        });
+
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO grn_invoice " + invoiceColumns + " VALUES " + objValues2,
+                objValues2,
+                function(tx, result) {
+                    console.log("insertID", result.insertId,
+                        "rows affected", result.rowsAffected);
+                    if (callback != null)
+                        callback(result);
+                }, onError);
+        });
+
+    },
+
     saveAllRecords: function(values, callback) {
         console.log("values", values);
         //Date time fields in db
@@ -170,6 +283,7 @@ var DBHandler = {
         });
 
     },
+
     saveAllRecordsofInvoice:function(values, callback) {
 
         console.log("values", values);
@@ -194,6 +308,59 @@ var DBHandler = {
        
         db.transaction(function(tx) {
             tx.executeSql("INSERT OR REPLACE INTO invoice " + columns + " VALUES " + objValues, objValues,
+                function(tx, result) {
+                    console.log("result",result);
+                    console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
+                    if (callback != null)
+                        callback(result);
+                }, onError);
+        });
+
+    },
+
+    saveRecordsofChassis: function(values, callback){
+        console.log("values", values);
+        console.log("values", values);
+        //Date time fields in db
+        var objValues = "";
+
+
+        for (var i = 0; i < values.length; i++) {
+            var obj = values[i];
+            //Date time fields
+
+            var cRow = getChassisValues(obj);
+            if (i != values.length - 1)
+                objValues = objValues + cRow + ", ";
+            else
+                objValues = objValues + cRow;
+                console.log('objValues',objValues);
+
+        }
+
+        var columns = "('chassisno', 'damage_location', 'damage_detail', 'damage_type', 'damage_cause', 'attachment', 'shortage_brand_variant', 'shortage_part','shortage_city', 'invoiceno')";
+       
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO grn_chassis " + columns + " VALUES " + objValues, objValues,
+                function(tx, result) {
+                    console.log("result",result);
+                    console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
+                    if (callback != null)
+                        callback(result);
+                }, onError);
+        });
+    },
+
+    saveGrn_detail:function(values, callback) {
+        console.log("values of saveGrn_detail", values);
+        var objValues = "";
+
+        var objValues = getGrnValues(values);
+    
+        var columns = "('grn_number', 'reporting_date', 'reporting_time', 'uploading_date', 'uploading_time', 'delay_type', 'reason_of_delay')";
+       
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO grn_detail " + columns + " VALUES " + objValues, objValues,
                 function(tx, result) {
                     console.log("result",result);
                     console.log("insertID", result.insertId, "rows affected", result.rowsAffected);
@@ -353,6 +520,7 @@ function getTripValues(obj) {
         var tripno, created_date, modified_date, truckno;
         //checks for integer
         tripno = obj.tripno;
+        console.log('tripno',tripno);
         //checks for datetime
         created_date = obj.created_date;
         modified_date = obj.modified_date;
@@ -387,7 +555,7 @@ function getTripValues(obj) {
 
 function getInvoiceValues(obj){
      var invoiceno, plant, created_date, modified_date, billqty, tripno;
-
+        console.log('getInvoiceValues',obj);
         invoiceno = obj.invoiceno;
         plant = obj.plant;
         created_date = obj.created_date;
@@ -397,7 +565,7 @@ function getInvoiceValues(obj){
         if (invoiceno == null || invoiceno == 'null' || invoiceno == '')
             invoiceno = null;
 
-         if (plant == null || plant == 'null' || plant == '')
+        if (plant == null || plant == 'null' || plant == '')
             plant = null;
         else
             plant = "'" + plant + "'";
@@ -424,10 +592,156 @@ function getInvoiceValues(obj){
         return currentRow;
 }
 
+function getGrnValues(obj){
+       var grn_number, reporting_date, reporting_time, uploading_date, uploading_time, delay_type, reason_of_delay;
+        grn_number = obj.grn_number;
+        reporting_date = obj.reporting_date;
+        reporting_time = obj.reporting_time;
+        uploading_date = obj.uploading_date;
+        uploading_time = obj.uploading_time;
+        delay_type = obj.delay_type;
+        reason_of_delay = obj.reason_of_delay;
+         if (grn_number == null || grn_number == 'null' || grn_number == '')
+            grn_number = null;
+        else
+            grn_number = "'" + grn_number + "'";
+
+        if (reporting_date == null || reporting_date == 'null' || reporting_date == '')
+            reporting_date = null;
+        else
+            reporting_date = "'" + reporting_date + "'";
+
+        if (reporting_time == null || reporting_time == 'null' || reporting_time == '')
+            reporting_time = null;
+        else
+            reporting_time = "'" + reporting_time + "'";
+
+        if (uploading_date == null || uploading_date == 'null' || uploading_date == '')
+            uploading_date = null;
+        else
+            uploading_date = "'" + uploading_date + "'";
+
+        if (uploading_time == null || uploading_time == 'null' || uploading_time == '')
+            uploading_time = null;
+        else
+            uploading_time = "'" + uploading_time + "'";
+        
+        if (delay_type == null || delay_type == 'null' || delay_type == '')
+            delay_type = null;
+        else
+            delay_type = "'" + delay_type + "'";
+
+        if (reason_of_delay == null || reason_of_delay == 'null' || reason_of_delay == '')
+            reason_of_delay = null;
+        else
+            reason_of_delay = "'" + reason_of_delay + "'";
+       
+        var currentRow = "(" + grn_number +", "+ reporting_date + ", " + reporting_time + ", " + uploading_date + ", " + uploading_time + ", " + delay_type + ", " + reason_of_delay +")";
+        console.log('currentRow',currentRow);
+
+        return currentRow;
+}
+
+function getDealerValues(obj){
+    var dealer_name, dealer_code, pdi_manager;
+    dealer_name = obj.dealer_name;
+    dealer_code = obj.dealer_code;
+    pdi_manager = obj.pdi_manager;
+    
+    if (dealer_name == null || dealer_name == 'null' || dealer_name == '')
+        dealer_name = null;
+    else
+        dealer_name = "'" + dealer_name + "'";
+
+    if (dealer_code == null || dealer_code == 'null' || dealer_code == '')
+        dealer_code = null;
+    else
+        dealer_code = "'" + dealer_code + "'";
+
+    if (pdi_manager == null || pdi_manager == 'null' || pdi_manager == '')
+        pdi_manager = null;
+    else
+        pdi_manager = "'" + pdi_manager + "'";
+
+    var currentRow = "(" + dealer_name +", "+ dealer_code + ", " + pdi_manager + ")";
+    console.log('currentRow',currentRow);
+
+    return currentRow;
+
+}
+
+function getChassisValues(obj){
+    var chassisno, damage_location, damage_detail, damage_type, damage_cause, attachment;
+    var shortage_brand_variant, shortage_part, shortage_city, invoiceno;
+    chassisno = obj.chassisno;
+    damage_location = obj.damage_location;
+    damage_detail = obj.damage_detail;
+    damage_type = obj.damage_type;
+    damage_cause = obj.damage_cause;
+    attachment = obj.attachment;
+    shortage_brand_variant = obj.shortage_brand_variant;
+    shortage_part = obj.shortage_part;
+    shortage_city = obj.shortage_city;
+    invoiceno = obj.invoiceno;
+    
+    if (chassisno == null || chassisno == 'null' || chassisno == '')
+        chassisno = null;
+    else
+        chassisno = "'" + chassisno + "'";
+
+    if (damage_location == null || damage_location == 'null' || damage_location == '')
+        damage_location = null;
+    else
+        damage_location = "'" + damage_location + "'";
+
+    if (damage_detail == null || damage_detail == 'null' || damage_detail == '')
+        damage_detail = null;
+    else
+        damage_detail = "'" + damage_detail + "'";
+
+    if (damage_type == null || damage_type == 'null' || damage_type == '')
+        damage_type = null;
+    else
+        damage_type = "'" + damage_type + "'";
+
+    if (damage_cause == null || damage_cause == 'null' || damage_cause == '')
+        damage_cause = null;
+    else
+        damage_cause = "'" + damage_cause + "'";
+
+    if (attachment == null || attachment == 'null' || attachment == '')
+        attachment = null;
+    else
+        attachment = "'" + attachment + "'";
+    if (shortage_brand_variant == null || shortage_brand_variant == 'null' || shortage_brand_variant == '')
+        shortage_brand_variant = null;
+    else
+        shortage_brand_variant = "'" + shortage_brand_variant + "'";
+
+    if (shortage_part == null || shortage_part == 'null' || shortage_part == '')
+        shortage_part = null;
+    else
+        shortage_part = "'" + shortage_part + "'";
+
+    if (shortage_city == null || shortage_city == 'null' || shortage_city == '')
+        shortage_city = null;
+    else
+        shortage_city = "'" + shortage_city + "'";
+
+    if (invoiceno == null || invoiceno == 'null' || invoiceno == '')
+        invoiceno = null;
+    
+    var currentRow = "(" + chassisno +", "+ damage_location + ", " + damage_detail + ", "+ damage_type + ", " + damage_cause + ", "+ attachment + ", " + shortage_brand_variant +", " + shortage_part + ", "+ shortage_city + ", " + invoiceno +")";
+    console.log('currentRow',currentRow);
+
+    return currentRow;
+}
+
 
 function onError(tx, error) {
     console.log(error.message);
 }
+
 function onError1(tx, error) {
     console.log(error.message);
 }

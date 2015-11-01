@@ -1,53 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="width=300, initial-scale=1" name="viewport">
     <meta name="description" content="">
     <script src="cordova.js"></script>
-    <title>Bajaj - CTS</title>
+    <title>Bajaj Auto Ltd - Aftersell</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <style type="text/css">
-    #error-msg {
-        visibility: hidden;
-        color: red
+    #loading{
+        display:none;
     }
-    
-    @media screen and (max-width: 580px) {
-        .bajaj-header-bar.centered .header .logo {
-            margin: 5% auto 5%;
-        }
-        .signin-card {
-            margin-top: 0
-        }
+    #loading, #loading div.bg{
+        position:fixed;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        top:0px;
+        left: 0px;
+        z-index: 500000;
     }
-    </style>
-    <script type="text/javascript">
-    if (localStorage.getItem("isRegistered") == true || localStorage.getItem("isRegistered") == "true") {
-        //   alert('Skip login');
-        window.location = "home.html";
-    }
-    </script>
-</head>
 
+    #loading div.txt{
+        position: absolute;
+        top:50%;
+        padding:23px 0;
+        width: 100%;
+        font-size: 12px;
+        z-index: 500001;
+        background: url(img/loading.gif) no-repeat 50%;
+        margin-top: -46px;
+    }
+
+    #loading div.bg{
+        background: #fff;
+        opacity:0.7;
+        filter:alpha(opacity=70); /* For IE8 and earlier */
+    }
+
+    #error-msg-login-window {
+        display: none;
+        padding: 10px;
+        color: red;
+        text-align: center;
+    }
+
+
+    </style>
+</head>
 <body>
     <div class="wrapper">
         <div class="bajaj-header-bar centered">
@@ -55,25 +63,27 @@
                 <img class="img-responsive logo" src="img/Bajaj_Logo.png">
             </div>
         </div>
+
         <div class="main content clearfix">
+
             <div class="card signin-card clearfix">
                 <h1 class="login-aftersell-title">
-                        One Company...One Experience
-                    </h1>
+                    One Company...One Experience
+                </h1>
                 <form novalidate method="post" id="gaia_loginform" onsubmit="return loginCheck()" autocomplete="off">
                     <div class="text-left alert alert-danger" id="error-msg-login-window">Invalid Credientials</div>
                     <label class="hidden-label" for="Email">Email</label>
-                    <input id="Email" name="Email" type="email" placeholder="Email" value="" spellcheck="false" class="" maxlength="50">
+                    <input id="Email" name="Email" type="email" placeholder="Email" value="" spellcheck="false" class="">
                     <label class="hidden-label" for="Passwd">Password</label>
-                    <input id="Passwd" name="Passwd" type="password" placeholder="Password" class="" maxlength="25">
+                    <input id="Passwd" name="Passwd" type="password" placeholder="Password" class="">
                     <button type="submit" id="signIn" name="signIn" class="rc-button rc-button-submit">Sign In</button>
-                    <!-- <div class="forgot-pwd">
-                            <label class="remember">
-                                <a href="#">
-                                    Forgot Password?
-                                </a>
-                            </label>
-                        </div> -->
+                    <div class="forgot-pwd">
+                        <label class="remember">
+                            <a href="#">
+                                Forgot Password?
+                            </a>
+                        </label>
+                    </div>
                 </form>
             </div>
             <div class="text-center aftersell-logo">
@@ -82,16 +92,18 @@
             <div class="oneApp-bajaj">
                 <p class="create-account">
                     <a id="link-signup" class="new-user-reg" href="">
-                            Create an account
-                        </a>
+                        Create an account
+                    </a>
                 </p>
             </div>
+
             <footer class="bajaj-footer"></footer>
+
         </div>
+
     </div>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/plugins/jquery.md5.min.js"></script>
-    <script type="text/javascript" src="js/org.apache.cordov.plugin/www/toast.js"></script>
     <script type="text/javascript" src="js/inc.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/sqLite.js"></script>
@@ -100,5 +112,4 @@
         <div class="bg"></div>
     </div>
 </body>
-
 </html>

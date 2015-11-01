@@ -1,4 +1,16 @@
-$(document).ready(function(){
+$(function() {
+    
+    document.addEventListener("deviceready", onDeviceReady, true);
+    // showLoading();
+});
+
+
+function onDeviceReady() {
+ 
+// $(document).ready(function(){
+     // DBHandler.initDatabase();
+     // console.log('Inside MainMenu.js');
+     // alert('Inside MainMenu.js');
     $.ajax({
         type: 'GET',
         url: 'js/api/mainMenu.json?get_param=value',
@@ -52,4 +64,7 @@ $(document).ready(function(){
             console.log(e)
         }
     });
-});
+// });
+
+
+}

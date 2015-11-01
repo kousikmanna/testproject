@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -22,21 +22,30 @@
     <!-- GLOBAL STYLES - Include these on every page. -->
     <link href="css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/plugins/datatables/datatables.css" rel="stylesheet">
-
+    <link href="css/plugins/jqueryui/jquery-ui.css" rel="stylesheet">
     <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- THEME STYLES - Include these on every page. -->
-    <link href="css/style2.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link href="css/plugins.css" rel="stylesheet">
     <link href="css/header.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/breadcrumb.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/datepicker.css">
     
     <!-- CUSTOM CSS - Pne -->
-    <!--<link href="css/PnE.css" rel="stylesheet"> -->
+    <link href="css/PnE.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .logoutBlock {
+            height: 40px;
+        }
+        .signOutIcon {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,24 +54,28 @@
         <div id="page-wrapper">
             <div class="page-content">
                 <div class="row">
-                    <div class="col-md-12 menu-page-mob">
+                    <div class="col-md-12 menu-page-mob padding-zero">
                         <div id="breadcrumb"></div>
                         
                         <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
+                            <div class="text-right logoutBlock">
+                            <img src="img/Bajaj_Logo.png" class="img-responsive bajaj_header_logo">
+                                <a class="logout_open" href="#"> <i class="fa fa-power-off signOutIcon pull-right"></i></a>
+                            </div>
                             
                                 <ul id="myTab" class="nav nav-tabs">
-                                    <li class="active createGrn_OptLIst"><a href="#home" data-toggle="tab">Home</a>
+                                    <li class="active createGrn_OptLIst"><a href="#home" data-toggle="tab">Pending Invoices</a>
                                     </li>
-                                    <li class="createGrn_OptLIst"><a href="#profile" data-toggle="tab">Profile</a>
+                                    <li class="createGrn_OptLIst"><a href="#profile" data-toggle="tab">Search Invoices</a>
                                     </li>
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
                                     <div class="tab-pane fade active in" id="home">
                                         <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
                                             <div class="panel panel-default">
-                                                <div class="panel-body" id="tabledetail">
-                                                    <table class="table table-condensed table_trip_data" style="border-collapse:collapse;">
-                                                        <thead>
+                                                <div class="panel-body1" id="tabledetail">
+                                                    <!-- <table class="table table-condensed table_trip_data" style="border-collapse:collapse;">
+                                                        <thead class="thead_trip">
                                                             <tr>
                                                                 <th>Trip No</th>
                                                                 <th>Date</th>
@@ -70,14 +83,12 @@
                                                                 <th>&nbsp;</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" id = "tripdetail">
-                                                                    
-                                                                    <td>1234</td>
+                                                            <tbody>
+                                                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                                                    <td>371720</td>
                                                                     <td>11.10.2014</td>
                                                                     <td>MH12HD2233</td>
                                                                     <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                                                    
 
                                                                 </tr>
                                                                 <tr>
@@ -96,20 +107,20 @@
                                                                                     <td>90000</td>
                                                                                     <td><input type="checkbox" class="select_for_grn" /></td>
                                                                                 </tr><tr>
-                                                                                    <td>7493040</td>
-                                                                                    <td>Pune</td>
+                                                                                    <td>7353040</td>
+                                                                                    <td>Mumbai</td>
                                                                                     <td>90000</td>
                                                                                     <td><input type="checkbox" class="select_for_grn" /></td>
                                                                                 </tr><tr>
-                                                                                    <td>7493040</td>
+                                                                                    <td>2493040</td>
                                                                                     <td>Pune</td>
-                                                                                    <td>90000</td>
+                                                                                    <td>Bangalore</td>
                                                                                     <td><input type="checkbox" class="select_for_grn" /></td>
                                                                                 </tr>
                                                                               </tbody>
                                                                         </table>
                                                                         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                            <button data-rel="1" class="createGrnButton">Create GRN</button>
                                                                         </div>
                                                                       
                                                                       </div> </td>
@@ -131,25 +142,25 @@
                                                                             </thead>
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td>89236348</td>
-                                                                                <td>Mumbai</td>
+                                                                                <td>8453348</td>
+                                                                                <td>Delhi</td>
                                                                                 <td>2300000</td>
                                                                                 <td><input type="checkbox" class="select_for_grn" /></td>
                                                                             </tr><tr>
-                                                                                <td>89236348</td>
-                                                                                <td>Mumbai</td>
+                                                                                <td>4529348</td>
+                                                                                <td>Pune</td>
                                                                                 <td>2300000</td>
                                                                                 <td><input type="checkbox" class="select_for_grn" /></td>
                                                                             </tr><tr>
-                                                                                <td>89236348</td>
-                                                                                <td>Mumbai</td>
+                                                                                <td>67936348</td>
+                                                                                <td>Kolkata</td>
                                                                                 <td>2300000</td>
                                                                                 <td><input type="checkbox" class="select_for_grn" /></td>
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
                                                                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                            <button class="createGrnButton">Create GRN</button>
                                                                         </div>
                                                                     </div> </td>
                                                                 </tr>
@@ -171,36 +182,159 @@
                                                                             </thead>
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td>89236348</td>
+                                                                                <td>45636348</td>
+                                                                                <td>Pune</td>
+                                                                                <td>70000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>80936348</td>
                                                                                 <td>Mumbai</td>
                                                                                 <td>2300000</td>
                                                                                 <td><input type="checkbox" class="select_for_grn" /></td>
                                                                             </tr><tr>
-                                                                                <td>89236348</td>
-                                                                                <td>Mumbai</td>
-                                                                                <td>2300000</td>
-                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
-                                                                            </tr><tr>
-                                                                                <td>89236348</td>
-                                                                                <td>Mumbai</td>
+                                                                                <td>25796348</td>
+                                                                                <td>Chennai</td>
                                                                                 <td>2300000</td>
                                                                                 <td><input type="checkbox" class="select_for_grn" /></td>
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
                                                                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                                                                            <button class="createGrnButton">Craete GRN</button>
+                                                                            <button class="createGrnButton">Create GRN</button>
+                                                                        </div>
+                                                                    </div> </td>
+                                                                </tr>
+
+
+
+                                                                <tr data-toggle="collapse" data-target="#demo21" class="accordion-toggle">
+                                                                    <td>371720</td>
+                                                                    <td>11.10.2014</td>
+                                                                    <td>MH12HD2233</td>
+                                                                    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo21"> 
+                                                                      <table class="table table-striped">
+                                                                              <thead>
+                                                                                    <th>Invoice No</th>
+                                                                                    <th>Plant</th>
+                                                                                    <th>Qty</th>
+                                                                                    <th>Select</th>
+                                                                              </thead>
+                                                                              <tbody>
+                                                                                <tr>
+                                                                                    <td>7493040</td>
+                                                                                    <td>Pune</td>
+                                                                                    <td>90000</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr><tr>
+                                                                                    <td>7353040</td>
+                                                                                    <td>Mumbai</td>
+                                                                                    <td>90000</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr><tr>
+                                                                                    <td>2493040</td>
+                                                                                    <td>Pune</td>
+                                                                                    <td>Bangalore</td>
+                                                                                    <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                                </tr>
+                                                                              </tbody>
+                                                                        </table>
+                                                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button data-rel="1" class="createGrnButton">Create GRN</button>
+                                                                        </div>
+                                                                      
+                                                                      </div> </td>
+                                                                </tr>
+                                                                <tr data-toggle="collapse" data-target="#demo22" class="accordion-toggle">    
+                                                                    <td>458899</td>
+                                                                    <td>15.10.2015</td>
+                                                                    <td>MH04XX9009</td>
+                                                                  <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo22"> 
+                                                                      <table class="table table-striped">
+                                                                            <thead>
+                                                                                <th>Invoice No</th>
+                                                                                <th>Plant</th>
+                                                                                <th>Qty</th>
+                                                                                <th>Select</th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>8453348</td>
+                                                                                <td>Delhi</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>4529348</td>
+                                                                                <td>Pune</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>67936348</td>
+                                                                                <td>Kolkata</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button class="createGrnButton">Create GRN</button>
+                                                                        </div>
+                                                                    </div> </td>
+                                                                </tr>
+
+                                                                <tr data-toggle="collapse" data-target="#demo23" class="accordion-toggle">    
+                                                                    <td>458899</td>
+                                                                    <td>15.10.2015</td>
+                                                                    <td>MH04XX9009</td>
+                                                                  <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo23"> 
+                                                                      <table class="table table-striped">
+                                                                            <thead>
+                                                                                <th>Invoice No</th>
+                                                                                <th>Plant</th>
+                                                                                <th>Qty</th>
+                                                                                <th>Select</th>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td>45636348</td>
+                                                                                <td>Pune</td>
+                                                                                <td>70000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>80936348</td>
+                                                                                <td>Mumbai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr><tr>
+                                                                                <td>25796348</td>
+                                                                                <td>Chennai</td>
+                                                                                <td>2300000</td>
+                                                                                <td><input type="checkbox" class="select_for_grn" /></td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                                            <button class="createGrnButton">Create GRN</button>
                                                                         </div>
                                                                     </div> </td>
                                                                 </tr>
                                                                 
                                                             </tbody>
-                                                        </table>
-                                                </div>
+                                                        </table> -->
+                                                    </div>
                                                                 
-                                            </div> 
+                                                </div> 
                                                                 
-                                        </div>
+                                            </div>
        
 
                                     </div>
@@ -208,8 +342,8 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12 clearfix search_invoice_block">
                                             <div class="enter_invoice_block"><input type="text" placeholder="Invoice Number" class="search_invoice col-md-8 col-sm-8 col-xs-10"></div>
                                             <div class="clearfix">
-                                                <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10">
-                                                <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10">
+                                                <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container" id="datepicker1">
+                                                <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container" id="datepicker2">
                                             </div>
                                             <button class="seachInvoiceButton">Search Invoice</button>
                                         </div>
@@ -226,18 +360,24 @@
         </div>
     </div>
     </div>
-    <footer class="bajaj-footer"></footer>
+    <footer class="bajaj-footer"><span>All rights reserved by Bajaj Auto Ltd.</span><br><span>Powered by <a href="//gladminds.co/#products" target="_blank">GladMinds Connect Platform</a></span><br><span>0.0.1</span></footer>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/inc/inc.js"></script>
+
+    <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
+    <script src="js/plugins/popupoverlay/defaults.js"></script>
+    <!--BOOTSTRAP DATE PICKER SCRIPT-->
+    <script src="js/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <div id="logout">
         <div class="logout-message">
             <div class="logout-user-profile-img">
             </div>
             <h4 class="logout-username">
-            <!--
-                <script type="text/javascript">
-                    $(".logout-username").text(localStorage.getItem('user_name'));
-                    localStorage.getItem('user_name');
-                </script>
-             -->   
+                TICL_Dealer
             </h4>
             <p>Select "Logout" below if you are ready<br> to end your current session.</p>
             <ul class="list-inline">
@@ -252,22 +392,21 @@
             </ul>
         </div>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
-    <script src="js/plugins/popupoverlay/defaults.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/sqLite.js"></script>
     <script src="js/flex.js"></script>
     <script src="js/header.js"></script>
+
     <script src="js/plugins/popupoverlay/logout.js"></script>
     <script src="js/plugins/hisrc/hisrc.js"></script>
-    
-    <script src="js/plugins/moment/moment.min.js"></script>
+    <script type="text/javascript" src="js/mainMenu.js"></script>
+    <script type="text/javascript" src="js/plugins/moment/moment.min.js"></script>
     <script src="js/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="js/sqLite.js"></script>
-    <script src="js/inc.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/home.js"></script>
     <!--PURCHASE ORDER SCRIPT-->
+    <!-- <script type="text/javascript" src="js/version.js"></script>-->
+    <!--<script type="text/javascript" src="js/create_grn.js"></script>-->
 <div id="loading">
   <div class="txt"></div>
   <div class="bg"></div>
