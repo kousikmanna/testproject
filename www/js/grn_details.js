@@ -250,5 +250,28 @@ $(document).on('click', '.groupChassis', function(){
     },1000)
 });
 
+$(document).on('click', '#chassisProfileDetail', function(){ 
+    var chassisCount=$('#chassisDetail').children().size();
+     console.log('chassisCount',chassisCount);
+    // var chassisArray=[];
+    var chassisArray = new Array();
+    var chassisObj={};
+    for(var i=0; i<chassisCount; i++){
+        chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
+        console.log('chassisCount',$('#chassisDetail').find('.acc_parent_block option:selected').eq(i).text());
+        chassisObj.damage_location="";
+        chassisObj.damage_detail=$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text();
+        console.log('damage_detail',$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text());
+        chassisObj.damage_type=$('#chassisDetail').find('.damageClauses .damageDesc_2 option:selected').eq(i).text();
+        chassisObj.damage_cause=$('#chassisDetail').find('.damageClauses .damageDesc_3 option:selected').eq(i).text();
+        chassisObj.attachment="";
+        chassisObj.shortage_brand_variant=$('#chassisDetail').find('.shortageClauses .damageDesc_1 option:selected').eq(i).text();
+        chassisObj.shortage_part=$('#chassisDetail').find('.shortageClauses .damageDesc_3 option:selected').eq(i).text();
+        chassisArray.push(chassisObj);
+    }
+
+    console.log('chassisArray',chassisArray);
+
+});
 
    

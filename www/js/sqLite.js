@@ -65,6 +65,7 @@ var DBHandler = {
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_invoice ("invoiceno" INTEGER PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno"  INTEGER)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_detail ("grn_number" VARCHAR, "reporting_date" DATETIME, "reporting_time" DATETIME, "uploading_date" DATETIME, "uploading_time" DATETIME, "delay_type" VARCHAR, "reason_of_delay" VARCHAR)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassis ("chassisno" VARCHAR, "damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR, "shortage_city" VARCHAR, "invoiceno" INTEGER)');    
+            //tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassis ("chassisno" VARCHAR, "damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR)');    
         });
 
 
