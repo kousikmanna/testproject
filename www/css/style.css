@@ -244,6 +244,9 @@ a:focus {
     transition: all ease-in-out .3s;
 }
 
+.carImage{
+     display: inline-block;
+}
 .navbar-top .navbar-brand a:hover {
     opacity: 0.7;
 }
@@ -849,9 +852,9 @@ div.dataTables_filter label {
 }
 
 
-.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
-    /*width: 1%;*/
-}
+/*.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+    width: 1%;
+}*/
 
  .page-title {
     margin: 10px 0 10px 0;
@@ -3729,19 +3732,26 @@ div.error{
 .createGrn_OptLIst {
     width: 50%;
     text-align: center;
-    background: #636363;
+    /*background: #636363;*/
 }
 
-.createGrn_OptLIst a {
+/*.createGrn_OptLIst a {
     color: #FFF;    
 }
-
+*/
 .search_invoice {
     margin: 30px;
     border-left: none;
     border-right: none;
     border-top: none;
     border-bottom: 1px solid #ccc;
+}
+
+
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    background: #636363;
+    color: #FFF;
 }
 
 .search_invoice_block {
@@ -3794,7 +3804,7 @@ div.error{
 }
 
 .reporting_date {
-    width: 60%;
+    width: 30%;
     float: left;
     border-top: none;
     border-left: none;
@@ -3822,21 +3832,41 @@ div.error{
 
 .damageDesc_1,
 .damageDesc_2,
-.damageDesc_3 {
+.damageDesc_3,
+.damageDesc_4,
+.damageDesc_5,
+.shortageDesc
+ {
     width: 100%;
     height: 35px;
     margin-top: 10px;
 }
+.chosen-container,
+.chosen-container-single,
+.chosen-container-active {
+width: 100% !important;
+}
+.shortageDesc {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #ccc;
+}
 
 .damage_details,
 .attchmentBlock,
+.grnDetailattchmentBlock,
 .grnBlock,
 .invoiceSummeryBlock {
     background: #FFF;
     padding: 10px;
+   /* overflow: scroll;*/
+    overflow: auto;
+    font-size: 12px;
 }
 
 .attchmentBlock,
+.grnDetailattchmentBlock,
 .invoiceSummeryBlock {
     margin-top: 10px;
 }
@@ -3952,8 +3982,10 @@ div.error{
 }
 
 .driverPhotoAndSign {
-    width: 80%;
-    height: 150px;
+    /*width: 80%;
+    height: 150px;*/
+   /* width: 200px;
+    height: 60px;*/
     border: 1px solid #CCC;
 }
 
@@ -3969,8 +4001,9 @@ div.error{
     background: #636363;
     color: #FFF;
     border: none;
-    margin-top: 5%;
+    margin-top: 17%;
     font-size: 12px;
+    float: right;
 }
 
 
@@ -4106,3 +4139,18 @@ font-size: 18px;
 .shortageClauses {
     display: none;
 }
+
+.driver_pic {
+    width: 100px;
+    height: 150px;
+}
+.table_trip_data tbody tr td{
+     border-top:none !important;
+}
+#imageDetail{
+    width:100%;
+}
+.grnImage {
+    display: inline-block !important;
+}
+

@@ -3,7 +3,6 @@ $(document).ready(function() {
     // create_footer();
 });
 
-
 function showLoading() {
     $("#loading").show();
 }

@@ -2,16 +2,32 @@
 	
     "objects": [
     	{
-		"tripno" : 1001,                 
-		"created_date" : "18/10/2015",
-		"modified_date" : "18/10/2015",
-		"truckno" : "at01"            
+		"tripno" : "0000498951",                 
+		"created_date" : "10/16/2015",
+		"modified_date" : "10/16/2015",
+		"total_distance":600,
+		"truckno" : "MH04CP7421"      
 		},
 		{
-		"tripno" : 1002,                 
-		"created_date" : "20/10/2015",
-		"modified_date" : "20/10/2015",
-		"truckno" : "at02"            
+		"tripno" : "0000500131",                 
+		"created_date" : "10/22/2015",
+		"modified_date" : "10/22/2015",
+		"total_distance":600,
+		"truckno" : "MH04CP7424"            
+		},
+		{
+		"tripno" : "0000501224",                 
+		"created_date" : "10/28/2015",
+		"modified_date" : "10/28/2015",
+		"total_distance":600,
+		"truckno" : "MH04CP7427"            
+		},
+		{
+		"tripno" : "0000501980",                 
+		"created_date" : "10/31/2015",
+		"modified_date" : "10/31/2015",
+		"total_distance":600,
+		"truckno" : "MH04CP7430"            
 		}
     ]
 }
