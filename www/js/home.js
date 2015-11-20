@@ -13,7 +13,10 @@ function onDeviceReady() {
     //     $( "#datepicker1").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
     //     $( "#datepicker2").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
     // });
-
+    $(function() {
+        $("#datepicker1").datepicker({dateFormat: 'dd-mm-yy', showButtonPanel: true, changeMonth: true, changeYear: true}).val;
+        $("#datepicker2").datepicker({dateFormat: 'dd-mm-yy', showButtonPanel: true, changeMonth: true, changeYear: true}).val;
+    });
     // var isConnected = isNetworkAvailable();
     // if (isConnected) {
       
@@ -71,6 +74,9 @@ function details(result) {
     var trip_invoice6='';
     var trip_invoiceItem='';
     var resLen = result.rows.length;
+    if(resLen == 0){
+        alert('Please enter string which is matching with trip number');
+    }
     var trip_invoice4;
     console.log("resLen",  result.rows.length);
     console.log("details", result);
@@ -323,3 +329,41 @@ function logout_user() {
 //     }
 
 // });
+    // var condition1='';
+    // var condition2;
+    // for(var i=0; i<arrayLen; i++){ 
+        
+    //     if(i<arrayLen-1){
+    //         condition1=condition1+" invoiceno='"+invoiceArray[i]+"'"+" OR "; 
+    //     }
+        
+    //     if(i===arrayLen-1){
+    //         condition2=condition1+" invoiceno='"+invoiceArray[i]+"'";
+    //     }
+
+    // }
+    // console.log('condition2',condition2);
+    // var condition=condition2 + " AND chassisno LIKE '"+chassisNumber+"%'";
+$(document).on('click', '#searchTrip', function(){ 
+    var tripNumber = $('#tripNumber').val();
+    if(tripNumber){
+        var condition=" WHERE tripno LIKE '0000"+tripNumber+"%'" +" OR tripno LIKE '"+"%"+tripNumber+"'";
+        console.log('condition',condition);
+         $('#tripDetailList').removeAttr("href"); 
+         $('#pendingTripDetail').fadeTo("fast", .5).attr("href", "#home"); 
+         $("#pendingTrip").addClass('active');
+         $("#searchTripDetail").removeClass('active');
+        DBHandler.searchRecordsOfTrip('trip', condition, details);
+    }else{
+        alert('Please enter string which is matching with trip number');
+    }
+    
+
+});
+$(document).on('click', '#tripDetailList', function(){ 
+    $('#tripDetailList').fadeTo("fast", .5).attr("href", "#profile"); 
+    $("#pendingTrip").removeClass('active');
+    $("#searchTripDetail").addClass('active');
+
+});
+

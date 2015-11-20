@@ -23,6 +23,7 @@ function onDeviceReady() {
         //$('#reportingTime').timepicker({ timeFormat: 'h:mm:ss p', interval: 15});
         //$('#uploadingTime').timepicker({ timeFormat: 'h:mm:ss p', interval: 15 });
     });
+
  //   	$(".grnDetailsNext").click(function(){
 	// 	$(".details_1").removeClass('active');
 	// 	$(".details_3").removeClass('active');
@@ -72,45 +73,50 @@ function onDeviceReady() {
     var c1 = document.getElementById("canvasId1");
     var ctx1 = c1.getContext("2d");
     ctx1.clearRect(0, 0, c1.width, c1.height);
-    $('#grndetail').on("click",function(){
-        // var grnObject={
-        //     grn_number: generateGrnNumber(),
-        //     reporting_date : $('#datepicker3').val(),
-        //     reporting_time : $('#reportingTime').val(),
-        //     uploading_date : $('#datepicker4').val(),
-        //     uploading_time : $('#uploadingTime').val(),
-        //     delay_type : $('#reason').val(),
-        //     reason_of_delay : $('#reasonForDelay').val()
-        // };
-        var reporting_date = $('#datepicker3').val();
-        var uploading_date = $('#datepicker4').val();
+   //  $('#grndetail').on("click",function(){
+   //      var grnCount=$('.grnDetailattchmentBlock').children().size();
+   //      console.log('grnCount',grnCount);
+   //      var imageArray = new Array();
+   //      for(var i=1; i<grnCount; i++){
+   //          console.log('inside for loop');
+   //          console.log('imageID1',$('#grnDetailattchmentBlock').find('.grnImage .image1234').eq(i).attr('id'));
+   //          console.log('imageID2',$('#grnDetailattchmentBlock').eq(i));
+   //          var smallImage = document.getElementById(imageID);
+   //          imageArray.push(smallImage.src);
+   //      }
+   //      console.log('imageArray',imageArray);
+   //      var imageData=imageArray.toString();
+   //      console.log('imageData',imageData);
+   //      alert('imageData');
+   //      var reporting_date = $('#datepicker3').val();
+   //      var uploading_date = $('#datepicker4').val();
         
-        if(reporting_date=="" || uploading_date==""){
-            $('#reportVerify').removeAttr("href"); 
-            $(".details_1").addClass('active'); 
-            $(".details_2").removeClass('active');
-            $(".details_3").removeClass('active');
-            alert('Please fill the grn detail');
-        }else{
-           $('#grndetail').fadeTo("fast", .5).attr("href", "#profile"); 
-           $(".details_1").removeClass('active');
-           $(".details_2").addClass('active');
-           $(".details_3").removeClass('active');
-        }
-        var grnObject={
-            grn_number: generateGrnNumber(),
-            reporting_date : $('#datepicker3').val(),
-            reporting_time : $('#reportingHour').val()+':'+$('#reportingMinute').val()+$('#reportingFormat').val(),
-            uploading_date : $('#datepicker4').val(),
-            uploading_time : $('#uploadingHour').val()+':'+$('#uploadingMinute').val()+$('#uploadingFormat').val(),
-            delay_type : $('#reason').val(),
-            reason_of_delay : $('#reasonForDelay').val(),
-            flag: $.now()
-        };
-         console.log('grnObject::',grnObject);   
-         DBHandler.saveGrn_detail(grnObject, grnObjectCallback);
+   //      if(reporting_date=="" || uploading_date==""){
+   //          $('#reportVerify').removeAttr("href"); 
+   //          $(".details_1").addClass('active'); 
+   //          $(".details_2").removeClass('active');
+   //          $(".details_3").removeClass('active');
+   //          alert('Please fill the grn detail');
+   //      }else{
+   //         $('#grndetail').fadeTo("fast", .5).attr("href", "#profile"); 
+   //         $(".details_1").removeClass('active');
+   //         $(".details_2").addClass('active');
+   //         $(".details_3").removeClass('active');
+   //      }
+   //      var grnObject={
+   //          grn_number: generateGrnNumber(),
+   //          reporting_date : $('#datepicker3').val(),
+   //          reporting_time : $('#reportingHour').val()+':'+$('#reportingMinute').val()+$('#reportingFormat').val(),
+   //          uploading_date : $('#datepicker4').val(),
+   //          uploading_time : $('#uploadingHour').val()+':'+$('#uploadingMinute').val()+$('#uploadingFormat').val(),
+   //          delay_type : $('#reason').val(),
+   //          reason_of_delay : $('#reasonForDelay').val(),
+   //          flag: $.now()
+   //      };
+   //       console.log('grnObject::',grnObject);   
+   //       DBHandler.saveGrn_detail(grnObject, grnObjectCallback);
 
-   })
+   // })
 
    //  $(document).on('click', '#datepicker3', function(){
    //      if($("#datepicker3").val().length >= 8 && $("#datepicker4").val().length >= 8) {
@@ -176,7 +182,7 @@ function onDeviceReady() {
                  $("#dealerDetail").empty();
                 console.log('result.rows.length', result.rows.length);
                 grnNumber=result.rows.item(0).grn_number;
-                reportDetail2='<label class="dealerInfo">GRN #: </label><span class="dearlerValues">'+grnNumber+'</span><br>';
+                reportDetail2='<label class="dealerInfo">GRN #: </label><span class="dearlerValues" id="grn1234">'+grnNumber+'</span><br>';
                 DBHandler.getAllRecords('dealer', dealerDetailCallback);
 
                 function dealerDetailCallback(result){
@@ -203,7 +209,7 @@ function onDeviceReady() {
                             function invoiceCallback(result2){
                                 var resLen2 = result2.rows.length;
                                 console.log('resLen2',resLen2);
-                                var invoiceDetail1='<h4>Invoice Details</h4><table class="invoiceTableTemp table table-striped table-bordered table-hover"><thead class="invoiceTable"><th>S.N</th><th>Invice No.</th><th>Date</th><th>Part</th><th>Trip No</th><th>Billed Qty</th></thead><tbody>';
+                                var invoiceDetail1='<h4>Invoice Details</h4><table class="invoiceTableTemp table table-striped table-bordered table-hover" id="tripTable"><thead class="invoiceTable"><th>S.N</th><th>Invice No.</th><th>Date</th><th>Part</th><th>Trip No</th><th>Billed Qty</th></thead><tbody>';
                                 var invoiceDetail2='';
                                 var invoiceDetail3;
                                 var invoiceDetail4;
@@ -248,22 +254,22 @@ function onDeviceReady() {
                                     var tpl = _.template($('#shortageDetailTemplate').html());
                                     $('#shortageDetail').append(tpl(data));
 
-                                    var imageDetail='';
-                                    $("#showAttachment").empty();
-                                        for(var i=0; i<resLen; i++){
-                                            console.log('inside imageDetail');
-                                            var imgData=result.rows.item(i).attachment;
-                                            console.log('imgData',imgData);
-                                            var imgData=result.rows.item(i).attachment;
-                                            console.log('imgDatalength',imgData.length);
-                                            if(imgData.length>200){
-                                                var imageDetail=imageDetail+'<img style="width:60px;height:60px;" src="'+imgData+'" class="carImage">';
-                                            }
-                                            if(i===(resLen-1)){
+                                    // var imageDetail='';
+                                    // $("#showAttachment").empty();
+                                        // for(var i=0; i<resLen; i++){
+                                        //     console.log('inside imageDetail');
+                                        //     var imgData=result.rows.item(i).attachment;
+                                        //     console.log('imgData',imgData);
+                                        //     var imgData=result.rows.item(i).attachment;
+                                        //     console.log('imgDatalength',imgData.length);
+                                        //     if(imgData.length>200){
+                                        //         var imageDetail=imageDetail+'<img style="width:60px;height:60px;" src="'+imgData+'" class="carImage">';
+                                        //     }
+                                        //     if(i===(resLen-1)){
 
-                                                $("#showAttachment").append(imageDetail);
-                                            } 
-                                        }
+                                        //         $("#showAttachment").append(imageDetail);
+                                        //     } 
+                                        // }
                                     DBHandler.getAllRecordsodDriver('grn_detail', grndetailCallBack);      
                                     var driverDetail='';
                                     function grndetailCallBack(result){
@@ -367,7 +373,57 @@ function onDeviceReady() {
    })
     
 }
+$(document).on('click', '#grndetail', function(){
+    // $('#grndetail').on("click",function(){
+        var grnCount=$('.grnDetailattchmentBlock').children().size()-1;
+        console.log('grnCount',grnCount);
+        var imageArray = new Array();
+        for(var i=0; i<grnCount; i++){
+            console.log('inside for loop');
+            var imageID = $('.grnDetailattchmentBlock').find('.grnImage img').eq(i).attr('id')
+            console.log('imageID2',imageID);
+            var smallImage = document.getElementById(imageID);
+            imageArray.push(smallImage.src);
+        }
+        console.log('imageArray',imageArray);
+        localStorage.setItem('grnImageArray',imageArray);
+        var imageData=imageArray.toString();
+        var serilizedImageData = JSON.stringify(imageArray);
+        console.log('serilizedImageData',serilizedImageData);
+        localStorage.setItem('grnImageData',imageData);
 
+        console.log('imageData2',imageData);
+        // alert('imageData');
+        var reporting_date = $('#datepicker3').val();
+        var uploading_date = $('#datepicker4').val();
+        
+        if(reporting_date=="" || uploading_date==""){
+            $('#reportVerify').removeAttr("href"); 
+            $(".details_1").addClass('active'); 
+            $(".details_2").removeClass('active');
+            $(".details_3").removeClass('active');
+            alert('Please fill the grn detail');
+        }else{
+           $('#grndetail').fadeTo("fast", .5).attr("href", "#profile"); 
+           $(".details_1").removeClass('active');
+           $(".details_2").addClass('active');
+           $(".details_3").removeClass('active');
+        }
+        var grnObject={
+            grn_number: generateGrnNumber(),
+            reporting_date : $('#datepicker3').val(),
+            reporting_time : $('#reportingHour').val()+':'+$('#reportingMinute').val()+$('#reportingFormat').val(),
+            uploading_date : $('#datepicker4').val(),
+            uploading_time : $('#uploadingHour').val()+':'+$('#uploadingMinute').val()+$('#uploadingFormat').val(),
+            delay_type : $('#reason').val(),
+            reason_of_delay : $('#reasonForDelay').val(),
+            flag: $.now()
+        };
+         console.log('grnObject::',grnObject);   
+         DBHandler.saveGrn_detail(grnObject, grnObjectCallback);
+
+   // })
+});
 $(document).on('change', '#datepicker3', function(){
     $("#NumberofDelay").empty();
     if($("#datepicker3").val().length >= 8) {
@@ -733,16 +789,14 @@ $(document).on('click', '.getAttachment', function(){
               console.log('onPhotoDataSuccess');
               // Uncomment to view the base64-encoded image data
               // console.log(imageData);
-
               // Get image handle
               //
               var smallImage = document.getElementById(imageId);
-               console.log("document.getElementById(imageId)",smallImage);
-                // var smallImage = document.getElementsByClassName('smallImage');
+              console.log("document.getElementById(imageId)",smallImage);
+              // var smallImage = document.getElementsByClassName('smallImage');
               // Unhide image elements
               //
                smallImage.style.display = 'block';
-
               // Show the captured photo
               // The in-line CSS rules are used to resize the image
               //
@@ -761,22 +815,21 @@ $(document).on('click', '.AttachmentofVehical', function(){
     if(localStorage.getItem('imageNumber') > 10){
         alert('Maximum attachment number is exceed');
     }else{
-        // alert('select image');
-        var grnDetailImageNumber=localStorage.getItem('imageNumber');
-        console.log('grnDetailImageNumber',grnDetailImageNumber);
-        $( ".AttachmentofVehical" ).after( '<div class="grnImage"><img style="display:none;width:60px;height:60px; padding:2px;" id="showVehicalImage'+grnDetailImageNumber+'" src="" /><button class="imageDelete text-center" style="width:56px">Delete</button></div>');
-        console.log('AttachmentofVehical');
-        // var imageId=$(this).siblings('img').attr('id');
-        var imageId="showVehicalImage"+grnDetailImageNumber;
-        console.log('AttachmentofVehicalimageId', imageId);
-        //var popover = new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY);
-
         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, encodingType: Camera.EncodingType.JPEG,
             popoverOptions  : new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY),
             destinationType: destinationType.DATA_URL });
 
        
         function onPhotoDataSuccess(imageData) {
+              // alert('select image');
+              var grnDetailImageNumber=localStorage.getItem('imageNumber');
+              console.log('grnDetailImageNumber',grnDetailImageNumber);
+              $( ".AttachmentofVehical" ).after( '<div class="grnImage"><img style="display:none;width:60px;height:60px; padding:2px;" class ="image1234" id="showVehicalImage'+grnDetailImageNumber+'" src="" /><button class="imageDelete text-center" style="width:56px">Delete</button></div>');
+             console.log('AttachmentofVehical');
+             // var imageId=$(this).siblings('img').attr('id');
+             var imageId="showVehicalImage"+grnDetailImageNumber;
+             console.log('AttachmentofVehicalimageId', imageId);
+             //var popover = new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY);
               console.log('onPhotoDataSuccess');
               // Uncomment to view the base64-encoded image data
               // console.log(imageData);
@@ -804,7 +857,7 @@ $(document).on('click', '.AttachmentofVehical', function(){
 
 });
 $(document).on('click', '.imageDelete', function(){
-    alert("Image is deleting");
+    // alert("Image is deleting");
   $(this).parent().remove(); 
 });
 
@@ -975,7 +1028,7 @@ $(document).on('click','#chassisProfileId', function(){
          $('#chassisProfileId').fadeTo("fast", .5).attr("href", "#profile"); 
          $(".details_1").removeClass('active');
          $(".details_2").addClass('active');
-         $(".details_3").removeClass('active');
+         $(".details_3").removeClass('active');                   
         // e.preventDefault();
         // $('#report').prop('disabled',disabled);
     }
@@ -1024,4 +1077,165 @@ $(document).on('click','#clear2', function(){
     var c2 = document.getElementById("canvasId2");
     var ctx2 = c2.getContext("2d");
     ctx2.clearRect(0, 0, c2.width, c2.height);
+});
+
+// (function(){
+    // var form = $('.form'), cache_width = form.width(), a4  =[ 595.28,  841.89];  // for a4 size paper width and height
+    // var form = $('.form'), cache_width = form.width(), a4  =[ 280.28,  841.89]; 
+    // $(document).on('click','#create_pdf', function(){
+    // // $('#create_pdf').on('click',function(){
+    //     console.log('create pdf');
+    //     $('body').scrollTop(0);
+    //     createPDF();
+    // });
+
+    //create pdf
+    // function createPDF(){
+    //     console.log('createPDF creating');
+    //     getCanvas().then(function(canvas){
+    //         var img = canvas.toDataURL("image/png");
+    //         var doc = new jsPDF({
+    //           unit:'px', 
+    //           format:'a4'
+    //         });     
+    //         doc.addImage(img, 'JPEG', 20, 20);
+    //         doc.save('techumber-html-to-pdf.pdf');
+    //         console.log('techumber-html-to-pdf.pdf');
+    //         form.width(cache_width);
+    //     });
+    // }
+
+    // create canvas object
+    // function getCanvas(){
+    //     console.log('getCanvas creating');
+    //     // form.width((a4[0]*1.33333) -80).css('max-width','none');
+    //     form.width(a4[0]).css('max-width','none');
+    //     return html2canvas(form,{
+    //         imageTimeout:2000,
+    //         removeContainer:true
+    //     }); 
+    // }
+
+// }());
+
+$(document).on('click', '#create_pdf', function(){ 
+    // console.log('clicking');
+    // var doc = new jsPDF();
+    //  console.log('jsPDF');
+    // doc.text(20, 20, 'Hello world.');
+    // doc.save('Test.pdf');
+    //FIRST GENERATE THE PDF DOCUMENT
+    alert('generating pdf');
+    console.log("generating pdf...");
+    var doc = new jsPDF();
+ 
+    doc.text(20, 20, 'HELLO!');
+ 
+    doc.setFont("courier");
+    doc.setFontType("normal");
+    doc.text(20, 30, 'This is a PDF document generated using JSPDF.');
+    doc.text(20, 50, 'YES, Inside of PhoneGap!');
+    var v=$('#grn1234').text();
+    console.log('dearlerValues',v);
+    doc.text(20, 80, v);
+
+    var columns = ["ID", "Name", "Country"];
+    var rows = [
+        [1, v, "Tanzania"],
+        [2, "Nelson", "Kazakhstan"]
+    ];
+
+   
+    // var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows,{
+        margin: {top: 100},
+        beforePageContent: function(data) {
+             doc.text("Header", 20, 110);
+        }
+    });
+    // doc.autoTable(columns, rows);
+    // doc.save('table.pdf');
+   //  var table = doc.table({
+   //    padding: 5,
+   //    borderWidth: 20,
+   //    borderColor: 0xdddddd,
+   //    backgroundColor: 0xeeeeee,
+   //    widths: ['50%', '30%']
+   //  });
+
+   // var tr = table.tr({});
+   // tr.td('Foo');
+   // tr.td('Bar');
+    // var table = tableToJson($('#tripTable').get(0));
+    // var doc = new jsPDF('p', 'pt', 'a4', true);
+    // doc.cellInitialize();
+    // $.each(table, function (i, row){
+    //   $.each(row, function (j, cell){
+    //     doc.cell(10, 200, 100, 20, cell, i);
+    //   })
+    // })
+    // doc.save()
+    // function tableToJson(table) {
+    //     var data = [];
+
+    //     // first row needs to be headers
+    //     var headers = [];
+    //     for (var i=0; i<table.rows[0].cells.length; i++) {
+    //         headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+    //     }
+
+
+    //     // go through cells
+    //     for (var i=0; i<table.rows.length; i++) {
+
+    //         var tableRow = table.rows[i];
+    //         var rowData = {};
+
+    //         for (var j=0; j<tableRow.cells.length; j++) {
+
+    //             rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+    //         }
+
+    //         data.push(rowData);
+    //     }       
+
+    //     return data;
+    // }
+    var pdfOutput = doc.output();
+    console.log( pdfOutput );
+ 
+    //NEXT SAVE IT TO THE DEVICE'S LOCAL FILE SYSTEM
+    console.log("file system...");
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+ 
+    console.log(fileSystem.name);
+    console.log(fileSystem.root.name);
+    console.log(fileSystem.root.fullPath);
+ 
+        fileSystem.root.getFile("test.pdf", {create: true}, function(entry) {
+            var fileEntry = entry;
+            console.log(entry);
+            entry.createWriter(function(writer) {
+               writer.onwrite = function(evt) {
+                alert('write success');
+               console.log("write success");
+            };
+     
+            console.log("writing to file");
+               writer.write( pdfOutput );
+            }, function(error) {
+             console.log(error);
+          });
+     
+        }, function(error){
+           console.log(error);
+        });
+    },
+
+
+
+    function(event){
+       console.log( evt.target.error.code );
+    });
 });

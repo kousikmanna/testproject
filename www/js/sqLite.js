@@ -229,6 +229,15 @@ var DBHandler = {
         });
     },
 
+    searchRecordsOfTrip: function(table, condition, callback){
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM " + table + condition, [], function(tx, result) {
+                console.log('getAllRecords result', result);
+                callback(result);
+            });
+        });
+    },
+
     getAllRecords2:function(table, callback) {
         db.transaction(function(tx) {
             tx.executeSql("SELECT * FROM " + table, [], function(tx, result2) {
@@ -501,6 +510,8 @@ var DBHandler = {
         });
 
     },
+
+
 
     saveAllRecordsofInvoice:function(values, callback) {
 
