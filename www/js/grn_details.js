@@ -1,8 +1,157 @@
-
 $(function() {
     document.addEventListener("deviceready", onDeviceReady, true);
 });
 function onDeviceReady() {
+    // var shortage  = 0 ;
+    // var damage    = 0 ;
+    // var short_click = 1 ;
+    // var dam_click = 1 ;
+    // $(document).ready(function(){
+        // $('#damage_btn').on("click",function(e){
+       
+        //  console.log('damage_btn click');
+        //     add_damage_rows();
+        // });
+
+        // $('#shortage_btn').on("click",function(e){
+        //   console.log('damage_btn click');
+       
+        //     add_shortage_rows();
+        // });
+
+        // $('#remove_all').on("click",function(){
+        
+        //     $('#remove-window').modal('show');
+        // });
+
+        // update_cnt();
+
+        // $('#yes').on("click",function(){
+       
+        //     $('#table tbody tr').remove();
+        //     shortage = 0;
+        //     damage = 0;
+        //     update_cnt();    
+        //     $('#remove-window').modal('hide');
+        // });
+
+        // $('#no').on("click",function(){
+        
+        //     $('#remove-window').modal('hide');
+        // });
+
+        // $('#rc_yes').on("click",function(){
+        
+        //     $('#accordion').remove();
+        //     $('#remove-chassis-window').modal('hide');
+        // });
+
+        // $('#rc_no').on("click",function(){
+       
+        //     $('#remove-chassis-window').modal('hide');
+        // });
+
+        // $('#remove_chassis').on("click",function(e){
+       
+        //     $('#remove-chassis-window').modal('show');
+        // });
+    // });
+
+
+   // function add_shortage_rows () {
+   //     $('#table tbody').append('<tr><td data-title="Shortage">Shortage</td><td>\
+   //                  <select class="damageDesc_1" data-title="DamageDesc_1">\
+   //                  <option>Select Shortage</option>\
+   //                  <option>Front mirror</option>\
+   //                  <option>Rear Mirror</option>\
+   //                  <option>Head Light</option>\
+   //                  <option>Left Indicator</option>\
+   //                  <option>Right Indicator</option>\
+   //              </select></td>\
+   //          <td>\
+   //              <select class="damageDesc_2" data-title="DamageDesc_2">\
+   //                  <option>Shortage Type</option>\
+   //                  <option>Slightly Broken</option>\
+   //                  <option>Major Damage</option>\
+   //                  <option>Others</option>\
+   //              </select>\
+   //          </td>\
+   //          <td>\
+   //              <select class="damageDesc_3" data-title="DamageDesc_3">\
+   //                  <option>Damage Type</option>\
+   //                  <option>Accident</option>\
+   //                  <option>Traffic</option>\
+   //                  <option>Others</option>\
+   //              </select>\
+   //          </td>\
+   //          <td data-title="Attachment">\
+   //              <div class="" data-title="Attachement">\
+   //              <h5>Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>\
+   //              </div>\
+   //          </td><td data-title="Delete" class="short_delete_row">Delete</td>'
+   //       );
+
+   //      shortage++;
+   //      update_cnt();
+
+
+   //      $('.short_delete_row').unbind().bind('click', function(evt) {
+   //          shortage--;
+   //          if ( shortage <= 0 ) shortage = 0; 
+   //          update_cnt();
+   //          $(evt.target).parents('tr').remove();
+   //      });
+   //  }
+
+   //  function add_damage_rows () {
+   //      $('#table tbody').append('<tr><td data-title="Damage">Damage</td><td>\
+   //              <select class="damageDesc_1">\
+   //                  <option>Select Damage</option>\
+   //                  <option>Front mirror</option>\
+   //                  <option>Rear Mirror</option>\
+   //                  <option>Head Light</option>\
+   //                  <option>Left Indicator</option>\
+   //                  <option>Right Indicator</option>\
+   //              </select></td>\
+   //          <td data-title="DamageDesc_2">\
+   //              <select class="damageDesc_2">\
+   //                  <option>Damage Type</option>\
+   //                  <option>Slightly Broken</option>\
+   //                  <option>Major Damage</option>\
+   //                  <option>Others</option>\
+   //              </select>\
+   //          </td>\
+   //          <td data-title="damageDesc_3">\
+   //              <select class="damageDesc_3 col-xs-12">\
+   //                  <option>Damage Type</option>\
+   //                  <option>Accident</option>\
+   //                  <option>Traffic</option>\
+   //                  <option>Others</option>\
+   //              </select>\
+   //          </td>\
+   //          <td>\
+   //              <div class="" data-title="Attachments">\
+   //                  <h5>Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>\
+   //              </div>\
+   //          </td><td class="dam_delete_row" data-title="Delete">Delete</td>'
+   //       );
+
+   //      damage++;
+   //      update_cnt();
+
+   //      $('.dam_delete_row').unbind().bind('click', function(evt) {
+   //          damage--;
+   //          if ( damage <= 0 ) damage = 0; 
+   //          update_cnt();
+   //          $(evt.target).parents('tr').remove();
+   //      });
+   //  }
+
+   //  function update_cnt () {
+   //      $('#cnt').text("Damage : "+damage+", Shortage : "+ shortage );
+   //  }
+
+    //
     localStorage.setItem('imageNumber',1);
     $(".AttachmentofVehical").siblings().remove();
     $('.sigPad').signaturePad({drawOnly:true});
@@ -24,131 +173,11 @@ function onDeviceReady() {
         //$('#uploadingTime').timepicker({ timeFormat: 'h:mm:ss p', interval: 15 });
     });
 
- //   	$(".grnDetailsNext").click(function(){
-	// 	$(".details_1").removeClass('active');
-	// 	$(".details_3").removeClass('active');
-	// 	$(".details_2").addClass('active');
-	// })
-
-    // $(document).on('click','.damageDesc_1', function(){
-       // $(function(){
-       //      $.ajax({
-       //          type: "GET",
-       //          url:"js/api/damage.json",
-       //          dataType: "json",
-       //          success: function (data) {
-       //              var dropdown_data="";
-       //              $.each(data.legend,function(i,obj)
-       //              {
-       //               console.log('legend',obj.material+":"+obj.damage_type);
-       //               dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
-                    
-       //              });  
-       //               $('.damageDesc_1').append(dropdown_data); 
-       //          },
-       //          error: function(e) {
-       //          console.log(e);
-       //          return false;
-       //         }
-             
-       //      });
-       // }); 
-        
-   // });
-	// $(".grnDetailsreport").click(function(){
-	// 	$(".details_1").removeClass('active');
-	// 	$(".details_3").addClass('active');
-	// 	$(".details_2").removeClass('active');
-	// })
-
-     /**---------- Start of datepicker js----------**/
-    // $('.sandbox-container').datepicker({
-    //     format: "dd-mm-yyyy",
-    //     autoclose: true,
-    //     todayHighlight: true
-    // });
-    /**---------- End of date picker js----------**/
-
     DBHandler.initDatabase();
     var c1 = document.getElementById("canvasId1");
     var ctx1 = c1.getContext("2d");
     ctx1.clearRect(0, 0, c1.width, c1.height);
-   //  $('#grndetail').on("click",function(){
-   //      var grnCount=$('.grnDetailattchmentBlock').children().size();
-   //      console.log('grnCount',grnCount);
-   //      var imageArray = new Array();
-   //      for(var i=1; i<grnCount; i++){
-   //          console.log('inside for loop');
-   //          console.log('imageID1',$('#grnDetailattchmentBlock').find('.grnImage .image1234').eq(i).attr('id'));
-   //          console.log('imageID2',$('#grnDetailattchmentBlock').eq(i));
-   //          var smallImage = document.getElementById(imageID);
-   //          imageArray.push(smallImage.src);
-   //      }
-   //      console.log('imageArray',imageArray);
-   //      var imageData=imageArray.toString();
-   //      console.log('imageData',imageData);
-   //      alert('imageData');
-   //      var reporting_date = $('#datepicker3').val();
-   //      var uploading_date = $('#datepicker4').val();
-        
-   //      if(reporting_date=="" || uploading_date==""){
-   //          $('#reportVerify').removeAttr("href"); 
-   //          $(".details_1").addClass('active'); 
-   //          $(".details_2").removeClass('active');
-   //          $(".details_3").removeClass('active');
-   //          alert('Please fill the grn detail');
-   //      }else{
-   //         $('#grndetail').fadeTo("fast", .5).attr("href", "#profile"); 
-   //         $(".details_1").removeClass('active');
-   //         $(".details_2").addClass('active');
-   //         $(".details_3").removeClass('active');
-   //      }
-   //      var grnObject={
-   //          grn_number: generateGrnNumber(),
-   //          reporting_date : $('#datepicker3').val(),
-   //          reporting_time : $('#reportingHour').val()+':'+$('#reportingMinute').val()+$('#reportingFormat').val(),
-   //          uploading_date : $('#datepicker4').val(),
-   //          uploading_time : $('#uploadingHour').val()+':'+$('#uploadingMinute').val()+$('#uploadingFormat').val(),
-   //          delay_type : $('#reason').val(),
-   //          reason_of_delay : $('#reasonForDelay').val(),
-   //          flag: $.now()
-   //      };
-   //       console.log('grnObject::',grnObject);   
-   //       DBHandler.saveGrn_detail(grnObject, grnObjectCallback);
-
-   // })
-
-   //  $(document).on('click', '#datepicker3', function(){
-   //      if($("#datepicker3").val().length >= 8 && $("#datepicker4").val().length >= 8) {
-   //         var difference= ($("#datepicker4").datepicker("getDate") - $("#datepicker3").datepicker("getDate"))/(1000 * 60 * 60 * 24);
-   //      console.log('difference',difference);
-           
-   //      }  
-   // })
-    //
-    // $("#datepicker3").datepicker({
-    // minDate: 0,
-    // maxDate: '+1Y+6M',
-    // onSelect: function (dateStr) {
-    //     var min = $(this).datepicker('getDate'); // Get selected date
-    //     $("#datepicker4").datepicker('option', 'minDate', min || '0'); // Set other min, default to today
-    // }
-    // });
-
-// $("#datepicker4").datepicker({
-//     minDate: '0',
-//     maxDate: '+1Y+6M',
-//     onSelect: function (dateStr) {
-//         var max = $(this).datepicker('getDate'); // Get selected date
-//         $('#datepicker').datepicker('option', 'maxDate', max || '+1Y+6M'); // Set other max, default to +18 months
-        // var start = $("#datepicker3").datepicker("getDate");
-        // var end = $("#datepicker4").datepicker("getDate");
-        // var days = (end - start) / (1000 * 60 * 60 * 24);
-//         console.log('days',days);
-//         // $("#TextBox3").val(days);
-//     }
-// });
-
+  
    $('.grnDetailsreport').on("click",function(){
         // $('#report').prop( "disabled", false );
         var chassisCount = $('#chassisDetail').children().size();
@@ -254,22 +283,7 @@ function onDeviceReady() {
                                     var tpl = _.template($('#shortageDetailTemplate').html());
                                     $('#shortageDetail').append(tpl(data));
 
-                                    // var imageDetail='';
-                                    // $("#showAttachment").empty();
-                                        // for(var i=0; i<resLen; i++){
-                                        //     console.log('inside imageDetail');
-                                        //     var imgData=result.rows.item(i).attachment;
-                                        //     console.log('imgData',imgData);
-                                        //     var imgData=result.rows.item(i).attachment;
-                                        //     console.log('imgDatalength',imgData.length);
-                                        //     if(imgData.length>200){
-                                        //         var imageDetail=imageDetail+'<img style="width:60px;height:60px;" src="'+imgData+'" class="carImage">';
-                                        //     }
-                                        //     if(i===(resLen-1)){
-
-                                        //         $("#showAttachment").append(imageDetail);
-                                        //     } 
-                                        // }
+                                  
                                     DBHandler.getAllRecordsodDriver('grn_detail', grndetailCallBack);      
                                     var driverDetail='';
                                     function grndetailCallBack(result){
@@ -288,82 +302,6 @@ function onDeviceReady() {
 
                     }
 
-                    //
-                    // function tripCallback(result){
-                    //      $("#invoiceDetail").empty();
-                    //     var resLen = result.rows.length;
-                    //     console.log('resLen',resLen);
-                        // DBHandler.getAllRecords('grn_invoice', invoiceCallback);
-                            // function invoiceCallback(result2){
-                                // var resLen2 = result2.rows.length;
-                                // console.log('resLen2',resLen2);
-                                // var invoiceDetail1='<h4>Invoice Details</h4><table class="invoiceTableTemp table table-striped table-bordered table-hover"><thead class="invoiceTable"><th>S.N</th><th>Invice No.</th><th>Date</th><th>Part</th><th>Trip No</th><th>Billed Qty</th></thead><tbody>';
-                                // var invoiceDetail2='';
-                                // var invoiceDetail3;
-                                // var invoiceDetail4;
-                                // var h=1;
-                                // for(var i=0; i<resLen; i++){
-                                    // var tripno1=result.rows.item(i).tripno;
-                                    // console.log('result.rows.item(i)',result.rows.item(i));
-                                    // for(var j=0; j<resLen2; j++){
-                                        // var tripno2=result2.rows.item(j).tripno;
-                                        // console.log('result2.rows.item(j)',result2.rows.item(j));
-                                        // if(tripno1===tripno2){
-                                            // console.log('tripno1==tripno2',tripno1);
-                                            // invoiceDetail2=invoiceDetail2 + '<tr><td>'+h+'</td><td>1041</td><td>'+result.rows.item(i).created_date+'</td><td>CH003</td><td>'+result.rows.item(i).tripno+'</td><td>100000</td></tr>';
-                                            // h=h+1
-                                            // console.log('invoiceDetail2',invoiceDetail2);
-                                        // }
-                                    // }
-                                    // console.log('i :: resLen', i, resLen);
-                                //     if(i===(resLen-1)){
-                                //         console.log('i==resLen-1');
-                                //         invoiceDetail3='</tbody></table>';
-                                //         invoiceDetail4=invoiceDetail1+invoiceDetail2+invoiceDetail3;
-                                //         $("#invoiceDetail").append(invoiceDetail4);
-                                //     } 
-                                   
-                                // }
-
-                            // }
-
-                        // DBHandler.getAllRecords('grn_chassisDetails', chassisCallback);   
-                        // console.log('After chassisCallback');
-                        //     function chassisCallback(result){
-                        //         $("#damageDetail").empty();
-                        //         $("#shortageDetail").empty();
-                        //         console.log('Inside chassisCallback');
-                        //         var resLen = result.rows.length;
-                        //         var data = { resultData:result.rows, length: resLen};
-                        //         console.log('data',data);
-                        //         var tpl = _.template($('#damageDetailTemplate').html());
-                        //         $('#damageDetail').append(tpl(data));
-
-                        //         var tpl = _.template($('#shortageDetailTemplate').html());
-                        //         $('#shortageDetail').append(tpl(data));
-
-                        //         var imageDetail='';
-                        //         $("#showAttachment").empty();
-                        //         for(var i=0; i<resLen; i++){
-                        //             console.log('inside imageDetail');
-                        //             var imgData=result.rows.item(i).attachment;
-                        //             console.log('imgData',imgData);
-                        //             var imgData=result.rows.item(i).attachment;
-                        //             console.log('imgDatalength',imgData.length);
-                        //             if(imgData.length>200){
-                        //                 var imageDetail=imageDetail+'<img style="width:60px;height:60px;" src="'+imgData+'" class="carImage">';
-                        //             }
-                        //             if(i===(resLen-1)){
-
-                        //                 $("#showAttachment").append(imageDetail);
-                        //             } 
-                        //         }
-                        //     }
-
-                    // }  
-
-                    //
-                
                 }
             }
 
@@ -373,6 +311,212 @@ function onDeviceReady() {
    })
     
 }
+ //
+ // $(document).ready(function(){
+        
+        // var shortage=localStorage.getItem(shortage);
+        // var damage=localStorage.getItem(damage);
+        // var short_click=localStorage.getItem(short_click);
+        // var dam_click=localStorage.getItem(dam_click);
+        var shortage=0;
+        var damage=0;
+        var short_click=1;
+        var dam_click=1;
+        $(document).on('click', '#damage_btn', function(e){
+            console.log('damage_btn click');
+            add_damage_rows();
+            $(function(){
+                $.ajax({
+                      type: "GET",
+                      url:"js/api/damage.json",
+                      dataType: "json",
+                      success: function (data) {
+                          var dropdown_data="";
+                          $.each(data.legend,function(i,obj)
+                          {
+                           console.log('legend',obj.material+":"+obj.damage_type);
+                           dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
+                          
+                          });  
+                           $('.damageDesc_1').append(dropdown_data); 
+
+                          setTimeout(function() {
+                              console.log('chosen-select');
+                               var config = {
+                                '.chosen-select'           : {},
+                                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                                '.chosen-select-no-single' : {disable_search_threshold:10},
+                                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                                '.chosen-select-width'     : {width:"95%"}
+                              }
+                              for (var selector in config) {
+                                $(selector).chosen(config[selector]);
+                              }
+                          }, 2000);
+
+                          $('.chosen-container').removeAttr('style');
+                          $('.chosen-container').attr('style','width:100% !important');
+
+
+                           
+                      },
+                      error: function(e) {
+                      console.log(e);
+                      return false;
+                     }
+                   
+                });
+            }); 
+        });
+
+        $(document).on('click', '#shortage_btn', function(e){
+          console.log('shortage_btn click');
+            add_shortage_rows();
+            $(function(){
+                $.ajax({
+                    type: "GET",
+                    url:"js/api/shortage.json",
+                    dataType: "json",
+                    success: function (data) {
+                        var dropdown_data2="";
+                        $.each(data.legend,function(i,obj)
+                        {
+                         console.log('legend2',obj.description+":"+obj.brand_varient);
+                         dropdown_data2=dropdown_data2+"<option value="+obj.description+">"+obj.brand_varient+"</option>";
+                        
+                        });  
+                         $('.damageDesc_4').append(dropdown_data2); 
+                    },
+                    error: function(e) {
+                    console.log(e);
+                    return false;
+                   }
+                 
+                });
+            }); 
+        });
+
+        $(document).on('click', '#remove_all', function(){
+            $('#remove-window').modal('show');
+        });
+
+        update_cnt();
+
+        $(document).on('click', '#yes', function(){
+            $('#table tbody tr').remove();
+            shortage = 0;
+            damage = 0;
+            update_cnt();    
+            $('#remove-window').modal('hide');
+        });
+
+        $(document).on('click', '#no', function(){
+            $('#remove-window').modal('hide');
+        });
+
+        $(document).on('click', '#rc_yes', function(){
+            $('#accordion').remove();
+            $('#remove-chassis-window').modal('hide');
+        });
+
+        $(document).on('click', '#rc_no', function(){
+            $('#remove-chassis-window').modal('hide');
+        });
+
+        $(document).on('click', '#remove_chassis', function(){
+            $('#remove-chassis-window').modal('show');
+        });
+   //  // });
+
+
+   function add_shortage_rows () {
+       var chassisno=localStorage.getItem('chassisno');
+       $('#tableCreate'+chassisno+' tbody').append('<tr><td data-title="Shortage" class="type">Shortage</td><td>\
+                    <select class="damageDesc_4" data-title="damageDesc_4">\
+                    <option>Select Shortage</option>\
+                </select></td>\
+            <td>\
+                <input type="text" class="damageDesc_5" value="" />\
+            </td>\
+            <td>\
+               <input type="text" id="" class="shortageDesc" name="quentity" class="" placeholder="Enter quantity"/>\
+            </td>\
+            <td data-title="Attachment">\
+                <div class="attchmentBlock" data-title="Attachement">\
+                <h5 class="getAttachment">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>\
+                <img style="display:none;width:60px;height:60px;" id="smallImage'+generateRandomNumber()+'" src="" />\
+                </div>\
+            </td><td data-title="Delete" class="short_delete_row">Delete</td>'
+         );
+
+        shortage++;
+        update_cnt();
+
+
+        $('.short_delete_row').unbind().bind('click', function(evt) {
+            shortage--;
+            if ( shortage <= 0 ) shortage = 0; 
+            update_cnt();
+            $(evt.target).parents('tr').remove();
+        });
+    }
+
+    function add_damage_rows () {
+        var chassisno=localStorage.getItem('chassisno');
+        $('#tableCreate'+chassisno+' tbody').append('<tr><td data-title="Damage" class="type">Damage</td><td>\
+                    <select class="damageDesc_1 chosen-select" data-placeholder="Select Damage" tabindex="2" style="width:100%;margin-top:10px;height:35px;">\
+                          <option value=""></option>\
+                    </select>\
+                </select></td>\
+                <td data-title="DamageDesc_2">\
+                    <input type="text" class="damageDesc_2" value="" />\
+                </td>\
+              <td data-title="damageDesc_3">\
+                  <select class="damageDesc_3 col-xs-12">\
+                     <option>Probable cause of damage</option>\
+                      <option>Accident</option>\
+                      <option>Loose fitting</option>\
+                      <option>Others</option>\
+                  </select>\
+              </td>\
+              <td>\
+                 <div class="attchmentBlock" data-title="Attachement">\
+                <h5 class="getAttachment">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>\
+                <img style="display:none;width:60px;height:60px;" id="smallImage'+generateRandomNumber()+'" src="" />\
+                </div>\
+              </td><td class="dam_delete_row" data-title="Delete">Delete</td>'
+         );
+
+        damage++;
+        update_cnt();
+
+        // $('.dam_delete_row').unbind().bind('click', function(evt) {
+          $('.dam_delete_row').unbind().bind('click', function(evt) {
+            damage--;
+            if ( damage <= 0 ) damage = 0; 
+            update_cnt();
+            $(evt.target).parents('tr').remove();
+        });
+    }
+    function update_cnt () {
+        var chassisno=localStorage.getItem('chassisno');
+        $('#cnt'+chassisno).text("Damage : "+damage+", Shortage : "+ shortage );
+    }
+    function generateRandomNumber(){
+        return (Math.ceil(Math.random()*100000000));
+    }
+    $(document).on('click', '.acc_parent_block', function(){
+        // localStorage.setItem('shortage',0);
+        // localStorage.setItem('damage',0);
+        // localStorage.setItem('short_click',1);
+        // localStorage.setItem('dam_click',1);
+        shortage=0;
+        damage=0;
+        short_click=1;
+        dam_click=1;
+        var chassisno = $(this).text();
+        localStorage.setItem('chassisno',chassisno);
+    });
 $(document).on('click', '#grndetail', function(){
     // $('#grndetail').on("click",function(){
         var grnCount=$('.grnDetailattchmentBlock').children().size()-1;
@@ -424,6 +568,7 @@ $(document).on('click', '#grndetail', function(){
 
    // })
 });
+
 $(document).on('change', '#datepicker3', function(){
     $("#NumberofDelay").empty();
     if($("#datepicker3").val().length >= 8) {
@@ -455,17 +600,6 @@ $(document).on('change', '#datepicker3', function(){
         }
 
     }
-    // console.log('datepicker3',$("#datepicker3").datepicker("getDate"));
-    // console.log('d',d);
-    // console.log('difference',difference);
-        // if(difference==0){
-        //    var option='<option selected="selected">No Delay</option>';
-        //    $("#reasonForDelay").append(option);
-
-        // }else if (difference > 0){
-        //     var optionList='<option>Problem on road/jam/accident</option><option>Fault in Truck</option><option>Accident with Truck</option><option>Late release of truck due to accessories</option><option>Late release of truck due to late invoice generation</option><option>Late release of truck due to late loading/manpower issue</option><option>Truck detained by RTO/Police</option><option>Negligence by driver</option>';
-        //      $("#reasonForDelay").append(optionList);
-        // }
    
     }  
 })
@@ -499,21 +633,6 @@ function grnObjectCallback(){
     console.log('grnObjectCallback');
 }
 
-// $(document).on('change', '.searchChassis', function(){
-//     if($(".searchChassis").val().length >= 3) {
-//         $(".openChassisTable").click();
-//     }  
-// })
-
-// $(".groupChassis").click(function(){
-//     console.log('clicking groupChassis');
-//     showLoading();
-//     setTimeout(function(){
-//         $(".accordian_parent").show();
-//         hideLoading();
-//     },1000)
-// })
-
 $(".sendGRNbutton").click(function(){
     showLoading();
     setTimeout(function(){
@@ -538,6 +657,7 @@ $(document).on('change', '.complaintType', function(){
 function generateGrnNumber(){
     return ('00000000'+Math.ceil(Math.random()*100000000));
 }
+// chassis 
 $(document).on('click', '#chassisId', function(){ 
     // grnfunc();
     var chassisNumber = $('#chassisNumber').val();
@@ -585,23 +705,7 @@ function getChassisRecordsCallback(result){
     $('#selectChassis').append(tpl(data));
     
     $(".openChassisTable").click();
-    // for(var i=0; i<resLen; i++){
-    //     console.log('inside loop');
-    //     var resResult = result.rows.item(i);
-    //     console.log('result.rows',result.rows);
-    //     var chassisno = result.rows.item(i).chassisno;
-    //     console.log('resResult',resResult);
-    //     console.log('chassisno',chassisno);
-    //     if(i===resLen-1){
-    //         var tpl = _.template($('#chassisSearchTemplate').html());
-    //         $('#selectChassis').append(tpl(resResult));
-    //         console.log('selectChassis');
-    //         console.log('inside resResult',resResult);
-    //         console.log('inside chassisno',chassisno);
-    //         $(".openChassisTable").click();
-          
-    //     }
-    // }
+    
 }
 
 $(document).on('click', '.select_for_chessisno', function(){ 
@@ -625,75 +729,71 @@ function chessisfunc() {
     var tpl = _.template($('#chassisTemplate').html());
     $('#chassisDetail').append(tpl(chassisObj));
 
-    $(function(){
-        $.ajax({
-            type: "GET",
-            url:"js/api/damage.json",
-            dataType: "json",
-            success: function (data) {
-                var dropdown_data="";
-                $.each(data.legend,function(i,obj)
-                {
-                 console.log('legend',obj.material+":"+obj.damage_type);
-                 dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
+    // $(function(){
+    //     $.ajax({
+    //         type: "GET",
+    //         url:"js/api/damage.json",
+    //         dataType: "json",
+    //         success: function (data) {
+    //             var dropdown_data="";
+    //             $.each(data.legend,function(i,obj)
+    //             {
+    //              console.log('legend',obj.material+":"+obj.damage_type);
+    //              dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
                 
-                });  
-                 $('.damageDesc_1').append(dropdown_data); 
+    //             });  
+    //              $('.damageDesc_1').append(dropdown_data); 
 
-                setTimeout(function() {
-                    console.log('chosen-select');
-                     var config = {
-                      '.chosen-select'           : {},
-                      '.chosen-select-deselect'  : {allow_single_deselect:true},
-                      '.chosen-select-no-single' : {disable_search_threshold:10},
-                      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-                      '.chosen-select-width'     : {width:"95%"}
-                    }
-                    for (var selector in config) {
-                      $(selector).chosen(config[selector]);
-                    }
-                }, 2000);
+    //             setTimeout(function() {
+    //                 console.log('chosen-select');
+    //                  var config = {
+    //                   '.chosen-select'           : {},
+    //                   '.chosen-select-deselect'  : {allow_single_deselect:true},
+    //                   '.chosen-select-no-single' : {disable_search_threshold:10},
+    //                   '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+    //                   '.chosen-select-width'     : {width:"95%"}
+    //                 }
+    //                 for (var selector in config) {
+    //                   $(selector).chosen(config[selector]);
+    //                 }
+    //             }, 2000);
 
-                // $('.chosen-container, .chosen-container-single, .chosen-container-active').removeAttr('style');
-                // $('.chosen-container, .chosen-container-single, .chosen-container-active').attr('style','width:100% !important');
-                $('.chosen-container').removeAttr('style');
-                $('.chosen-container').attr('style','width:100% !important');
+    //             $('.chosen-container').removeAttr('style');
+    //             $('.chosen-container').attr('style','width:100% !important');
 
 
                  
-            },
-            error: function(e) {
-            console.log(e);
-            return false;
-           }
+    //         },
+    //         error: function(e) {
+    //         console.log(e);
+    //         return false;
+    //        }
          
-        });
-    }); 
+    //     });
+    // }); 
 
-    $(function(){
-        $.ajax({
-            type: "GET",
-            url:"js/api/shortage.json",
-            dataType: "json",
-            success: function (data) {
-                var dropdown_data2="";
-                $.each(data.legend,function(i,obj)
-                {
-                 console.log('legend2',obj.description+":"+obj.brand_varient);
-                 dropdown_data2=dropdown_data2+"<option value="+obj.description+">"+obj.brand_varient+"</option>";
+    // $(function(){
+    //     $.ajax({
+    //         type: "GET",
+    //         url:"js/api/shortage.json",
+    //         dataType: "json",
+    //         success: function (data) {
+    //             var dropdown_data2="";
+    //             $.each(data.legend,function(i,obj)
+    //             {
+    //              console.log('legend2',obj.description+":"+obj.brand_varient);
+    //              dropdown_data2=dropdown_data2+"<option value="+obj.description+">"+obj.brand_varient+"</option>";
                 
-                });  
-                 $('.damageDesc_4').append(dropdown_data2); 
-            },
-            error: function(e) {
-            console.log(e);
-            return false;
-           }
+    //             });  
+    //              $('.damageDesc_4').append(dropdown_data2); 
+    //         },
+    //         error: function(e) {
+    //         console.log(e);
+    //         return false;
+    //        }
          
-        });
-    }); 
-
-
+    //     });
+    // }); 
 
 }
 
@@ -706,38 +806,73 @@ $(document).on('click', '.groupChassis', function(){
     },1000)
 });
 var flag;
-// var chassisArray = new Array();
+
 $(document).on('click', '#chassisProfileDetail', function(){ 
 
     var chassisCount=$('#chassisDetail').children().size();
      console.log('chassisCount',chassisCount);
-    // var chassisArray=[];
     var chassisArray = new Array();
     flag=generateFlagNumber();
     console.log('flag create',flag);
     for(var i=0; i<chassisCount; i++){
-        var chassisObj={};
-        chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
-        console.log('chassisno',chassisObj.chassisno);
-        chassisObj.damage_location="";
-        chassisObj.damage_detail=$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text();
-        console.log('damage_detail',$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text());
-        chassisObj.damage_type=$('#chassisDetail').find('.damageClauses .damageDesc_2').eq(i).val();
-        chassisObj.damage_cause=$('#chassisDetail').find('.damageClauses .damageDesc_3 option:selected').eq(i).text();
-        var imageID=$('#chassisDetail').find('.attchmentBlock img').eq(i).attr('id');
-        var smallImage = document.getElementById(imageID);
-        chassisObj.attachment=smallImage.src;
-        console.log('attachment',chassisObj.attachment);
-        chassisObj.shortage_brand_variant=$('#chassisDetail').find('.shortageClauses .damageDesc_4 option:selected').eq(i).text();
-        chassisObj.shortage_part=$('#chassisDetail').find('.shortageClauses .damageDesc_5').eq(i).val();
-        chassisObj.quantity=$('#chassisDetail').find('.shortageClauses .shortageDesc').eq(i).val();
-        chassisObj.flag=flag;
-        console.log('chassisObj',chassisObj);
-        chassisArray.push(chassisObj);
+        var tableId=$('#chassisDetail').find('.panel-group .tableDetail table').eq(i).attr('id');
+        console.log('tableId',tableId);
+        alert(tableId);
+        var rowCount = $('#'+tableId+' >tbody >tr').length;
+        console.log('rowCount',rowCount);
+        for(var j=0; j<rowCount; j++){
+            var type=$('#'+tableId+' .type').eq(j).text();
+            console.log('type',type);
+            var chassisObj={};
+            if(type=="Damage"){
+                chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
+                chassisObj.type=type.toLowerCase();
+                chassisObj.damage_location='';
+                chassisObj.damage_detail=$('#'+tableId+' .damageDesc_1 option:selected').eq(j).text();
+                chassisObj.damage_type=$('#'+tableId+' .damageDesc_2').eq(j).val();
+                chassisObj.damage_cause=$('#'+tableId+' .damageDesc_3 option:selected').eq(j).text();
+                var imageID=$('#'+tableId+' .attchmentBlock img').eq(j).attr('id');
+                var smallImage = document.getElementById(imageID);
+                chassisObj.attachment=smallImage.src;
+                chassisArray.push(chassisObj);
+            }else if(type=="Shortage"){
+                chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
+                chassisObj.type=type.toLowerCase();
+                chassisObj.shortage_brand_variant=$('#'+tableId+' .damageDesc_4 option:selected').eq(j).text();
+                chassisObj.shortage_part=$('#'+tableId+' .damageDesc_5').eq(j).val();
+                chassisObj.quantity=$('#'+tableId+' .shortageDesc').eq(j).val();
+                var imageID=$('#'+tableId+' .attchmentBlock img').eq(j).attr('id');
+                var smallImage = document.getElementById(imageID);
+                chassisObj.attachment=smallImage.src;
+                chassisArray.push(chassisObj);
+
+            }
+        }
+
+        console.log('chassisArray',chassisArray);
+        alert('chassisArray');
+        // var chassisObj={};
+        // chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
+        // console.log('chassisno',chassisObj.chassisno);
+        // chassisObj.damage_location="";
+        // chassisObj.damage_detail=$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text();
+        // console.log('damage_detail',$('#chassisDetail').find('.damageClauses .damageDesc_1 option:selected').eq(i).text());
+        // chassisObj.damage_type=$('#chassisDetail').find('.damageClauses .damageDesc_2').eq(i).val();
+        // chassisObj.damage_cause=$('#chassisDetail').find('.damageClauses .damageDesc_3 option:selected').eq(i).text();
+        // var imageID=$('#chassisDetail').find('.attchmentBlock img').eq(i).attr('id');
+        // var smallImage = document.getElementById(imageID);
+        // chassisObj.attachment=smallImage.src;
+        // console.log('attachment',chassisObj.attachment);
+        // chassisObj.shortage_brand_variant=$('#chassisDetail').find('.shortageClauses .damageDesc_4 option:selected').eq(i).text();
+        // chassisObj.shortage_part=$('#chassisDetail').find('.shortageClauses .damageDesc_5').eq(i).val();
+        // chassisObj.quantity=$('#chassisDetail').find('.shortageClauses .shortageDesc').eq(i).val();
+        // chassisObj.flag=flag;
+        // console.log('chassisObj',chassisObj);
+        // chassisArray.push(chassisObj);
     }
 
-    console.log('chassisArray Detail:',chassisArray);
-    DBHandler.saveRecordsofgrn_chassisDetails(chassisArray, saveRecordsofgrn_chassisCallback);
+    // console.log('chassisArray Detail:',chassisArray);
+    // DBHandler.saveRecordsofgrn_chassisDetails(chassisArray, saveRecordsofgrn_chassisCallback);
 
 });
 
@@ -760,15 +895,7 @@ function locationFunc(){
     });
     localStorage.setItem('location', values)
     console.log('location',localStorage.getItem(location));
-    // console.log('location2',localStorage.getItem(location2));
-    // console.log('values2',values);
-    // localStorage.getItem(locationArray);
-    // localStorage.setItem('access_token', log_data.access_token)
-    //$("input[name='select_for_damage_location[]']:checked").parents('.modal-content').css({"color": "red", "border": "2px solid red"});
-    // $('.modal-content').attr("id", values.toString());
     return values.toString();
-    // var checkboxId= $("input[name='select_for_damage_location[]']:checked").attr('id');
-    // console.log('checkboxId',checkboxId);
 }
 
 
@@ -778,8 +905,6 @@ $(document).on('click', '.getAttachment', function(){
     var imageId=$(this).siblings('img').attr('id');
     console.log('imageId', imageId);
 
-    //var popover = new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY);
-
     navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, encodingType: Camera.EncodingType.JPEG,
        popoverOptions  : new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY),
        destinationType: destinationType.DATA_URL });
@@ -787,19 +912,10 @@ $(document).on('click', '.getAttachment', function(){
 
         function onPhotoDataSuccess(imageData) {
               console.log('onPhotoDataSuccess');
-              // Uncomment to view the base64-encoded image data
-              // console.log(imageData);
-              // Get image handle
-              //
+              
               var smallImage = document.getElementById(imageId);
               console.log("document.getElementById(imageId)",smallImage);
-              // var smallImage = document.getElementsByClassName('smallImage');
-              // Unhide image elements
-              //
-               smallImage.style.display = 'block';
-              // Show the captured photo
-              // The in-line CSS rules are used to resize the image
-              //
+              smallImage.style.display = 'block';
               smallImage.src = "data:image/jpeg;base64," + imageData;
               console.log("smallImage.src",smallImage.src);
         }
@@ -826,26 +942,14 @@ $(document).on('click', '.AttachmentofVehical', function(){
               console.log('grnDetailImageNumber',grnDetailImageNumber);
               $( ".AttachmentofVehical" ).after( '<div class="grnImage"><img style="display:none;width:60px;height:60px; padding:2px;" class ="image1234" id="showVehicalImage'+grnDetailImageNumber+'" src="" /><button class="imageDelete text-center" style="width:56px">Delete</button></div>');
              console.log('AttachmentofVehical');
-             // var imageId=$(this).siblings('img').attr('id');
              var imageId="showVehicalImage"+grnDetailImageNumber;
              console.log('AttachmentofVehicalimageId', imageId);
-             //var popover = new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY);
+             
               console.log('onPhotoDataSuccess');
-              // Uncomment to view the base64-encoded image data
-              // console.log(imageData);
-
-              // Get image handle
-              //
+             
               var smallImage = document.getElementById(imageId);
-               console.log("document.getElementById(imageId)",smallImage);
-                // var smallImage = document.getElementsByClassName('smallImage');
-              // Unhide image elements
-              //
-               smallImage.style.display = 'block';
-
-              // Show the captured photo
-              // The in-line CSS rules are used to resize the image
-              //
+              console.log("document.getElementById(imageId)",smallImage);
+              smallImage.style.display = 'block';
               smallImage.src = "data:image/jpeg;base64," + imageData;
               console.log("smallImage.src",smallImage.src);
               grnDetailImageNumber=parseInt(grnDetailImageNumber)+1;
@@ -877,41 +981,17 @@ $(document).on('click', '.getPicture', function(){
 
         function onPhotoDataSuccess(imageData) {
               console.log('onPhotoDataSuccess');
-              // Uncomment to view the base64-encoded image data
-              // console.log(imageData);
-
-              // Get image handle
-              //
+             
               var smallImage = document.getElementById(imageId);
-               console.log("document.getElementById(imageId)",smallImage);
-                // var smallImage = document.getElementsByClassName('smallImage');
-              // Unhide image elements
-              //
-               smallImage.style.display = 'block';
+              console.log("document.getElementById(imageId)",smallImage);
+              smallImage.style.display = 'block';
 
-              // Show the captured photo
-              // The in-line CSS rules are used to resize the image
-              //
               smallImage.src = "data:image/jpeg;base64," + imageData;
               console.log("smallImage.src",smallImage.src);
         }
 
 });
 
-
-
-// $(function() {
-//     $('#sig').signature();
-//     $('#clear').click(function() {
-//         $('#sig').signature('clear');
-//     });
-//     $('#json').click(function() {
-//         alert($('#sig').signature('toJSON'));
-//     });
-//     $('#svg').click(function() {
-//         alert($('#sig').signature('toSVG'));
-//     });
-// });
 $(document).on('click', '.logout_open', function(){
     console.log('user is logout');
     DBHandler.clearData(); 
@@ -924,47 +1004,7 @@ $(document).on('click', '.logout_open', function(){
    function generateFlagNumber(){
     return (Math.ceil(Math.random()*100000000));
 }
-// $(document).on('click','.damageDesc_1', function(){
-//     $.ajax({
-//             type: "GET",
-//             url:"js/api/damage.json",
-//             dataType: "json",
-//             success: function (data) {
-//                 var dropdown_data="";
-//                 $.each(data.legend,function(i,obj)
-//                 {
-//                  console.log('legend',obj.material+":"+obj.damage_type);
-//                  dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
-                
-//                 });  
-//                  $('.damageDesc_1').append(dropdown_data); 
-//                  console.log('chosen-select');
-//                  var config = {
-//                   '.chosen-select'           : {},
-//                   '.chosen-select-deselect'  : {allow_single_deselect:true},
-//                   '.chosen-select-no-single' : {disable_search_threshold:10},
-//                   '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-//                   '.chosen-select-width'     : {width:"95%"}
-//                 }
-//                 for (var selector in config) {
-//                   $(selector).chosen(config[selector]);
-//                 }
-//             },
-//             error: function(e) {
-//             console.log(e);
-//             return false;
-//            }
-         
-//     });
-// });
 
-// $(document).on('click', '.damageDesc_2', function(){
-//     // var textVal = $(".damageDesc_1 option:selected" ).text();
-//      var textVal = $(".damageDesc_1").val();
-//     console.log('option value',textVal);
-//     $('.damageDesc_2').val(textVal);
-
-// });
 
 
 $(document).on('change', '.damageDesc_1', function(){
@@ -983,40 +1023,11 @@ $(document).on('change', '.damageDesc_4', function(){
 
 });
 
-
-// $(document).on('click','.damageDesc_1', function(){
-       // $(function(){
-       //      $.ajax({
-       //          type: "GET",
-       //          url:"js/api/damage.json",
-       //          dataType: "json",
-       //          success: function (data) {
-       //              var dropdown_data="";
-       //              $.each(data.legend,function(i,obj)
-       //              {
-       //               console.log('legend',obj.material+":"+obj.damage_type);
-       //               dropdown_data=dropdown_data+"<option value="+obj.damage_type+">"+obj.material+"</option>";
-                    
-       //              });  
-       //               $('.damageDesc_1').append(dropdown_data); 
-       //          },
-       //          error: function(e) {
-       //          console.log(e);
-       //          return false;
-       //         }
-             
-       //      });
-       // }); 
-        
-   // });
-
 $(document).on('click','#chassisProfileId', function(){
     var reporting_date = $('#datepicker3').val();
     var uploading_date = $('#datepicker4').val();
     if(reporting_date=="" || uploading_date==""){
        
-        // e.preventDefault();
-         // $('#reportVerify').fadeTo("fast", .5).removeAttr("href"); 
          $('#chassisProfileId').removeAttr("href"); 
          $(".details_1").addClass('active');
          $(".details_2").removeClass('active');
@@ -1079,52 +1090,7 @@ $(document).on('click','#clear2', function(){
     ctx2.clearRect(0, 0, c2.width, c2.height);
 });
 
-// (function(){
-    // var form = $('.form'), cache_width = form.width(), a4  =[ 595.28,  841.89];  // for a4 size paper width and height
-    // var form = $('.form'), cache_width = form.width(), a4  =[ 280.28,  841.89]; 
-    // $(document).on('click','#create_pdf', function(){
-    // // $('#create_pdf').on('click',function(){
-    //     console.log('create pdf');
-    //     $('body').scrollTop(0);
-    //     createPDF();
-    // });
-
-    //create pdf
-    // function createPDF(){
-    //     console.log('createPDF creating');
-    //     getCanvas().then(function(canvas){
-    //         var img = canvas.toDataURL("image/png");
-    //         var doc = new jsPDF({
-    //           unit:'px', 
-    //           format:'a4'
-    //         });     
-    //         doc.addImage(img, 'JPEG', 20, 20);
-    //         doc.save('techumber-html-to-pdf.pdf');
-    //         console.log('techumber-html-to-pdf.pdf');
-    //         form.width(cache_width);
-    //     });
-    // }
-
-    // create canvas object
-    // function getCanvas(){
-    //     console.log('getCanvas creating');
-    //     // form.width((a4[0]*1.33333) -80).css('max-width','none');
-    //     form.width(a4[0]).css('max-width','none');
-    //     return html2canvas(form,{
-    //         imageTimeout:2000,
-    //         removeContainer:true
-    //     }); 
-    // }
-
-// }());
-
 $(document).on('click', '#create_pdf', function(){ 
-    // console.log('clicking');
-    // var doc = new jsPDF();
-    //  console.log('jsPDF');
-    // doc.text(20, 20, 'Hello world.');
-    // doc.save('Test.pdf');
-    //FIRST GENERATE THE PDF DOCUMENT
     alert('generating pdf');
     console.log("generating pdf...");
     var doc = new jsPDF();
@@ -1153,55 +1119,6 @@ $(document).on('click', '#create_pdf', function(){
              doc.text("Header", 20, 110);
         }
     });
-    // doc.autoTable(columns, rows);
-    // doc.save('table.pdf');
-   //  var table = doc.table({
-   //    padding: 5,
-   //    borderWidth: 20,
-   //    borderColor: 0xdddddd,
-   //    backgroundColor: 0xeeeeee,
-   //    widths: ['50%', '30%']
-   //  });
-
-   // var tr = table.tr({});
-   // tr.td('Foo');
-   // tr.td('Bar');
-    // var table = tableToJson($('#tripTable').get(0));
-    // var doc = new jsPDF('p', 'pt', 'a4', true);
-    // doc.cellInitialize();
-    // $.each(table, function (i, row){
-    //   $.each(row, function (j, cell){
-    //     doc.cell(10, 200, 100, 20, cell, i);
-    //   })
-    // })
-    // doc.save()
-    // function tableToJson(table) {
-    //     var data = [];
-
-    //     // first row needs to be headers
-    //     var headers = [];
-    //     for (var i=0; i<table.rows[0].cells.length; i++) {
-    //         headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
-    //     }
-
-
-    //     // go through cells
-    //     for (var i=0; i<table.rows.length; i++) {
-
-    //         var tableRow = table.rows[i];
-    //         var rowData = {};
-
-    //         for (var j=0; j<tableRow.cells.length; j++) {
-
-    //             rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
-
-    //         }
-
-    //         data.push(rowData);
-    //     }       
-
-    //     return data;
-    // }
     var pdfOutput = doc.output();
     console.log( pdfOutput );
  

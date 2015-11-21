@@ -3830,7 +3830,7 @@ div.error{
     height: 35px;
 }
 
-.damageDesc_1,
+/*.damageDesc_1,
 .damageDesc_2,
 .damageDesc_3,
 .damageDesc_4,
@@ -3840,6 +3840,12 @@ div.error{
     width: 100%;
     height: 35px;
     margin-top: 10px;
+}*/
+.damageDesc_2,
+.damageDesc_4,
+.damageDesc_5,
+.shortageDesc{
+    width: 100%;
 }
 .chosen-container,
 .chosen-container-single,
@@ -3974,6 +3980,10 @@ width: 100% !important;
     background: #636363;
     color: #FFF;
     font-style: 12px;
+}
+
+.tableDetail{
+   overflow: auto;
 }
 
 .driverSummery {
