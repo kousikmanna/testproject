@@ -93,14 +93,14 @@
                                 <a class="logout_open" href="#"> <i class="fa fa-power-off signOutIcon pull-right"></i></a>
                             </div>
                             
-                                <ul id="myTab" class="nav nav-tabs">
-                                    <li class="active createGrn_OptLIst" id="pendingTrip"><a href="#home" id="pendingTripDetail" data-toggle="tab">Pending Invoices</a>
+                                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active createGrn_OptLIst" id="pendingTrip"><a href="#home" id="pendingTripDetail" role="tab" data-toggle="tab">Pending Invoices</a>
                                     </li>
-                                    <li class="createGrn_OptLIst" id="searchTripDetail"><a id="tripDetailList" href="#profile" data-toggle="tab">Search Trips</a>
+                                    <li role="presentation" class="createGrn_OptLIst" id="searchTripDetail"><a id="tripDetailList" href="#profile" role="tab" data-toggle="tab">Search Trips</a>
                                     </li>
                                 </ul>
                                 <div id="myTabContent" class="tab-content">
-                                    <div class="tab-pane fade active in" id="home">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="home">
                                         <div class="col-md-12 col-sm-12 col-xs-12 padding-zero">
                                             <div class="panel panel-default">
                                                 <div class="panel-body1" id="tabledetail">
@@ -370,12 +370,12 @@
        
 
                                     </div>
-                                    <div class="tab-pane fade text-center clearfix" id="profile">
+                                    <div role="tabpanel" class="tab-pane fade text-center clearfix" id="profile">
                                         <div class="col-md-12 col-sm-12 col-xs-12 clearfix search_invoice_block">
                                             <div class="enter_invoice_block"><input type="text" id="tripNumber" placeholder="Trip Number" class="search_invoice col-md-8 col-sm-8 col-xs-10"></div>
                                             <div class="clearfix">
-                                                <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container" id="datepicker1">
-                                                <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container" id="datepicker2">
+                                                <input type="text" placeholder="From Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container tripSearchDatePicker" id="datepicker1">
+                                                <input type="text" placeholder="To Date" class="search_invoice col-md-8 col-sm-8 col-xs-10 sandbox-container tripSearchDatePicker" id="datepicker2">
                                             </div>
                                             <button class="seachInvoiceButton" id="searchTrip">Search Trips</button>
                                         </div>
@@ -397,7 +397,7 @@
     <div id="selectTrip" class="modal fade" role="dialog">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/inc/inc.js"></script>
+    <script type="text/javascript" src="js/inc.js"></script>
     <script src="js/plugins/jquery.timepicker.min.js"></script>
     <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -435,7 +435,7 @@
     <script type="text/javascript" src="js/mainMenu.js"></script>
     <script type="text/javascript" src="js/plugins/moment/moment.min.js"></script>
     <script src="js/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="js/common.js"></script>
+    
     <script src="js/home.js"></script>
     <!--PURCHASE ORDER SCRIPT-->
     <!-- <script type="text/javascript" src="js/version.js"></script>-->

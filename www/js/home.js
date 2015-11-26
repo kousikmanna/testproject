@@ -4,7 +4,11 @@ $(function() {
     // showLoading();
 });
 function onDeviceReady() {
+    localStorage.clear();
+    // showLoading();
     localStorage.setItem('tripSelected', false);
+    localStorage.setItem('countClick4', 1);
+    localStorage.setItem('countNew', 1);
     // localStorage.setItem('totalDistance',600);
     localStorage.setItem('travelPerDay',300);
     console.log("inside home.js");
@@ -26,8 +30,13 @@ function onDeviceReady() {
     DBHandler.initDatabase();
     // alert('initDatabase in home.js');
     setTimeout(function() {
+         // showLoading();
          DBHandler.getAllRecords('trip', details);
     }, 1000);
+
+    $('.tripSearchDatePicker').on('change', function(){
+        $('.datepicker').hide();
+    });
 
     $("#searchInvoice").bind('click', function(e){
         e.preventDefault();
@@ -46,13 +55,7 @@ function onDeviceReady() {
             toDate   : datepicker2
         };
         DBHandler.searchInvoice(searchObj, searchInvoiceCallback);
-        // if((email == 'ticl_dealer@bajajauto.co.in') && (password == "dealer123")) {
-        //     window.location.href = "create_grn.html";
-        // } else {
-        //     $("#error-msg-login-window").css("display", "block");
-        //     hideLoading();
-        // }
-
+        
     });
 
 }
@@ -67,6 +70,7 @@ arrColor = [{
 
 function details(result) {
     // alert('inside details');
+    showLoading();
     $("#tabledetail").empty();
     var trip_invoice;
     var trip_invoice5 = '';
@@ -82,33 +86,8 @@ function details(result) {
     console.log("details", result);
     DBHandler.getAllRecords2('invoice', invoiceDetails);
     function invoiceDetails(result2) {
-        // alert('inside invoiceDetails');
         var resLen2 = result2.rows.length;
-        // trip_invoice='<table class="table table-condensed table_trip_data" style="border-collapse:collapse;"><thead class="thead_trip"><tr><th>Trip No</th><th>Date</th><th>Truck No</th><th>&nbsp;</th></tr></thead><tbody>';
-        // console.log("invoiceDetails", result2);
-        // for (var i = 0; i < resLen; i++) {
-        //     console.log("result.rows.item(i)",  result.rows.item(i));
-        //     trip_invoice2='<tr data-toggle="collapse" id="100'+i+'" data-target="#demo'+i+'" class="accordion-toggle" id = "tripdetail"><td>'+result.rows.item(i).tripno+'</td><td>'+result.rows.item(i).created_date+'</td><td>'+result.rows.item(i).truckno+'</td><td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td></tr>';
-        //     var trip_invoice_i='';
-        //     var trip_invoice3;
-        
-        //     for(var j = 0; j < resLen2; j++){
-        //         console.log("result2.rows.item(j)",  result2.rows.item(j));
-        //         console.log("result2.rows.item(j).invoiceno",  result2.rows.item(j).invoiceno);
-        //         trip_invoice3='<tr><td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo'+i+'"><table class="table table-striped"><thead><th>Invoice No</th><th>Plant</th><th>Qty</th><th>Select</th></thead><tbody>';
-        //         trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"><button data-rel="1" class="createGrnButton" id="grnButton'+i+1+j+1+'">Create GRN</button></div></div></td></tr>';
-        //         if(result.rows.item(i).tripno === result2.rows.item(j).tripno){
-        //            console.log("i..",i);
-        //         trip_invoice_i=trip_invoice_i + '<tr><td>'+result2.rows.item(j).invoiceno+'</td><td>'+result2.rows.item(j).plant+'</td><td>'+result2.rows.item(j).billqty+'</td><td><input type="checkbox" id="'+i+'" name="select_for_grn[]" class="select_for_grn"/></td></tr>';
-        //          console.log('trip_invoice_i',trip_invoice_i);
-        //         }
-        //         if(j === resLen2-1){
-        //            trip_invoice5 = trip_invoice5 + trip_invoice3+trip_invoice_i+trip_invoice4;
-        //            trip_invoice2=trip_invoice2+trip_invoice5;
-        //            trip_invoice6=trip_invoice6+trip_invoice2;
-        //            // console.log('trip_invoice6',trip_invoice6);
-        //         }
-                   
+                 
         trip_invoice='<table class="table table-condensed table_trip_data" style="border-collapse:collapse;"><thead class="thead_trip"><tr><th>Trip No</th><th>Date</th><th>Truck No</th><th>Select</th><th>&nbsp;</th></tr></thead><tbody>';
         console.log("invoiceDetails", result2);
         for (var i = 0; i < resLen; i++) {
@@ -135,24 +114,17 @@ function details(result) {
                    trip_invoice6=trip_invoice6+trip_invoice2;
                    // console.log('trip_invoice6',trip_invoice6);
                 }
-                             
-
-                // if(i==resLen-1){
-                //     trip_invoice=trip_invoice + '</tbody></table>'
-                // }
+                
             }
 
-            // trip_invoice2=trip_invoice2+trip_invoice5;
            
-            //trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"><button class="createGrnButton">Craete GRN</button></div></div></td></tr>';
             if(i===resLen-1){
                     trip_invoice=trip_invoice + trip_invoice6+'</tbody></table><div class="text-center"><button data-rel="1" class="createGrnButton" id="grnButton">Create GRN</button></div>';
+                   
             }
-            // trip_invoiceItem=trip_invoice2+trip_invoice4
 
         }
         $("#tabledetail").append(trip_invoice);
-        // $("#tabledetail").append(tripdata);
         hideLoading();
 
         console.log('datatime', $.now());
@@ -172,16 +144,7 @@ function searchInvoiceCallback(result){
 }
 
 
-// $(document).on('click', '#grnButton0131', function(){ 
 
-//     showLoading();
-//     window.location="grn_details.html";
-// });
-
-// $(document).on('click', '#grnButton1131', function(){ 
-//     showLoading();
-//     window.location="grn_details.html";
-// });
 $(document).on('click', '.createGrnButton', function(){ 
     showLoading();
     if(localStorage.getItem('tripSelected')==false|| localStorage.getItem('tripSelected')=='false'){
@@ -195,29 +158,7 @@ $(document).on('click', '.createGrnButton', function(){
     }
 });
 
-// function grnfunc() {
-//     var values = new Array();
-//     var checkboxId= $("input[name='select_for_grn[]']:checked").attr('id');
-//     var trId="100"+checkboxId;
-//     for(var i=0; i<3; i++){
-//         $.each($('#'+trId),
-//         function () {
-          
-//             values.push($(this).find('td').eq(i).text());
-            
-//        });
-//     }
-    
-//     $.each($("input[name='select_for_grn[]']:checked").closest("td").siblings("td"),
-//         function () {
-//             values.push($(this).text());
-//         });
 
-//     console.log('values1',values.join (", "));
- 
-//     DBHandler.saveRecordsofGrn_trip_invoice(values, grn_trip_invoiceCallback);
-
-// }
  function grn_trip_invoiceCallback(){
     console.log('grn_trip_invoiceCallback');
     localStorage.setItem('tripSelected', true);
@@ -228,17 +169,6 @@ $(document).on('click', '.select_for_grn', function(){
     grnfunc();
 });
 
-
-// $(document).on('click', '.select_for_trip', function(){ 
-//     var values = new Array();
-//      $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
-//         function () {
-//             values.push($(this).text());
-//     });
-
-//     console.log('trip values',values); 
-//     DBHandler.saveRecordsofGrn_trip(values, grn_trip_Callback);
-// });
 $(document).on('click', '.select_for_trip', function(){
     var test = $(this).attr('id'); 
      // var tripCheckboxId= $("input[name='select_for_trip[]']:checked").attr('id');
@@ -266,37 +196,6 @@ $(document).on('click', '.select_for_trip', function(){
      console.log('trip values',values);
      $('.select_for_grn'+test).each(function(i, box){
         $(box).prop('checked', true);
-        // if($(box).prop('checked', true)){
-
-                // var values = new Array();
-               
-                // for(var i=0; i<3; i++){
-                //     $.each($('#'+test),
-                //     function () {
-                      
-                //         values.push($(this).find('td').eq(i).text());
-                        
-                //    });
-
-
-                // }
-                // $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
-                //     function () {
-                //         values.push($(this).text());
-                //     });
-                // console.log('trip values',values);
-
-                // $.each($("input[name='"+invoicenoClass+"[]']:checked").closest("td").siblings("td"),
-                //     function () {
-                //         values.push($(this).text());
-                //     });
-
-                // console.log('values1',values1);
-             
-                // DBHandler.saveRecordsofGrn_trip_invoice(values, grn_trip_invoiceCallback);
-                
-           
-        // }
      });
     
      
@@ -322,48 +221,27 @@ function logout_user() {
     window.location = "index.html";
 }
 
-// (document).on('change' , '.checkbox' , function(){
-
-//     if(this.checked) {
-//         //Do stuff
-//     }
-
-// });
-    // var condition1='';
-    // var condition2;
-    // for(var i=0; i<arrayLen; i++){ 
-        
-    //     if(i<arrayLen-1){
-    //         condition1=condition1+" invoiceno='"+invoiceArray[i]+"'"+" OR "; 
-    //     }
-        
-    //     if(i===arrayLen-1){
-    //         condition2=condition1+" invoiceno='"+invoiceArray[i]+"'";
-    //     }
-
-    // }
-    // console.log('condition2',condition2);
-    // var condition=condition2 + " AND chassisno LIKE '"+chassisNumber+"%'";
 $(document).on('click', '#searchTrip', function(){ 
+    showLoading();
+    localStorage.setItem('countNew', 2);
     var tripNumber = $('#tripNumber').val();
     if(tripNumber){
         var condition=" WHERE tripno LIKE '0000"+tripNumber+"%'" +" OR tripno LIKE '"+"%"+tripNumber+"'";
         console.log('condition',condition);
-         $('#tripDetailList').removeAttr("href"); 
-         $('#pendingTripDetail').fadeTo("fast", .5).attr("href", "#home"); 
+         // $('#tripDetailList').removeAttr("href"); 
+         // $('#pendingTripDetail').attr("href", "#home"); 
          $("#pendingTrip").addClass('active');
          $("#searchTripDetail").removeClass('active');
+          $("#profile").removeClass('active in');
+          $("#home").addClass('active in');
+
+         var countClick4=localStorage.getItem('countClick4');
+         
         DBHandler.searchRecordsOfTrip('trip', condition, details);
     }else{
         alert('Please enter string which is matching with trip number');
     }
     
-
 });
-$(document).on('click', '#tripDetailList', function(){ 
-    $('#tripDetailList').fadeTo("fast", .5).attr("href", "#profile"); 
-    $("#pendingTrip").removeClass('active');
-    $("#searchTripDetail").addClass('active');
 
-});
 

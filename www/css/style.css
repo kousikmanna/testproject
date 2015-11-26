@@ -3989,6 +3989,7 @@ width: 100% !important;
 .driverSummery {
     padding: 5px;
     text-align: justify;
+    background-color:#ffffff;
 }
 
 .driverPhotoAndSign {
@@ -4017,23 +4018,22 @@ width: 100% !important;
 }
 
 
+.driverHeading {
+    background: #FFF !important
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.tg {width: 100%;}
 
 .donate-now {
      list-style-type:none;
      margin:25px 0 0 0;
      padding:0;
+}
+
+.tab_head {
+    background: #636363;
+    color: #fff;
+    font-weight: bold;
 }
 
 .donate-now li {
@@ -4146,9 +4146,9 @@ font-size: 18px;
     color: #FFF;
 }
 
-.shortageClauses {
+/*.shortageClauses {
     display: none;
-}
+}*/
 
 .driver_pic {
     width: 100px;
@@ -4164,3 +4164,111 @@ font-size: 18px;
     display: inline-block !important;
 }
 
+.damageDesc_1,
+.damageDesc_2,
+.damageDesc_3,
+.damageDesc_4,
+.damageDesc_5,
+.shortageDesc
+ {
+    width: 100%;
+    height: 35px;
+    margin-top: 10px;
+}
+.type, 
+.short_delete_row{
+    display: inline-block;
+     margin-bottom: 22px;
+}
+.type, 
+.dam_delete_row{
+    display: inline-block;
+}
+.type{
+  float:left;
+}
+.dam_delete_row{
+ float:right;
+}
+.short_delete_row{
+ float:right;
+}
+.damageShortageImage{
+    display: inline-block !important;
+}
+.truckLayoutTable,
+.damageLocationShow{
+    display:inline-block;
+}
+.remove_all{
+    display:none;
+    background: #636363;
+    border: none;
+    border-radius: 0;
+}
+.imageDelete{
+    background: #636363;
+    border: none;
+    margin: -1px 0px 0px 2px;
+    color: #fff;
+}
+
+.grnDetailattchmentBlock,
+.add_buttons {
+    padding: 0;
+}
+
+#damage_btn,
+#shortage_btn,
+.remove_chassis {
+    background: #636363;
+    border: none;
+    border-radius: 0;
+}
+.button {
+    text-align: right;
+}
+
+.chassis_block {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.getChassisNumber,
+.chassis_heading {
+    padding: 15px;  
+}
+
+.remove_chassis,
+.remove_all {
+    width: 125px;
+    height: 35px;
+}
+/*.tableDetail{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    background: #EAE9E9;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}*/
+.shortageBlock{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    background: #EAE9E9;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+.damageBlock{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    background: #EAE9E9;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.short_delete_row, 
+.dam_delete_row {
+    margin-top: 6px;
+    font-size: 26px;
+
+}

@@ -81,16 +81,16 @@
     </script>
 
     <script type="text/template" id="chassisTemplate">
-        <div class="panel-group accordion">
+        <div id= "abct<%= chassisno%>" class="panel-group accordion">
             <div class="panel panel-default">
-                <div class="panel-heading col-lg-12">
-                    <div class="col-lg-6">
+                <div class="panel-heading col-lg-12 col-xs-12 chassis_block">
+                    <div class="col-lg-6 col-sm-6 col-xs-6">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent=".accordion" class="acc_parent_block" href="#collapse<%= chassisno%>"><%= chassisno %></a>
+                            <a data-toggle="collapse" id="t<%= chassisno%>" data-parent=".accordion" class="acc_parent_block" href="#collapse<%= chassisno%>"><%= chassisno %></a>
                         </h4>
                         <div id="cnt<%= chassisno%>" class="info"></div>
                     </div>
-                    <div class="col-lg-6" style="text-align:right"><input id="remove_chassis" type="button" class="btn btn-warning" value="Remove Chassis"/>
+                    <div class="col-lg-6 col-sm-6 col-xs-6" style="text-align:right"><input id="t<%= chassisno %>" type="button" class="remove_chassis btn btn-warning" value="Remove Chassis"/>
                     </div>    
                 </div>
                 <div id="collapse<%= chassisno %>" class="panel-collapse collapse">
@@ -98,25 +98,19 @@
                         <div class="clearfix">
                         </div>
                         <div class="damage_detail clearfix">
-                            <div class='button'><input id="remove_all" type="button" class="btn btn-warning" value="Remove All"/>
+                            <div class='button'><input id="<%= chassisno %>" type="button" class="remove_all btn btn-warning" value="Remove All"/>
                             </div>
-                            <h5>Damage Location<i class="fa fa-plus getChassisLabel plusStyle" data-toggle="modal" data-target="#damageLocation"></i>
-                            </h5>
-                            <section class="tableDetail">
-                                <table id="tableCreate<%= chassisno %>" style="width:901px; table-layout: fixed;" class="table table-striped table-bordered table-hover table-condensed">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                </table>
-                            </section>
+                            <h4 id="1234truckLayout<%= chassisno %>">Damage Location<i class="fa fa-plus getChassisLabel plusStyle truckLayoutTable" data-toggle="modal" id="truckLayout<%= chassisno %>" data-target="#damageLocation"></i>
+                            </h4>
+                            <div class="tableDetail">
+                                <div id="tableCreate<%= chassisno %>" class="damageShortageDetail">
+                                </div>
+                            </div>
                             <div class="col-lg-12 add_buttons">
                                 <input type="button" id="damage_btn" class="btn btn-primary" value="Add Damage"/>
                                 <input type="button" id="shortage_btn" class="btn btn-info" value="Add Shortage"/>
                             </div>
-                            <div class="damageClauses">
-                            </div>
-                            <div class="shortageClauses">
-                            </div>
+                            
                         </div>
                     </div>   
                 </div>
@@ -138,14 +132,16 @@
             </thead>
             <tbody>
                 <% for(var i=0; i<length; i++) {%>
-                    <tr>
-                        <td><%= i+1 %></td>
-                        <td><%= resultData.item(i).chassisno %></td>
-                        <td><%= resultData.item(i).damage_detail %></td>
-                        <td><%= resultData.item(i).damage_type %></td>
-                        <td><%= resultData.item(i).damage_cause %></td>
-                        <td>Front</td>
-                    </tr>
+                    <% if(resultData.item(i).type=="damage") {%>
+                        <tr>
+                            <td><%= i+1 %></td>
+                            <td><%= resultData.item(i).chassisno %></td>
+                            <td><%= resultData.item(i).damage_detail %></td>
+                            <td><%= resultData.item(i).damage_type %></td>
+                            <td><%= resultData.item(i).damage_cause %></td>
+                            <td><%= resultData.item(i).damage_location %></td>
+                        </tr>
+                    <% }; %>   
                 <% }; %>
                 
             </tbody>
@@ -157,21 +153,81 @@
             <table class="invoiceTableTemp table table-striped table-bordered table-hover">
             <thead class="invoiceTable">
                 <th>S.N</th>
-                <th>Brand Varient</th>
-                <th>Shortage Part</th>
+                <th>shortage_brand_variant</th>
                 <th>Shortage Qty</th>
             </thead>
             <tbody>
-                 <% for(var i=0; i<length; i++) {%>
-                <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= resultData.item(i).shortage_brand_variant %></td>
-                    <td><%= resultData.item(i).shortage_part %></td>
-                    <td>Some type</td>
-                </tr>
+                <% for(var i=0; i<length; i++) {%>
+                    <% if(resultData.item(i).type=="shortage") {%>
+                        <tr>
+                            <td><%= i+1 %></td>
+                            <td><%= resultData.item(i).shortage_brand_variant %></td>
+                            <td><%= resultData.item(i).quantity %></td>
+                        </tr>
+                    <% }; %>
                 <% }; %>
             </tbody>
         </table>
+    </script>
+    <script type="text/template" id="truckLayoutTemplate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Damage Location in Truck</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <div class="clearfix">
+                        <ul class="donate-now">
+                            <li>
+                                <input type="radio" id="upperDeck" name="amount" checked="checked"/>
+                                <label for="upperDeck">Upper Deck</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="lowerDeck" name="amount" />
+                                <label for="lowerDeck">Lower Deck</label>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+                        <thead class="">
+                            <th colspan="5" class="text-right">Driver</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <% for(var i=1; i<=truckLayoutData.column; i++) {%>
+                                <td>C<%= i %></td>
+                                <% }; %>
+                            </tr>
+
+                            <% for(var j=1; j<=truckLayoutData.row; j++) {%>
+                            <tr>   
+                                <td>R<%= j %></td>  
+                                <% for(var l=1; l<=truckLayoutData.column; l++) {%>
+                                 
+                                <td><input type="radio" id="R<%= j %>C<%= l %>" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <% }; %>
+
+                             </tr>
+                            <% }; %>
+                            
+                            <tr>
+                                <td></td>
+                                <td colspan="4">Rear side of truck</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                </div>
+                <div class="modal-footer truckLayout_actionBlk">
+                    <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn actAddEmployee" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+
+        </div>
     </script>
     <style type="text/css">
         body {
@@ -407,13 +463,13 @@
                                 </div>
                                 <div class="tab-pane fade" id="profile">
                                     <div class="chassisBlock">
-                                        <h5>Get Chassis Number</h5>
+                                        <h4 class="chassis_heading">Get Chassis Number</h4>
                                         <!-- old -->
                                         <div class="getChassisNumber clearfix">
                                             <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/>
                                             <label class="getChassisLabel">Scan</label>
-                                           <!--  <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i> -->
-                                            <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i>
+                                            <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i>
+                                            <!-- <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i> -->
                                         </div>
                                         <!-- old -->
                                         <!-- new -->
@@ -567,6 +623,7 @@
 
                                        <!--  <div class="text-center"><a href="#report" id ="chassisProfileDetail" data-toggle="tab" class="grnDetailsreport">Next</a></div> -->
                                         <div class="text-center"><a id ="chassisProfileDetail" data-toggle="tab" class="grnDetailsreport">Next</a></div>
+                                        <div><a class="grnDetailsreport2" style="display:none;"></a></div>
                                     </div><!-- End of chassis Block-->
                                 </div>
                                 <div class="tab-pane fade" id="report">
@@ -673,8 +730,8 @@
 
                                     <div class="col-md-12 col-sm-12 col-xs-12 padding-zero invoiceSummeryBlock">
                                         <!-- <h4>Driver Details</h4> -->
-                                        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
-                                            <p class="driverSummery"><h4>Driver Details</h4>
+                                        <div class="col-md-6 col-sm-6 col-xs-12 padding-zero">
+                                            <p class="driverSummery driverHeading"><h4>Driver Details</h4>
                                             <div id="driverDetail">
                                                <!--  <table>
                                                     <tr>
@@ -721,29 +778,33 @@
                                             </div>
                                             </p>
                                         </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-6 padding-zero">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 padding-zero">
                                             <!-- <label>Driver Photo and Signature</label> -->
                                             <!-- <label>Driver Photo</label> -->
                                            <!--  <div class="driverPhotoAndSign clearfix"> -->
-                                            <div class="driver_pic">
-                                                <h5 class="getPicture"><i class="fa fa-2x fa-camera getChassisLabel plusStyle"></i></h5>
-                                                <img style="display:none;width:100px;height:100px;" id="driverImage" src="" />
-                                            </div>
-                                            <label>Driver Signature</label>
-                                            <div class="sigPad">
-                                               
-                                               
-                                                <div class="sig sigWrapper">
-                                                   
-                                                    <canvas id="canvasId1" class="pad" width="180" height="150"></canvas>
-                                                    <input type="hidden" name="output" class="output" value="">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="driver_pic">
+                                                    <h5 class="getPicture"><i class="fa fa-2x fa-camera getChassisLabel plusStyle"></i></h5>
+                                                    <img style="display:none;width:100px;height:100px;" id="driverImage" src="" />
                                                 </div>
-                                                <ul class="sigNav">
-                                                    
-                                                    <li class="clearButton"><a href="#clear" id="clear1"><h4>Clear<h4></a></li>
-                                                </ul>
-                                               <!--  <button type="submit">Save</button> -->
-                                            </div>  
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8">
+                                                <label>Driver Signature</label>
+                                                <div class="sigPad">
+                                                   
+                                                   
+                                                    <div class="sig sigWrapper">
+                                                       
+                                                        <canvas id="canvasId1" class="pad" width="180" height="150"></canvas>
+                                                        <input type="hidden" name="output" class="output" value="">
+                                                    </div>
+                                                    <ul class="sigNav">
+                                                        
+                                                        <li class="clearButton"><a href="#clear" id="clear1"><h4>Clear<h4></a></li>
+                                                    </ul>
+                                                   <!--  <button type="submit">Save</button> -->
+                                                </div>
+                                            </div> 
 
                                           <!--   </div> -->
                                         </div>
@@ -797,6 +858,7 @@
                                             </div>  
                                             <button class="sendGRNbutton grnActionButton">Send GRN</button>
                                             <button class="printButton grnActionButton" id="create_pdf">Print</button>
+                                            <div style="display:none"><img id="logo" src="img/logo.png"></div>
                                         </div>
                                     </div>
 
@@ -832,7 +894,7 @@
    
     
     <script src="js/plugins/jquery.timepicker.min.js"></script>
-    <script type="text/javascript" src="js/inc/inc.js"></script>
+    <script type="text/javascript" src="js/inc.js"></script>
 
     <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -898,90 +960,87 @@
     </div>
 
     <div id="damageLocation" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
+        <!-- <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Damage Location in Truck</h4>
                 </div>
                 <div class="modal-body clearfix">
-                <div class="clearfix">
-                    <ul class="donate-now">
-                        <li>
-                            <input type="radio" id="upperDeck" name="amount" />
-                            <label for="upperDeck">Upper Deck</label>
-                        </li>
-                        <li>
-                            <input type="radio" id="lowerDeck" name="amount" />
-                            <label for="lowerDeck">Lower Deck</label>
-                        </li>
+                    <div class="clearfix">
+                        <ul class="donate-now">
+                            <li>
+                                <input type="radio" id="upperDeck" name="amount" />
+                                <label for="upperDeck">Upper Deck</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="lowerDeck" name="amount" />
+                                <label for="lowerDeck">Lower Deck</label>
+                            </li>
 
-                    </ul>
-                </div>
-                <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
-                    <!-- <th rowspan="5">Driver</th> -->
-                    <thead class="">
-                        <th colspan="5" class="text-right">Driver</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>C1</td>
-                            <td>C2</td>
-                            <td>C3</td>
-                            <td>C4</td>
-                        </tr>
-                        <tr>
-                            <td>R1</td>
-                            <td><input type="checkbox" id="R1C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R1C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R1C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R1C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr>
-                        <tr>
-                            <td>R2</td>
-                            <td><input type="checkbox" id="R2C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R2C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R2C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R2C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td>R3</td>
-                            <td><input type="checkbox" id="R3C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R3C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R3C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R3C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td>R4</td>
-                            <td><input type="checkbox" id="R4C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R4C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R4C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R4C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td>R5</td>
-                            <td><input type="checkbox" id="R5C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R5C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R5C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R5C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td>R6</td>
-                            <td><input type="checkbox" id="R6C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R6C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R6C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R6C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td>R7</td>
-                            <td><input type="checkbox" id="R7C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R7C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R7C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                            <td><input type="checkbox" id="R7C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
-                        </tr><tr>
-                            <td></td>
-                            <td colspan="4">Rear side of truck</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </ul>
+                    </div>
+                    <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+                        <thead class="">
+                            <th colspan="5" class="text-right">Driver</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>C1</td>
+                                <td>C2</td>
+                                <td>C3</td>
+                                <td>C4</td>
+                            </tr>
+                            <tr>
+                                <td>R1</td>
+                                <td><input type="checkbox" id="R1C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R1C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R1C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R1C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr>
+                            <tr>
+                                <td>R2</td>
+                                <td><input type="checkbox" id="R2C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R2C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R2C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R2C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td>R3</td>
+                                <td><input type="checkbox" id="R3C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R3C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R3C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R3C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td>R4</td>
+                                <td><input type="checkbox" id="R4C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R4C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R4C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R4C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td>R5</td>
+                                <td><input type="checkbox" id="R5C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R5C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R5C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R5C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td>R6</td>
+                                <td><input type="checkbox" id="R6C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R6C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R6C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R6C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td>R7</td>
+                                <td><input type="checkbox" id="R7C1" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R7C2" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R7C3" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                <td><input type="checkbox" id="R7C4" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                            </tr><tr>
+                                <td></td>
+                                <td colspan="4">Rear side of truck</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 
                 </div>
                 <div class="modal-footer truckLayout_actionBlk">
@@ -990,7 +1049,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
     </div><!-- End of damageLocation-->
 
 

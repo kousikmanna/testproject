@@ -76,7 +76,7 @@ var DBHandler = {
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_invoice ("invoiceno" VARCHAR PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno"  VARCHAR)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_detail ("grn_number" VARCHAR, "reporting_date" DATETIME, "reporting_time" DATETIME, "uploading_date" DATETIME, "uploading_time" DATETIME, "delay_type" VARCHAR, "reason_of_delay" VARCHAR, "flag"  INTEGER)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassis ("chassisno" VARCHAR , "damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR, "shortage_city" VARCHAR, "invoiceno" VARCHAR)');    
-            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassisDetails ("chassisno" VARCHAR, "type" VARCHAR, damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR, "quantity" VARCHAR,"flag" INTEGER)');    
+            tx.executeSql('CREATE TABLE IF NOT EXISTS grn_chassisDetails ("chassisno" VARCHAR, "type" VARCHAR, "damage_location" VARCHAR, "damage_detail" VARCHAR, "damage_type" VARCHAR, "damage_cause" VARCHAR, "attachment" VARCHAR, "shortage_brand_variant" VARCHAR, "shortage_part" VARCHAR, "quantity" VARCHAR,"flag" INTEGER)');    
         });
 
 
@@ -598,7 +598,7 @@ var DBHandler = {
 
         }
 
-        var columns = "('chassisno', 'damage_location', 'damage_detail', 'damage_type', 'damage_cause', 'attachment', 'shortage_brand_variant', 'shortage_part', 'quantity', 'flag')";
+        var columns = "('chassisno', 'type', 'damage_location', 'damage_detail', 'damage_type', 'damage_cause', 'attachment', 'shortage_brand_variant', 'shortage_part', 'quantity', 'flag')";
        
         db.transaction(function(tx) {
             tx.executeSql("INSERT OR REPLACE INTO grn_chassisDetails " + columns + " VALUES " + objValues, objValues,
@@ -1053,9 +1053,10 @@ function getChassisValues(obj){
 }
 
 function getGrn_ChassisValues(obj){
-    var chassisno, damage_location, damage_detail, damage_type, damage_cause, attachment, flag;
+    var chassisno, type, damage_location, damage_detail, damage_type, damage_cause, attachment, flag;
     var shortage_brand_variant, shortage_part, quantity;
     chassisno = obj.chassisno;
+    type=obj.type;
     damage_location = obj.damage_location;
     damage_detail = obj.damage_detail;
     damage_type = obj.damage_type;
@@ -1070,6 +1071,11 @@ function getGrn_ChassisValues(obj){
         chassisno = null;
     else
         chassisno = "'" + chassisno + "'";
+
+    if (type == null || type == 'null' || type == '')
+        type = null;
+    else
+        type = "'" + type + "'";
 
     if (damage_location == null || damage_location == 'null' || damage_location == '')
         damage_location = null;
@@ -1114,7 +1120,7 @@ function getGrn_ChassisValues(obj){
         flag = null;
 
     
-    var currentRow = "(" + chassisno +", "+ damage_location + ", " + damage_detail + ", "+ damage_type + ", " + damage_cause + ", "+ attachment + ", " + shortage_brand_variant +", " + shortage_part + ", "+ quantity + ", "+ flag + ")";
+    var currentRow = "(" + chassisno + ", " + type + ", " + damage_location + ", " + damage_detail + ", "+ damage_type + ", " + damage_cause + ", "+ attachment + ", " + shortage_brand_variant +", " + shortage_part + ", "+ quantity + ", "+ flag + ")";
     console.log('currentRow',currentRow);
 
     return currentRow;
