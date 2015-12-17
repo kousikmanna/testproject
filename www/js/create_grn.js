@@ -1,5 +1,4 @@
 $(function() {
-    
     document.addEventListener("deviceready", onDeviceReady, true);
     // showLoading();
 });

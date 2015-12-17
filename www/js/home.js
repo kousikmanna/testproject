@@ -3,6 +3,12 @@ $(function() {
     document.addEventListener("deviceready", onDeviceReady, true);
     // showLoading();
 });
+// document.addEventListener("deviceready", onDeviceReady, false);
+//     function onDeviceReady() {
+//         document.addEventListener("backbutton", function (e) {
+//             e.preventDefault();
+//         }, false );
+// }
 function onDeviceReady() {
     localStorage.clear();
     // showLoading();
@@ -17,9 +23,12 @@ function onDeviceReady() {
     //     $( "#datepicker1").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
     //     $( "#datepicker2").datepicker({showButtonPanel: true, changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy' }).val;
     // });
+    document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+    }, false );
     $(function() {
-        $("#datepicker1").datepicker({dateFormat: 'dd-mm-yy', showButtonPanel: true, changeMonth: true, changeYear: true}).val;
-        $("#datepicker2").datepicker({dateFormat: 'dd-mm-yy', showButtonPanel: true, changeMonth: true, changeYear: true}).val;
+        $("#datepicker1").datepicker({format: 'dd/mm/yyyy', showButtonPanel: true, changeMonth: true, changeYear: true});
+        $("#datepicker2").datepicker({format: 'dd/mm/yyyy', showButtonPanel: true, changeMonth: true, changeYear: true});
     });
     // var isConnected = isNetworkAvailable();
     // if (isConnected) {
@@ -217,6 +226,12 @@ $(document).on('click', '.select_for_trip', function(){
 function grn_trip_Callback(){
     console.log('grn_trip_Callback');
 }
+
+$(document).on('click', '.logoutModel', function(){ 
+     $(".openChassisTable").click();
+    
+
+});
 function logout_user() {
     window.location = "index.html";
 }
@@ -232,7 +247,7 @@ $(document).on('click', '#searchTrip', function(){
          // $('#pendingTripDetail').attr("href", "#home"); 
          $("#pendingTrip").addClass('active');
          $("#searchTripDetail").removeClass('active');
-          $("#profile").removeClass('active in');
+         $("#profile").removeClass('active in');
           $("#home").addClass('active in');
 
          var countClick4=localStorage.getItem('countClick4');

@@ -79,8 +79,8 @@ function loginCheck() {
                     console.log('log_data',log_data);
                     console.log('status',status);
                     // alert(log_data.status);
-                    if (log_data.email == "ticl_dealer@bajajauto.co.in" && log_data.password== "dealer123") {
-
+                    // if (log_data.email == "ticl_dealer@bajajauto.co.in" && log_data.password== "dealer123") {
+                    if (log_data.email == formData.username && log_data.password== formData.password) {
                         localStorage.setItem('email', log_data.email)
                             // sessionStorage.setItem('user_group',log_data.user_group);
                         // localStorage.setItem('user_id', un);

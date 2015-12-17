@@ -912,7 +912,7 @@ function getGrnValues(obj){
         delay_type = obj.delay_type;
         reason_of_delay = obj.reason_of_delay;
         flag = obj.flag;
-         if (grn_number == null || grn_number == 'null' || grn_number == '')
+        if (grn_number == null || grn_number == 'null' || grn_number == '')
             grn_number = null;
         else
             grn_number = "'" + grn_number + "'";

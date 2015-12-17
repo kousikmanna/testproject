@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="css/chosen.css">
     <!-- THEME STYLES - Include these on every page. -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/style_autosearch.css" rel="stylesheet">
     <link href="css/plugins.css" rel="stylesheet">
     <link href="css/header.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/breadcrumb.css">
@@ -64,7 +65,7 @@
 
                                 <% for(var i=0; i<length; i++) {%>
                                     <tr>
-                                        <td id="td100<%= i %>"><%= resultData.item(i).chassisno %></td>
+                                        <td id="td100<%= i %>"><%= resultData[i] %></td>
                                         <td><input type="checkbox" id="<%= i %>" name="select_for_chessisno[]" class="select_for_chessisno"/></td>
                                     </tr>
                                <% }; %>
@@ -107,8 +108,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 add_buttons">
-                                <input type="button" id="damage_btn" class="btn btn-primary" value="Add Damage"/>
-                                <input type="button" id="shortage_btn" class="btn btn-info" value="Add Shortage"/>
+                                <input type="button" id="damageBtn_<%= chassisno %>" class="btn btn-primary damage_btn" value="Add Damage"/>
+                                <input type="button" id="shortageBtn_<%= chassisno %>" class="btn btn-info shortage_btn" value="Add Shortage"/>
                             </div>
                             
                         </div>
@@ -190,44 +191,108 @@
 
                         </ul>
                     </div>
-                    <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
-                        <thead class="">
-                            <th colspan="5" class="text-right">Driver</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <% for(var i=1; i<=truckLayoutData.column; i++) {%>
-                                <td>C<%= i %></td>
-                                <% }; %>
-                            </tr>
+                    <div id ="addTable">
+                        <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+                            <thead class="">
+                                <th colspan="5" class="text-right">Driver</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <% for(var i=1; i<=truckLayoutData.column; i++) {%>
+                                    <td>C<%= i %></td>
+                                    <% }; %>
+                                </tr>
+                      
+                                <% for(var j=1; j<=truckLayoutData.row; j++) {%>
+                                <tr>   
+                                    <td>R<%= j %></td>  
+                                    <% for(var l=1; l<=truckLayoutData.column; l++) {%>
+                                     
+                                    <td><input type="radio" id="R<%= j %>C<%= l %>" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                    <% }; %>
 
-                            <% for(var j=1; j<=truckLayoutData.row; j++) {%>
-                            <tr>   
-                                <td>R<%= j %></td>  
-                                <% for(var l=1; l<=truckLayoutData.column; l++) {%>
-                                 
-                                <td><input type="radio" id="R<%= j %>C<%= l %>" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                                 </tr>
                                 <% }; %>
-
-                             </tr>
-                            <% }; %>
-                            
-                            <tr>
-                                <td></td>
-                                <td colspan="4">Rear side of truck</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                
+                                <tr>
+                                    <td></td>
+                                    <td colspan="4">Rear side of truck</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 
                 </div>
                 <div class="modal-footer truckLayout_actionBlk">
                     <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn actAddEmployee" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn actAddEmployee" data-dismiss="modal">Ok</button>
                 </div>
             </div>
 
         </div>
+    </script>
+    <script type="text/template" id="lowerDeckLayoutTemplate">
+        <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+            <thead class="">
+                <th colspan="5" class="text-right">Driver</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <% for(var i=1; i<=truckLayoutData.column; i++) {%>
+                    <td>C<%= i %></td>
+                    <% }; %>
+                </tr>
+      
+                <% for(var j=truckLayoutData.row+1; j<=length; j++) {%>
+                <tr>   
+                    <td>R<%= j %></td>  
+                    <% for(var l=1; l<=truckLayoutData.column; l++) {%>
+                     
+                    <td><input type="radio" id="R<%= j %>C<%= l %>" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                    <% }; %>
+
+                 </tr>
+                <% }; %>
+                
+                <tr>
+                    <td></td>
+                    <td colspan="4">Rear side of truck</td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script type="text/template" id="upperDeckLayoutTemplate">
+        <table class="text-center invoiceTableTemp table table-striped table-bordered table-hover">
+            <thead class="">
+                <th colspan="5" class="text-right">Driver</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <% for(var i=1; i<=truckLayoutData.column; i++) {%>
+                    <td>C<%= i %></td>
+                    <% }; %>
+                </tr>
+      
+                <% for(var j=1; j<=truckLayoutData.row; j++) {%>
+                <tr>   
+                    <td>R<%= j %></td>  
+                    <% for(var l=1; l<=truckLayoutData.column; l++) {%>
+                     
+                    <td><input type="radio" id="R<%= j %>C<%= l %>" name="select_for_damage_location[]" class="select_for_damage_location"/></td>
+                    <% }; %>
+
+                 </tr>
+                <% }; %>
+                
+                <tr>
+                    <td></td>
+                    <td colspan="4">Rear side of truck</td>
+                </tr>
+            </tbody>
+        </table>
     </script>
     <style type="text/css">
         body {
@@ -262,50 +327,6 @@
     </style>
     <style>
         .dam_delete_row:hover, .short_delete_row:hover { cursor:pointer; }
-
-        /*@media only screen and (max-width: 800px) {
-        
-        
-        #no-more-tables table, 
-        #no-more-tables thead, 
-        #no-more-tables tbody, 
-        #no-more-tables th, 
-        #no-more-tables td, 
-        #no-more-tables tr { 
-            display: block; 
-        }
-     
-      
-        #no-more-tables thead tr { 
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-     
-        #no-more-tables tr { border: 1px solid #ccc; }
-     
-        #no-more-tables td { 
-          
-            border: none;
-            border-bottom: 1px solid #eee; 
-            position: relative;
-            padding-left: 50%; 
-            white-space: normal;
-            text-align:left;
-        }
-     
-        #no-more-tables td:before { 
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            width: 45%; 
-            padding-right: 10px; 
-            white-space: nowrap;
-            text-align:left;
-            font-weight: bold;
-        }
-        #no-more-tables td:before { content: attr(data-title); }
-        }*/
 
         .panel-collapse .panel-body, .damage_details,
         #table tbody td, .attchmentBlock  {
@@ -441,6 +462,8 @@
                                             <option>Normal delivery</option>
                                             <option>Accident</option>
                                         </select>
+                                        <h5 class="seactionBrk" id="NumberofDelay"></h5>
+                                        
                                         <h5 class="seactionBrk">Reason for delay</h5>
                                         <select class="damageReason" name="reasonForDelay" id="reasonForDelay">
                                             <!-- <option>Accident</option>
@@ -449,7 +472,7 @@
                                             <option>Select reason for delay</option>
                                         </select>
                                         <!-- <h5 class="seactionBrk">Approximate Delay : <span>8</span> Days</h5>-->
-                                        <h5 class="seactionBrk" id="NumberofDelay"></h5>
+                                        
                                         <div class="grnDetailattchmentBlock">
                                             <h5 class="AttachmentofVehical">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h5>
                                            <!--  <img style="display:none;width:60px;height:60px;" id="showVehicalImage" src="" /> -->
@@ -457,6 +480,23 @@
                                             
                                         </div>
 
+                                        <!--  -->
+                                            <!-- <div class="damageBlock damageShortageClauses">
+                                                  <h4 class="type">Damage</h4> <h1 class="dam_delete_row">Delete</h1>
+                                                  <input type="text" name="country" class="damageDesc_1 autocomplete-ajax" id="2468" placeholder="Select Damage" style="width:100%; margin-top:10px; height:35px; z-index: 2; background: transparent;"/>
+                                                  <input type="text" name="country" class="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; background: transparent; z-index: 1;"/>
+                                                  <input type="text" class="damageDesc_2" value="" readonly/>
+                                                  <select class="damageDesc_3">
+                                                        <option>Probable cause of damage</option>
+                                                        <option>Accident</option>
+                                                        <option>Loose fitting</option>
+                                                        <option>Others</option>
+                                                  </select>
+                                                  <div class="attchmentBlock" data-title="Attachement">
+                                                    <h4 class="getAttachment" id="'2648'">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h4>
+                                                  </div>
+                                           </div> -->
+                                        <!--  -->
                                         </div>
                                     <!-- <div class="text-center"><a href="#profile" id ="grndetail" data-toggle="tab" class="grnDetailsNext">Next</a></div> -->
                                     <div class="text-center"><a id ="grndetail" data-toggle="tab" class="grnDetailsNext">Next</a></div>
@@ -467,9 +507,27 @@
                                         <!-- old -->
                                         <div class="getChassisNumber clearfix">
                                             <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/>
-                                            <label class="getChassisLabel">Scan</label>
+                                            <label class="getChassisLabel">Search</label>
                                             <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i>
+                                            <button class="topcoat-button" id="scan">Start Scan</button>
                                             <!-- <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i> -->
+                                            <!--  -->
+                                            <!--  <div class="damageBlock damageShortageClauses">
+                                                  <h4 class="type">Damage</h4> <h1 class="dam_delete_row">Delete</h1>
+                                                  <input type="text" name="country" class="damageDesc_1 autocomplete-ajax" id="2468" placeholder="Select Damage" style="width:100%; margin-top:10px; height:35px; z-index: 2; background: transparent;"/>
+                                                  <input type="text" name="country" class="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; background: transparent; z-index: 1;"/>
+                                                  <input type="text" class="damageDesc_2" value="" readonly/>
+                                                  <select class="damageDesc_3">
+                                                        <option>Probable cause of damage</option>
+                                                        <option>Accident</option>
+                                                        <option>Loose fitting</option>
+                                                        <option>Others</option>
+                                                  </select>
+                                                  <div class="attchmentBlock" data-title="Attachement">
+                                                    <h4 class="getAttachment" id="2648">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h4>
+                                                  </div>
+                                           </div> -->
+                                           <!--  -->
                                         </div>
                                         <!-- old -->
                                         <!-- new -->
@@ -481,6 +539,7 @@
                                         <!-- new -->
 
                                         <div class="accordian_parent clearfix" id="chassisDetail">
+
                                             <!-- <div class="panel-group" id="accordion">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -622,6 +681,7 @@
 
 
                                        <!--  <div class="text-center"><a href="#report" id ="chassisProfileDetail" data-toggle="tab" class="grnDetailsreport">Next</a></div> -->
+                                       <!--  <div class="text-center"><a id ="tableCreate" data-toggle="tab" class="grnDetailsreport">Next</a></div> -->
                                         <div class="text-center"><a id ="chassisProfileDetail" data-toggle="tab" class="grnDetailsreport">Next</a></div>
                                         <div><a class="grnDetailsreport2" style="display:none;"></a></div>
                                     </div><!-- End of chassis Block-->
@@ -867,30 +927,33 @@
                             
                         </div>
                         <!-- /.portlet -->
-
-                    
                         </div>
                             
                         </div>
                     </div>
                 </div>
-
         </div>
     </div>
     </div>
     <footer class="bajaj-footer"></footer>
     <button class="display-none openChassisTable" data-toggle="modal" data-target="#selectChassis">open Chassis</button>
 
-    <script src="js/jquery.min.js"></script>
+    <!--<script src="js/jquery.min.js"></script> -->
+    <script type="text/javascript" src="js/search/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/search/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="js/search/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="js/search/countries.js"></script>
+    <script type="text/javascript" src="js/search/shortages.js"></script>
+    <!--<script type="text/javascript" src="js/search/demo.js"></script>-->
     <!--<script type="text/javascript" src="js/plugins/jspdf.min.js"></script> -->
     <script type="text/javascript" src="js/plugins/jspdf.debug.js"></script>
     <script type="text/javascript" src="js/plugins/jspdf.plugin.autotable.js"></script>
     <script type="text/javascript" src="js/plugins/html2canvas.min.js"></script>
-    <script src="js/plugins/chosen.jquery.js" type="text/javascript"></script>
+    <script src="js/chosen.js" type="text/javascript"></script>
     <script src="js/plugins/prism.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.signaturepad.min.js"></script>
     <script src="css/json2.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
+    <!--<script src="js/jquery-ui.js"></script> -->
    
     
     <script src="js/plugins/jquery.timepicker.min.js"></script>
@@ -909,7 +972,7 @@
             <h4 class="logout-username">
                 TICL_Dealer
             </h4>
-            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
+            <p class="logoutMessage">Select "Logout" below if you are ready<br> to end your current session.</p>
             <ul class="list-inline">
                 <li>
                     <a class="btn btn-green" onclick="logout_user();">
@@ -1102,6 +1165,7 @@
 <footer class="bajaj-footer"><span>All rights reserved by Bajaj Auto Ltd.</span><br><span>Powered by <a href="//gladminds.co/#products" target="_blank">GladMinds Connect Platform</a></span><br><span>0.0.1</span></footer>
 
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/plugins/barcodescanner.js"></script>
     <script src="js/sqLite.js"></script>
     <script src="js/flex.js"></script>
     <script src="js/header.js"></script>
@@ -1115,11 +1179,13 @@
     <!--PURCHASE ORDER SCRIPT-->
     <script type="text/javascript" src="js/version.js"></script>
     <script type="text/javascript" src="js/grn_details.js"></script>
+    <script type="text/javascript" src="js/create_pdf.js"></script>
 <div id="loading">
   <div class="txt"></div>
   <div class="bg"></div>
 </div>
  <script type="text/javascript">
+    // console.log('chosen-select');
     // console.log('chosen-select');
     // var config = {
     //   '.chosen-select'           : {},
