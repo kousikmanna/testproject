@@ -267,6 +267,17 @@ var DBHandler = {
             });
         });
     },
+
+    chassisDetails: function(table, condition, callback){
+        
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT DISTINCT chassisno FROM " + table + " WHERE " + condition, [], function(tx, result) {
+                // tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
+                // console.log('getChassis Records result', result);
+                callback(result);
+            });
+        });
+    },
     
     getAllRecordsodDriver: function(table, callback){
         db.transaction(function(tx) {

@@ -509,7 +509,7 @@
                                             <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/>
                                             <label class="getChassisLabel">Search</label>
                                             <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i>
-                                            <button class="topcoat-button" id="scan">Start Scan</button>
+                                            <button class="topcoat-button" id="scan">Scan</button>
                                             <!-- <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i> -->
                                             <!--  -->
                                             <!--  <div class="damageBlock damageShortageClauses">
@@ -849,14 +849,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8">
+                                                <input type="text" id="driverName" name="driverName" placeholder="Enter driver name"/>
                                                 <label>Driver Signature</label>
                                                 <div class="sigPad">
-                                                   
-                                                   
+
                                                     <div class="sig sigWrapper">
                                                        
                                                         <canvas id="canvasId1" class="pad" width="180" height="150"></canvas>
-                                                        <input type="hidden" name="output" class="output" value="">
+                                                        <input type="hidden" id="signatureofDriver" name="output" class="output" value="">
                                                     </div>
                                                     <ul class="sigNav">
                                                         
@@ -892,7 +892,7 @@
                                                     <div class="sig sigWrapper">
                                                        <!--  <div class="typed"></div> -->
                                                         <canvas id="canvasId2" class="pad" width="180" height="150"></canvas>
-                                                        <input type="hidden" name="output" class="output" value="">
+                                                        <input type="hidden" id="managerSignature" name="output" class="output" value="">
                                                     </div>
                                                      <ul class="sigNav">
                                                         <!-- <li class="drawIt"><a href="#draw-it">Draw It</a></li> -->
@@ -916,8 +916,9 @@
                                                 </ul>
                                                <!--  <button type="submit">Save</button> -->
                                             </div>  
-                                            <button class="sendGRNbutton grnActionButton">Send GRN</button>
+                                            <button class="sendGRNbutton grnActionButton" style="display:none;">Send GRN</button>
                                             <button class="printButton grnActionButton" id="create_pdf">Print</button>
+                                            <button id="makePdf" style="display:none;"></button>
                                             <div style="display:none"><img id="logo" src="img/logo.png"></div>
                                         </div>
                                     </div>
@@ -999,6 +1000,24 @@
                 <div class="modal-footer confirm-log-btns">
                    <button type="button" id="yes" class="btn btn-success">Yes</button>
                    <button type="button" id="no" class="btn btn-success" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="send-grn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="logout-modal-img">
+                    <h4 class="modal-title" id="myModalLabel"> Are you sure you want to send GRN</h4>
+                </div>
+                <div class="modal-footer confirm-log-btns">
+                   <button type="button" id="yes_grn" class="btn btn-success">Yes</button>
+                   <button type="button" id="no_grn" class="btn btn-success" data-dismiss="modal">No</button>
                 </div>
             </div>
         </div>

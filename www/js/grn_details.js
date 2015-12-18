@@ -46,9 +46,10 @@ function onDeviceReady() {
     });
     $('#scan').on('click',function(){ 
         console.log('scanning');  
+        var chassisNumber;
+        var scanChassisArr=new Array();
         cordova.plugins.barcodeScanner.scan(
           function (result) {
-              console.log('result',result);
               console.log("We got a barcode\n" +
                     "Result: " + result.text + "\n" +
                     "Format: " + result.format + "\n" +
@@ -57,7 +58,36 @@ function onDeviceReady() {
                     "Result: " + result.text + "\n" +
                     "Format: " + result.format + "\n" +
                     "Cancelled: " + result.cancelled);
-               alert(result);
+              chassisNumber=result.text;
+              if(chassisNumber.length>2){
+                console.log('chassisNumber',chassisNumber);
+                scanChassisArr.push(chassisNumber);
+                var  serilizedScanChassisArr = JSON.stringify(scanChassisArr);
+                localStorage.setItem('scanChassisArray', serilizedScanChassisArr);
+                var invoiceArr=localStorage.getItem("invoiceArr");
+                console.log('invoiceArr',invoiceArr);
+                var invoiceArray = invoiceArr.split(',');
+                var arrayLen = invoiceArray.length;
+                console.log('invoiceArray',invoiceArray);
+                console.log('arrayLen',arrayLen);
+                var condition1='';
+                var condition2;
+                for(var i=0; i<arrayLen; i++){ 
+                    
+                    if(i<arrayLen-1){
+                        condition1=condition1+" invoiceno='"+invoiceArray[i]+"'"+" OR "; 
+                    }
+                    
+                    if(i===arrayLen-1){
+                        condition2=condition1+" invoiceno='"+invoiceArray[i]+"'";
+                    }
+
+                }
+                var condition=condition2 + " AND chassisno LIKE '"+chassisNumber+"%'";
+                console.log('condition',condition);
+                DBHandler.chassisDetails('grn_chassis', condition, chassisDetailsCallback);
+
+              }
           }, 
           function (error) {
               alert("Scanning failed: " + error);
@@ -250,7 +280,75 @@ function onDeviceReady() {
         
    })
     
-}
+}   
+
+
+    function chassisDetailsCallback(result){
+        var resLen = result.rows.length;
+        var chassisList = new Array();
+        for(var i=0; i<resLen; i++){
+            var chassisNumber=result.rows.item(i).chassisno;
+            chassisList.push(chassisNumber);
+        }
+        console.log('chassisList',chassisList);
+        var scanChassis = localStorage.getItem('scanChassisArray');
+        var scanChassisList = $.parseJSON(scanChassis);
+        var scanChassisNo=scanChassisList[0];
+        console.log('scanChassisList',scanChassisList);
+        var scanChassisNumber=_.intersection(scanChassisList, chassisList);
+        console.log('scanChassisNumber',scanChassisNumber);
+        var length=scanChassisNumber.length;
+        if(length>0){
+            var chassisNo=scanChassisNumber[0];
+            var len=chassisNo.length;
+            if(len>2){
+                chassisFunction(chassisNo);
+                // $('.select_for_chessisno').click();
+            }
+        }else{
+            alert('This chassis number is not belong to this trip number');
+            chassisFunction(scanChassisNo);
+        } 
+    }
+
+
+
+    function chassisFunction(chassisNo){
+        var chassisNumber=chassisNo;
+        console.log('chassisNumber',chassisNumber);
+        var arr = new Array();
+        // console.log('type1',typeof(arr));
+        arr = localStorage.getItem('selectedChassisList');
+        var chassisArr = $.parseJSON(arr);
+        // console.log('type2',typeof(chassisArr));
+        // console.log('chassisArr',chassisArr);
+        // $.each($("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td"),
+        //     function () {
+        // chassisNumber=$(this).text();
+        // console.log('chassisNumber',chassisNumber);
+        // chassisArr.push(chassisNumber);
+        // });
+        chassisArr.push(chassisNumber);
+        var  serilizedchassisArr = JSON.stringify(chassisArr);
+        console.log('serilizedchassisArr',serilizedchassisArr);
+        localStorage.setItem('selectedChassisList', serilizedchassisArr);
+
+        var damageList = new Array();
+        var  serilizedDamageList = JSON.stringify(damageList);
+        localStorage.setItem('selectedDamageList', serilizedDamageList);
+        
+        var shortageList = new Array();
+        var  serilizedShortageList = JSON.stringify(shortageList);
+        localStorage.setItem('selectedShortageList', serilizedShortageList);
+
+        //var chassisNumber=$("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td").text();
+        var chassisObj={
+            chassisno: chassisNumber
+        };
+        console.log('chassisObj',chassisObj);
+        var tpl = _.template($('#chassisTemplate').html());
+        $('#chassisDetail').append(tpl(chassisObj));
+    }
  //
  // $(document).ready(function(){
         
@@ -971,29 +1069,6 @@ function onDeviceReady() {
 
 
     });
-    
-    // $(document).on('click', '#scan', function(){ 
-    //     console.log('scanning');  
-    //     cordova.plugins.barcodeScanner.scan(
-    //       function (result) {
-    //           console.log('result',result);
-    //           console.log("We got a barcode\n" +
-    //                 "Result: " + result.text + "\n" +
-    //                 "Format: " + result.format + "\n" +
-    //                 "Cancelled: " + result.cancelled);
-    //           alert("We got a barcode\n" +
-    //                 "Result: " + result.text + "\n" +
-    //                 "Format: " + result.format + "\n" +
-    //                 "Cancelled: " + result.cancelled);
-    //            alert(result);
-    //       }, 
-    //       function (error) {
-    //           alert("Scanning failed: " + error);
-    //       }
-    //    );
-
-    // });
-
 
     function update_cnt () {
         var chassisno=localStorage.getItem('chassisno');
@@ -1145,15 +1220,70 @@ function grnObjectCallback(){
     $('#chassisId').click();
 }
 
-$(".sendGRNbutton").click(function(){
-    showLoading();
-    setTimeout(function(){
-        hideLoading();
-    },1000);
+// $(".sendGRNbutton").click(function(){
+//     showLoading();
+//     var driverName=$('#driverName').val();
+//     setTimeout(function(){
+//         hideLoading();
+//     },1000);
+//     localStorage.setItem('driverName',driverName);
+//     alert("Your GRN has been sent successfully");
+//     // window.location = "create_grn.html";
+// })
+$(document).on('click', '.printButton', function(){
+    var grnFlag=false;
+    localStorage.setItem('grnFlag',grnFlag);
+    var driverImg = document.getElementById('driverImage');
+    console.log('driverImg',driverImg);
+    var driverName=$('#driverName').val();
+    var signatureofDriver=$('#signatureofDriver').val();
+    var managerSignature=$('#managerSignature').val();
+    console.log('driverImg',driverImg.src);
+    console.log('driverImg.src.length',driverImg.src.length);
+    console.log('signatureofDriver',signatureofDriver);
+    console.log('signatureofDriver.length',signatureofDriver.length);
+    console.log('managerSignature',managerSignature);
+    console.log('managerSignature.length',managerSignature.length);
+    if(driverImg.src=='' || driverImg.src.length<=400){
+        grnFlag=false;
+        alert('Please take driver image');
+    }else if(driverName==''){
+        grnFlag=false;
+        alert('Please enter driver name');
+    }else if(signatureofDriver=='' || signatureofDriver.length<60){
+        grnFlag=false;
+        alert('Driver signature should be required');
+    }else if(managerSignature =='' || managerSignature.length<100){
+        grnFlag=false;
+        alert('Manager signature should be required');
+    }else{
+        grnFlag=true;
+        localStorage.setItem('grnFlag',grnFlag);
+        $('#makePdf').click();
+        $('.sendGRNbutton').show();
+    }
     
-    alert("Your GRN has been sent successfully");
+
+});
+$(document).on('click', '.sendGRNbutton', function(){
+    // showLoading();
+    var driverName=$('#driverName').val();
+    // setTimeout(function(){
+    //     hideLoading();
+    // },1000);
+    localStorage.setItem('driverName',driverName);
+    // alert("Your GRN has been sent successfully");
+    $('#send-grn').modal('show');
+});
+
+$(document).on('click', '#yes_grn', function(){
+    $('#send-grn').modal('hide');
     window.location = "create_grn.html";
-})
+});
+
+$(document).on('click', '#no_grn', function(){
+    $('#send-grn').modal('hide');
+});
 
 $(document).on('change', '.complaintType', function(){
     if(document.getElementById("shortage11").checked) {

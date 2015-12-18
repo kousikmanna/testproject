@@ -1,5 +1,6 @@
 
-$(document).on('click', '#create_pdf', function(){ 
+$(document).on('click', '#makePdf', function(){ 
+    var grnFlag=localStorage.getItem('grnFlag');
     var base64Data;
     console.log("generating pdf...");
     function encodeImage(src, callback) {
@@ -1116,10 +1117,12 @@ $(document).on('click', '#create_pdf', function(){
             // doc.text('0', 40, v4+20+25);
 
 
-            var grn=$('#grn1234').text()
+            var grn=$('#grn1234').text();
+            var driverName=$('#driverName').val();
             doc.line(10, 700, 568, 700);
             doc.text('Sign of Transporter', 10, 700+20);
             doc.text('Name', 10, 700+40);
+            doc.text('Driver Name '+driverName, 10, 700+60);
             doc.text('GRN NO. '+grn, 10, 700+80);
             doc.text('Sign of Dealer', 400, 700+20);
             doc.text('Stamp', 400, 700+40);
@@ -1150,7 +1153,7 @@ $(document).on('click', '#create_pdf', function(){
             else
             {
                 // We're screwed, blob constructor unsupported entirely
-                console.debug("Errore");
+                console.debug("Error");
             }
         }
         //
