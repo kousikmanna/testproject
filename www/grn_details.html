@@ -66,7 +66,7 @@
                                 <% for(var i=0; i<length; i++) {%>
                                     <tr>
                                         <td id="td100<%= i %>"><%= resultData[i] %></td>
-                                        <td><input type="checkbox" id="<%= i %>" name="select_for_chessisno[]" class="select_for_chessisno"/></td>
+                                        <td><input type="checkbox" id="select<%= resultData[i] %>" name="select_for_chessisno[]" class="select_for_chessisno"/></td>
                                     </tr>
                                <% }; %>
                             </tbody>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="modal-footer truckLayout_actionBlk">
-                    <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn add_employee_saveBtn actAddEmployee deleteChassisDetail" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn groupChassis" data-dismiss="modal">Ok</button>
                 </div>
             </div>
@@ -154,7 +154,7 @@
             <table class="invoiceTableTemp table table-striped table-bordered table-hover">
             <thead class="invoiceTable">
                 <th>S.N</th>
-                <th>shortage_brand_variant</th>
+                <th>shortage brand variant</th>
                 <th>Shortage Qty</th>
             </thead>
             <tbody>
@@ -419,6 +419,7 @@
                                                </select>
                                             </div>
                                         </div>
+                                        <!-- <div class="text-left alert alert-danger" id="alertMesage"></div> -->
                                         <div class="clearfix uploadDateTimeArea">
                                         <div>
                                             <input type="text" id="datepicker4" class="reporting_date sandbox-container" placeholder="Unloading Date" />
@@ -506,10 +507,24 @@
                                         <h4 class="chassis_heading">Get Chassis Number</h4>
                                         <!-- old -->
                                         <div class="getChassisNumber clearfix">
-                                            <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/>
-                                            <label class="getChassisLabel">Search</label>
-                                            <i class="fa fa-plus getChassisLabel plusStyle" id="chassisId"></i>
-                                            <button class="topcoat-button" id="scan">Scan</button>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 ">
+                                               <!--  <input type="text" id="chassisNumber" name="chassisNumber" class="col-md-9 col-sm-9 col-xs-9 searchChassis"/> -->
+                                                <input type="text" id="chassisNumber" name="chassisNumber" class="searchChassis"/>
+                                            </div>
+                                            
+                                            <!-- <label class="getChassisLabel">Search</label> -->
+                                             <div class="col-md-2 col-sm-8 col-xs-2">
+                                                  <i class="fa fa-plus plusStyle" id="chassisId"></i>
+                                                  <!-- <img src="img/ic_search.png" id="chassisId" /></i> -->
+                                             </div>
+                                           
+                                            <!-- <label class="getChassisLabel">Scan</label> -->
+                                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                                <i class="fa fa-qrcode fa-2x topcoat-button" id="scan"></i>
+                                            </div>
+                                            
+
+                                            <!-- <button class="topcoat-button" id="scan">Scan</button> -->
                                             <!-- <i class="getChassisLabel plusStyle" id="chassisId"><img src="img/ic_search.png" /></i> -->
                                             <!--  -->
                                             <!--  <div class="damageBlock damageShortageClauses">
@@ -1181,7 +1196,7 @@
 
 
 
-<footer class="bajaj-footer"><span>All rights reserved by Bajaj Auto Ltd.</span><br><span>Powered by <a href="//gladminds.co/#products" target="_blank">GladMinds Connect Platform</a></span><br><span>0.0.1</span></footer>
+<footer class="bajaj-footer"><span>All rights reserved by Bajaj Auto Ltd.</span><br><span>Powered by <a href="//gladminds.co/#products" target="_blank">GladMinds Connect Platform</a></span><br><span>0.0.2</span></footer>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/plugins/barcodescanner.js"></script>

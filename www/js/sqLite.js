@@ -220,6 +220,7 @@ var DBHandler = {
             });
         });
     },
+    
     getAllRecords: function(table, callback) {
         db.transaction(function(tx) {
             tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
@@ -467,6 +468,26 @@ var DBHandler = {
 
     },
 
+    deleteGrn_trip_invoice: function(trip_number, callback){
+
+        db.transaction(function(tx) {
+            tx.executeSql("DELETE FROM grn_trip WHERE tripno="+"'"+trip_number+"'", [], 
+                function(tx, result) {
+                    console.log('deleting grn_trip data');
+                   // callback(result); 
+                }, onError);
+        });
+
+        db.transaction(function(tx) {
+            tx.executeSql("DELETE FROM grn_invoice WHERE tripno="+"'"+trip_number+"'", [],
+                function(tx, result) {
+                    console.log('deleting grn_invoice data');
+                    callback(result);
+                }, onError);
+        });
+
+    },
+
     saveRecordsofGrn_trip: function(values, callback){
         
         var obj={
@@ -522,15 +543,11 @@ var DBHandler = {
 
     },
 
-
-
     saveAllRecordsofInvoice:function(values, callback) {
 
         console.log("values", values);
         //Date time fields in db
         var objValues = "";
-
-
         for (var i = 0; i < values.length; i++) {
             var obj = values[i];
             //Date time fields

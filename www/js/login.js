@@ -4,8 +4,13 @@ $(function() {
 
 function onDeviceReady() {
     $(".bajaj-footer").css("display", "block");
+    document.addEventListener("backbutton", function (e) {
+        e.preventDefault();
+    }, false );
     DBHandler.initDatabase();
 }
+
+
 
 function loginCheck() {
 
@@ -19,7 +24,6 @@ function loginCheck() {
     //     return false;
     // } else {
 
-
         var un = $('#Email').val();
         var pw = $('#Passwd').val();
         var formData = {
@@ -28,7 +32,6 @@ function loginCheck() {
             "password": pw
         };
         serilizedData = JSON.stringify(formData);
-
         console.log('formData',formData);
         console.log('serilizedData',serilizedData);
             //$(".errorDivClass").html("Error Message");
@@ -90,7 +93,7 @@ function loginCheck() {
                         fetchDatabase(log_data.email);
                     } else{
                         //alert(status);
-                        $("#error-msg-login-window").html(log_data.message);
+                        $("#error-msg-login-window").html('Invalid Credentials');
                         localStorage.setItem("isRegistered", false);
                         $("#error-msg-login-window").css("display", "block");
                     }
@@ -244,7 +247,10 @@ function dataSaved(data) {
         }
     });
 }
-
+function dataSave(data){
+    console.log('invoice data');
+    $('#some').attr('id');
+}
 function dataSaved2(data) {
     console.log('invoice data');
     // hideLoading();

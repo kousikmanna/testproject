@@ -153,7 +153,18 @@ function searchInvoiceCallback(result){
 }
 
 
-
+$(document).on('click', '#datepicker1', function(){
+    if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker1").val())) {
+        $("#datepicker1").attr("placeholder", "From Date").val('');
+        alert("Invalid date");
+    }
+});
+$(document).on('click', '#datepicker2', function(){
+    if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker2").val())) {
+        $("#datepicker2").attr("placeholder", "To Date").val('');
+        alert("Invalid date");
+    }
+});
 $(document).on('click', '.createGrnButton', function(){ 
     showLoading();
     if(localStorage.getItem('tripSelected')==false|| localStorage.getItem('tripSelected')=='false'){
@@ -171,58 +182,114 @@ $(document).on('click', '.createGrnButton', function(){
  function grn_trip_invoiceCallback(){
     console.log('grn_trip_invoiceCallback');
     localStorage.setItem('tripSelected', true);
-
-
 }    
 $(document).on('click', '.select_for_grn', function(){ 
     grnfunc();
 });
 
 $(document).on('click', '.select_for_trip', function(){
-    var test = $(this).attr('id'); 
-     // var tripCheckboxId= $("input[name='select_for_trip[]']:checked").attr('id');
-     console.log('tripCheckboxId',test);
-     var invoicenoClass='select_for_grn'+test;
-     var values = new Array();
-     var values2 = new Array();
-     var i=0;
-     // $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
-    $.each($("input[name='select_for_trip"+test+"[]']:checked").closest("td").siblings("td"),
-        function () {
-            if(i<3){
-                values.push($(this).text());
-            }
-            if(i===3){
-                values2.push($(this).text());
-                console.log('values2',values2);
-                localStorage.setItem('totalDistance',values2);
-                values.push($.now());
-            }
-             i=i+1;
-     });
+// $("#new").change(function() {
+    var ischecked= $(this).is(':checked');
+    if(ischecked){
+        var isTripSelect =localStorage.getItem('tripSelected');
+        if(isTripSelect == false || isTripSelect == "false"){
+             var test = $(this).attr('id'); 
+             console.log('tripCheckboxId',test);
+             var invoicenoClass='select_for_grn'+test;
+             var values = new Array();
+             var values2 = new Array();
+             var i=0;
+    
+            $.each($("input[name='select_for_trip"+test+"[]']:checked").closest("td").siblings("td"),
+                function () {
+                    if(i<3){
+                        values.push($(this).text());
+                    }
+                    if(i===3){
+                        values2.push($(this).text());
+                        console.log('values2',values2);
+                        localStorage.setItem('totalDistance',values2);
+                        values.push($.now());
+                    }
+                     i=i+1;
+            });
 
-     localStorage.setItem('trip_date',values[1]);
-     console.log('trip values',values);
-     $('.select_for_grn'+test).each(function(i, box){
-        $(box).prop('checked', true);
-     });
+            localStorage.setItem('trip_date',values[1]);
+            console.log('trip values',values);
+            localStorage.setItem('trip_number','0000'+values[0]);
+            $('.select_for_grn'+test).each(function(i, box){
+                $(box).prop('checked', true);
+            });
+            
+            $.each($("input[name='"+invoicenoClass+"[]']:checked").closest("td").siblings("td"),
+                function () {
+                values.push($(this).text());
+                console.log('values',values);
+            });
+            
+            console.log('values1',values);
+            DBHandler.saveRecordsofGrn_trip_invoice(values, grn_trip_invoiceCallback);
+        }else if(isTripSelect == true || isTripSelect == "true"){
+            $(this).attr('checked', false);
+            alert('You have already selected trip number');
+        }
+
+    }
+    if(!ischecked){
+        var trip_number=localStorage.getItem('trip_number');
+        DBHandler.deleteGrn_trip_invoice(trip_number, deleteGrn_trip_invoiceCallback);
+    }
+}); 
+function deleteGrn_trip_invoiceCallback(){
+     localStorage.setItem('tripSelected', false);
+     console.log('deleteGrn_trip_invoiceCallback clicking');
+}
+// $(document).on('click', '.select_for_trip', function(){
+//     var test = $(this).attr('id'); 
+//      // var tripCheckboxId= $("input[name='select_for_trip[]']:checked").attr('id');
+//      console.log('tripCheckboxId',test);
+//      var invoicenoClass='select_for_grn'+test;
+//      var values = new Array();
+//      var values2 = new Array();
+//      var i=0;
+//      // $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
+//     $.each($("input[name='select_for_trip"+test+"[]']:checked").closest("td").siblings("td"),
+//         function () {
+//             if(i<3){
+//                 values.push($(this).text());
+//             }
+//             if(i===3){
+//                 values2.push($(this).text());
+//                 console.log('values2',values2);
+//                 localStorage.setItem('totalDistance',values2);
+//                 values.push($.now());
+//             }
+//              i=i+1;
+//      });
+
+//      localStorage.setItem('trip_date',values[1]);
+//      console.log('trip values',values);
+//      $('.select_for_grn'+test).each(function(i, box){
+//         $(box).prop('checked', true);
+//      });
     
      
-        $.each($("input[name='"+invoicenoClass+"[]']:checked").closest("td").siblings("td"),
-            function () {
-            values.push($(this).text());
-            console.log('values',values);
-        });
+//         $.each($("input[name='"+invoicenoClass+"[]']:checked").closest("td").siblings("td"),
+//             function () {
+//             values.push($(this).text());
+//             console.log('values',values);
+//         });
        
     
 
-    console.log('values1',values);
-    DBHandler.saveRecordsofGrn_trip_invoice(values, grn_trip_invoiceCallback);
-     // $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
-//         function () {
-//             values.push($(this).text());
-//     });
-});
+//     console.log('values1',values);
+//     DBHandler.saveRecordsofGrn_trip_invoice(values, grn_trip_invoiceCallback);
+//      // $.each($("input[name='select_for_trip[]']:checked").closest("td").siblings("td"),
+// //         function () {
+// //             values.push($(this).text());
+// //     });
+// });
+
 function grn_trip_Callback(){
     console.log('grn_trip_Callback');
 }

@@ -26,7 +26,8 @@ function onDeviceReady() {
     var  serilizedalreadySelectedChassisList = JSON.stringify(alreadySelectedChassisList);
     localStorage.setItem('selectedChassisList', serilizedalreadySelectedChassisList);
 
-
+    localStorage.setItem('isDamageSelected', false);
+    localStorage.setItem('isShortageSelected', false);
     var c2 = document.getElementById("canvasId2");
     var ctx2 = c2.getContext("2d");
     ctx2.clearRect(0, 0, c2.width, c2.height);
@@ -216,12 +217,17 @@ function onDeviceReady() {
                                             var damageCause=result.rows.item(0).damage_cause;
                                             var data = { resultData:result.rows, length: resLen};
                                             console.log('data',data);
-                                            var tpl = _.template($('#damageDetailTemplate').html());
-                                            $('#damageDetail').append(tpl(data));
-
-                                            var tpl = _.template($('#shortageDetailTemplate').html());
-                                            $('#shortageDetail').append(tpl(data));
-
+                                            var isDamageSelect=  localStorage.getItem('isDamageSelected');
+                                            var isShortageSelect= localStorage.getItem('isShortageSelected');
+                                            if(isDamageSelect==true || isDamageSelect=="true"){
+                                                var tpl = _.template($('#damageDetailTemplate').html());
+                                                $('#damageDetail').append(tpl(data));
+                                            }
+                                            if(isShortageSelect == true || isShortageSelect == "true"){
+                                                var tpl = _.template($('#shortageDetailTemplate').html());
+                                                $('#shortageDetail').append(tpl(data));
+                                            }
+                                           
                                           
                                             DBHandler.getAllRecordsodDriver('grn_detail', grndetailCallBack);      
                                             var driverDetail='';
@@ -306,7 +312,7 @@ function onDeviceReady() {
                 // $('.select_for_chessisno').click();
             }
         }else{
-            alert('This chassis number is not belong to this trip number');
+            // alert('This chassis number is not belong to this trip number');
             chassisFunction(scanChassisNo);
         } 
     }
@@ -361,6 +367,10 @@ function onDeviceReady() {
         var short_click=1;
         var dam_click=1;
         $(document).on('click', '.damage_btn', function(e){
+            var someId=$(this).attr('id');
+            var someArr =someId.split('_');
+            var damageChassisId=someArr[1];
+            localStorage.setItem('isDamageSelected', true);
             console.log('damage_btn click');
             var damage_btnId=$(this).attr('id');
             var arr=damage_btnId.split('_');
@@ -410,7 +420,7 @@ function onDeviceReady() {
                     chassisArray.push(chassisObj);
                 }else if(type=="Shortage"){
                     chassisObj.type=type.toLowerCase();
-                    chassisObj.shortage_brand_variant=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_4 option:selected').text();
+                    chassisObj.shortage_brand_variant=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_4').val();
                     chassisObj.shortage_part=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_5').val();
                     chassisObj.quantity=$('#'+blockId+' .damageShortageClauses').last().find('.shortageDesc').val();
                 
@@ -440,33 +450,33 @@ function onDeviceReady() {
 
                         if(chassisArray[i].damage_location==null){
                              validationFlag=false;
-                             alert("Please fill the damage_location");
+                             alert("Please fill the damage_location of chassis number " + damageChassisId);
                         } else if(chassisArray[i].damage_detail==""){
                              validationFlag=false;
-                             alert("Please fill the damage_detail");
+                             alert("Please fill the damage_detail of chassis number " + damageChassisId);
 
                         } else if(chassisArray[i].damage_type==""){
                              validationFlag=false;
-                             alert("Please fill the damage_type");
+                             alert("Please fill the damage_type of chassis number " + damageChassisId);
                         } else if(chassisArray[i].damage_cause=="Probable cause of damage"){
                              validationFlag=false;
-                             alert("Please fill the damage_cause");
+                             alert("Please fill the damage_cause of chassis number " + damageChassisId);
                         } else if(chassisArray[i].attachment=="[]"){
                              validationFlag=false;
-                             alert("Please fill the attachment");
+                             alert("Please fill the attachment of chassis number " + damageChassisId);
                         } else{
                              validationFlag=true;
                         }
                     }else if(chassisArray[i].type=="shortage"){
-                        if(chassisArray[i].shortage_brand_variant=="Select Shortage"){
+                        if(chassisArray[i].shortage_brand_variant==""){
                             validationFlag=false;
-                            alert("Please fill the shortage_brand_variant");
+                            alert("Please fill the shortage_brand_variant of chassis number " + damageChassisId);
                         } else if(chassisArray[i].shortage_part==""){
                             validationFlag=false;
-                            alert("Please fill the shortage_part");
+                            alert("Please fill the shortage_part of chassis number " + damageChassisId);
                         } else if(chassisArray[i].quantity==""){
                             validationFlag=false;
-                            alert("Please fill the quantity");
+                            alert("Please fill the quantity of chassis number " + damageChassisId);
 
                         } else{
                             validationFlag=true;
@@ -619,6 +629,10 @@ function onDeviceReady() {
         });
 
         $(document).on('click', '.shortage_btn', function(e){
+            var someId=$(this).attr('id');
+            var someArr =someId.split('_');
+            var shortageChassisId=someArr[1];
+            localStorage.setItem('isShortageSelected', true);
             console.log('shortage_btn click');
             var damage_btnId=$(this).attr('id');
             var arr=damage_btnId.split('_');
@@ -638,7 +652,7 @@ function onDeviceReady() {
                 if(type=="Damage"){
                     chassisObj.type=type.toLowerCase();
                     chassisObj.damage_location=localStorage.getItem('truckLayout'+chassisNumber);
-                    chassisObj.damage_detail=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_1 option:selected').text();
+                    chassisObj.damage_detail=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_1').val();
                     chassisObj.damage_type=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_2').val();
                     chassisObj.damage_cause=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_3 option:selected').text();
                     // var imageID=$('#'+tableId+' .damageShortageClauses').find('.attchmentBlock img').eq(j).attr('id');
@@ -663,7 +677,7 @@ function onDeviceReady() {
                     chassisArray.push(chassisObj);
                 }else if(type=="Shortage"){
                     chassisObj.type=type.toLowerCase();
-                    chassisObj.shortage_brand_variant=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_4 option:selected').text();
+                    chassisObj.shortage_brand_variant=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_4').val();
                     chassisObj.shortage_part=$('#'+blockId+' .damageShortageClauses').last().find('.damageDesc_5').val();
                     chassisObj.quantity=$('#'+blockId+' .damageShortageClauses').last().find('.shortageDesc').val();
                 
@@ -693,33 +707,33 @@ function onDeviceReady() {
 
                         if(chassisArray[i].damage_location==null){
                              validationFlag=false;
-                             alert("Please fill the damage_location");
+                             alert("Please fill the damage_location of chassis number "+shortageChassisId);
                         } else if(chassisArray[i].damage_detail==""){
                              validationFlag=false;
-                             alert("Please fill the damage_detail");
+                             alert("Please fill the damage_detail of chassis number "+shortageChassisId);
 
                         } else if(chassisArray[i].damage_type==""){
                              validationFlag=false;
-                             alert("Please fill the damage_type");
+                             alert("Please fill the damage_type of chassis number "+shortageChassisId);
                         } else if(chassisArray[i].damage_cause=="Probable cause of damage"){
                              validationFlag=false;
-                             alert("Please fill the damage_cause");
+                             alert("Please fill the damage_cause of chassis number "+shortageChassisId);
                         } else if(chassisArray[i].attachment=="[]"){
                              validationFlag=false;
-                             alert("Please fill the attachment");
+                             alert("Please fill the attachment of chassis number "+shortageChassisId);
                         } else{
                              validationFlag=true;
                         }
                     }else if(chassisArray[i].type=="shortage"){
-                        if(chassisArray[i].shortage_brand_variant=="Select Shortage"){
+                        if(chassisArray[i].shortage_brand_variant==""){
                             validationFlag=false;
-                            alert("Please fill the shortage_brand_variant");
+                            alert("Please fill the shortage_brand_variant of chassis number "+shortageChassisId);
                         } else if(chassisArray[i].shortage_part==""){
                             validationFlag=false;
-                            alert("Please fill the shortage_part");
+                            alert("Please fill the shortage_part of chassis number "+shortageChassisId);
                         } else if(chassisArray[i].quantity==""){
                             validationFlag=false;
-                            alert("Please fill the quantity");
+                            alert("Please fill the quantity of chassis number "+shortageChassisId);
 
                         } else{
                             validationFlag=true;
@@ -928,7 +942,7 @@ function onDeviceReady() {
                     <input type="text" name="shortage" class="autocomplete-ajax-s-x" disabled="disabled" style="width:100%; color: #CCC; background: transparent; z-index: 1; height:1px; display:none"/>\
                     <div id="selction-ajax-s" style="width:100%; margin-top:10px; height:1px; display:none; background: transparent;"></div>\
                     <input type="hidden" class="damageDesc_5" value="" readonly />\
-                    <input type="text" id="" class="shortageDesc" name="quentity" class="" placeholder="Enter quantity"/>\
+                    <input type="number" id="" class="shortageDesc" name="quentity" class="" placeholder="Enter quantity"/>\
                     <div class="attchmentBlock" data-title="Attachement">\
                       <h4 class="getAttachment" id="'+generateFlagNumber()+'">Attachments <span class="font-10">Vehicle Level</span><i class="fa fa-plus getChassisLabel plusStyle"></i></h4>\
                     </div>\
@@ -941,6 +955,7 @@ function onDeviceReady() {
 
 
         $('.short_delete_row').unbind().bind('click', function(evt) {
+            localStorage.setItem('isShortageSelected', false);
             shortage=localStorage.getItem('shortage');
             shortage--;
             localStorage.setItem('shortage',shortage);
@@ -980,6 +995,7 @@ function onDeviceReady() {
 
         // $('.dam_delete_row').unbind().bind('click', function(evt) {
           $('.dam_delete_row').unbind().bind('click', function(evt) {
+            localStorage.setItem('isDamageSelected', false);
             damage=localStorage.getItem('damage');
             damage--;
             localStorage.setItem('damage',damage);
@@ -1154,46 +1170,70 @@ $(document).on('click', '#grndetail', function(){
  
 });
 
+function dateFunc(date){
+   var parts = date.split("/");
+   var dateFormat = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+   return dateFormat;
+   // return dateFormat.getTime();
+}
+
 $(document).on('change', '#datepicker3', function(){
     $("#NumberofDelay").empty();
-    if($("#datepicker3").val().length >= 8) {
-    $("#reasonForDelay").empty();  
-    var d = new Date(localStorage.getItem('trip_date'));
-    var difference= ($("#datepicker3").datepicker("getDate") - d)/(1000 * 60 * 60 * 24);
-    if(difference < 0 || difference ==0 ){
-        alert('Reporting date should be greather than trip date');
+    if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker3").val())) {
         $("#datepicker3").attr("placeholder", "Reporting Date").val('');
-    }else{
-        var numberOfdayTravel=Math.ceil(localStorage.getItem('totalDistance')/localStorage.getItem('travelPerDay'));
-        console.log('numberOfdayTravel',numberOfdayTravel);
-        // var shouldReachDate = new Date(d + numberOfdayTravel*1000*60*60*24);
-        var shouldReachDate = new Date(d.getFullYear(),d.getMonth(),d.getDate()+parseInt(numberOfdayTravel));
-        console.log('shouldReachDate',shouldReachDate);
-        var difference2 = ($("#datepicker3").datepicker("getDate") - shouldReachDate)/(1000 * 60 * 60 * 24);
-        console.log('difference2',difference2);
-        if(difference2 ==0){
-            var option='<option selected="selected">No Delay</option>';
-            $("#reasonForDelay").append(option);
-             var delay='Approximate Delay : <span style="color:green"> No Delay</span>';
-             $("#NumberofDelay").append(delay);
-
-        }else if (difference2 > 0){
-             var optionList='<option>Problem on road/jam/accident</option><option>Fault in Truck</option><option>Accident with Truck</option><option>Late release of truck due to accessories</option><option>Late release of truck due to late invoice generation</option><option>Late release of truck due to late loading/manpower issue</option><option>Truck detained by RTO/Police</option><option>Negligence by driver</option>';
-             $("#reasonForDelay").append(optionList);
-             var delay='Approximate Delay : <span style="color:red">'+difference2+' Days</span>';
-             $("#NumberofDelay").append(delay);
-
-             
-        }
-
+        alert("Invalid date");
     }
+    if($("#datepicker3").val().length >= 8) {
+        $("#reasonForDelay").empty();  
+        var date = localStorage.getItem('trip_date');
+        var d2=dateFunc(date);
+        console.log('datepicker3',$("#datepicker3").datepicker("getDate"));
+        var difference= ($("#datepicker3").datepicker("getDate") - d2)/(1000 * 60 * 60 * 24);
+        if(difference < 0 || difference ==0 ){
+            alert('Reporting date should be greather than trip date');
+            $("#datepicker3").attr("placeholder", "Reporting Date").val('');
+        }else{
+            var numberOfdayTravel=Math.ceil(localStorage.getItem('totalDistance')/localStorage.getItem('travelPerDay'));
+            console.log('numberOfdayTravel',numberOfdayTravel);
+            // var shouldReachDate = new Date(d + numberOfdayTravel*1000*60*60*24);
+            var shouldReachDate = new Date(d2.getFullYear(),d2.getMonth(),d2.getDate()+parseInt(numberOfdayTravel));
+            console.log('shouldReachDate',shouldReachDate);
+            var difference2 = ($("#datepicker3").datepicker("getDate") - shouldReachDate)/(1000 * 60 * 60 * 24);
+            console.log('difference2',difference2);
+            if(difference2 ==0){
+                var option='<option selected="selected">No Delay</option>';
+                $("#reasonForDelay").append(option);
+                 var delay='Approximate Delay : <span style="color:green"> No Delay</span>';
+                 $("#NumberofDelay").append(delay);
+
+            }else if (difference2 > 0){
+                 var optionList='<option>Problem on road/jam/accident</option><option>Fault in Truck</option><option>Accident with Truck</option><option>Late release of truck due to accessories</option><option>Late release of truck due to late invoice generation</option><option>Late release of truck due to late loading/manpower issue</option><option>Truck detained by RTO/Police</option><option>Negligence by driver</option>';
+                 $("#reasonForDelay").append(optionList);
+                 var delay='Approximate Delay : <span style="color:red">'+difference2+' Days</span>';
+                 $("#NumberofDelay").append(delay);
+
+                 
+            }
+
+        }
    
     }  
 })
 
 $(document).on('change', '#datepicker4', function(){
     // $("#NumberofDelay").empty();
-    if($("#datepicker3").val().length >= 8 && $("#datepicker4").val().length >= 8) {
+    console.log('datepicker4 is clicking');
+    
+    if($("#datepicker3").val()==''){
+        $("#datepicker4").attr("placeholder", "Unloading Date").val('');
+        $("#datepicker3").addClass('reportingText');
+        $("#datepicker3").attr("placeholder", "Select reporting date first").val('');
+        // alert('Please select the reporting date first');
+    } else if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker4").val())) {
+    $("#datepicker4").attr("placeholder", "Unloading Date").val('');
+    alert("Invalid date");
+    // event.preventDefault();
+    } else if ($("#datepicker3").val().length >= 8 && $("#datepicker4").val().length >= 8) {
     var difference= ($("#datepicker4").datepicker("getDate") - $("#datepicker3").datepicker("getDate"))/(1000 * 60 * 60 * 24);
     console.log('difference',difference);
         if(difference < 0){
@@ -1298,6 +1338,7 @@ $(document).on('change', '.complaintType', function(){
 function generateGrnNumber(){
     return ('00000000'+Math.ceil(Math.random()*100000000));
 }
+
 // chassis 
 $(document).on('click', '#chassisId', function(){ 
     // grnfunc();
@@ -1357,7 +1398,7 @@ $(document).on('click', '#chassisId', function(){
                 }else if(type=="Shortage"){
                     chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
                     chassisObj.type=type.toLowerCase();
-                    chassisObj.shortage_brand_variant=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_4 option:selected').text();
+                    chassisObj.shortage_brand_variant=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_4').val();
                     chassisObj.shortage_part=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_5').val();
                     chassisObj.quantity=$('#'+tableId+' .damageShortageClauses').eq(j).find('.shortageDesc').val();
                     
@@ -1405,7 +1446,7 @@ $(document).on('click', '#chassisId', function(){
                      validationFlag1=true;
                 }
             }else if(chassisArray[i].type=="shortage"){
-                if(chassisArray[i].shortage_brand_variant=="Select Shortage"){
+                if(chassisArray[i].shortage_brand_variant==""){
                     validationFlag1=false;
                     alert("Please fill the shortage_brand_variant");
                 } else if(chassisArray[i].shortage_part==""){
@@ -1449,7 +1490,7 @@ $(document).on('click', '#chassisId', function(){
             }
 
             console.log('condition2',condition2);
-            var condition=condition2 + " AND chassisno LIKE '"+chassisNumber+"%'";
+            var condition="("+condition2+")"+ "AND chassisno LIKE '"+chassisNumber+"%'";
             console.log('condition',condition);
             DBHandler.getChassisRecords('grn_chassis', condition, getChassisRecordsCallback);
         }
@@ -1486,52 +1527,142 @@ function getChassisRecordsCallback(result){
     $(".openChassisTable").click();
     
 }
+$(document).on('click', '.select_for_chessisno', function(){
+// $("input:checkbox").change(function() {
+  var chassisArr4=localStorage.getItem('selectedCheckboxChassisArr');
+  var checkboxChassisArr;
+  if(chassisArr4==null){
+     checkboxChassisArr = new Array();
+  }else{
+     checkboxChassisArr = $.parseJSON(chassisArr4);
+  }
+  console.log('chassisArr4',chassisArr4);
+  console.log('checkboxChassisArr',checkboxChassisArr);
+  // var checkboxChassisArr=new Array();
+  var chNumber;
+  var ischecked= $(this).is(':checked');
+  if(ischecked){
+      // alert('checkd ' + $(this).val());
+       // $("#chassisDetail").empty();
+        var chassisNumber;
+        var arr = new Array();
+        console.log('type1',typeof(arr));
+        arr = localStorage.getItem('selectedChassisList');
+        var chassisArr = $.parseJSON(arr);
+        console.log('type2',typeof(chassisArr));
+        console.log('chassisArr',chassisArr);
+        $.each($("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td"),
+            function () {
+        chassisNumber=$(this).text();
+        console.log('chassisNumber',chassisNumber);
+        chassisArr.push(chassisNumber);
+        chNumber='abct'+chassisNumber;
+        checkboxChassisArr.push(chNumber);
+        console.log('checkboxChassisArr',checkboxChassisArr);
+        var  serilizedcheckboxChassisArr = JSON.stringify(checkboxChassisArr);
+        console.log('serilizedcheckboxChassisArr',serilizedcheckboxChassisArr);
+        localStorage.setItem('selectedCheckboxChassisArr', serilizedcheckboxChassisArr);
 
-$(document).on('click', '.select_for_chessisno', function(){ 
-    chessisfunc();
+        });
+        var  serilizedchassisArr = JSON.stringify(chassisArr);
+        console.log('serilizedchassisArr',serilizedchassisArr);
+        localStorage.setItem('temporarySelectedChassisList', serilizedchassisArr);
+
+        var damageList = new Array();
+        var  serilizedDamageList = JSON.stringify(damageList);
+        localStorage.setItem('selectedDamageList', serilizedDamageList);
+        
+        var shortageList = new Array();
+        var  serilizedShortageList = JSON.stringify(shortageList);
+        localStorage.setItem('selectedShortageList', serilizedShortageList);
+
+        //var chassisNumber=$("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td").text();
+        var chassisObj={
+            chassisno: chassisNumber
+        };
+        console.log('chassisObj',chassisObj);
+        var tpl = _.template($('#chassisTemplate').html());
+        $('#chassisDetail').append(tpl(chassisObj));
+  }else if(!ischecked){
+      $(this).attr('checked', false);
+      var checkId= $(this).attr('id');
+      var arr=checkId.split('c');
+      var removeId=arr[1];
+      localStorage.setItem('chassisRemoveId', removeId);
+      $('#rc_yes').click();
+      // alert('uncheckd ' + $(this).val());
+  }
 });
+$(document).on('click','.chassisListClose', function(){
+    $('.deleteChassisDetail').click();
+});
+// $(document).on('click', '.select_for_chessisno', function(){ 
+//     chessisfunc();
+// });
 
-function chessisfunc() {
-     // $("#chassisDetail").empty();
-    var chassisNumber;
-    var arr = new Array();
-    console.log('type1',typeof(arr));
-    arr = localStorage.getItem('selectedChassisList');
-    var chassisArr = $.parseJSON(arr);
-    console.log('type2',typeof(chassisArr));
-    console.log('chassisArr',chassisArr);
-    $.each($("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td"),
-        function () {
-    chassisNumber=$(this).text();
-    console.log('chassisNumber',chassisNumber);
-    chassisArr.push(chassisNumber);
-    });
+// function chessisfunc() {
+//      // $("#chassisDetail").empty();
+//     var chassisNumber;
+//     var arr = new Array();
+//     console.log('type1',typeof(arr));
+//     arr = localStorage.getItem('selectedChassisList');
+//     var chassisArr = $.parseJSON(arr);
+//     console.log('type2',typeof(chassisArr));
+//     console.log('chassisArr',chassisArr);
+//     $.each($("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td"),
+//         function () {
+//     chassisNumber=$(this).text();
+//     console.log('chassisNumber',chassisNumber);
+//     chassisArr.push(chassisNumber);
+//     });
+//     var  serilizedchassisArr = JSON.stringify(chassisArr);
+//     console.log('serilizedchassisArr',serilizedchassisArr);
+//     localStorage.setItem('selectedChassisList', serilizedchassisArr);
+
+//     var damageList = new Array();
+//     var  serilizedDamageList = JSON.stringify(damageList);
+//     localStorage.setItem('selectedDamageList', serilizedDamageList);
+    
+//     var shortageList = new Array();
+//     var  serilizedShortageList = JSON.stringify(shortageList);
+//     localStorage.setItem('selectedShortageList', serilizedShortageList);
+
+//     //var chassisNumber=$("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td").text();
+//     var chassisObj={
+//         chassisno: chassisNumber
+//     };
+//     console.log('chassisObj',chassisObj);
+//     var tpl = _.template($('#chassisTemplate').html());
+//     $('#chassisDetail').append(tpl(chassisObj));
+// }
+$(document).on('click','.deleteChassisDetail', function(){
+    var chassisList=localStorage.getItem('selectedCheckboxChassisArr');
+    var chassisArr = $.parseJSON(chassisList);
+    console.log(chassisList);
+    console.log(chassisArr);
+    if(chassisList!=null){
+        var len=chassisArr.length;
+        if(len>0){
+            for(var i=0; i<len; i++){
+                var chassisNumber=chassisArr[i];
+                $( "#"+chassisNumber ).remove();
+            }
+            localStorage.removeItem('selectedCheckboxChassisArr');
+        }
+
+    }
+});
+$(document).on('click', '.groupChassis', function(){ 
+    console.log('clicking groupChassis');
+    var chassisList=localStorage.getItem('temporarySelectedChassisList');
+    var chassisArr = $.parseJSON(chassisList);
     var  serilizedchassisArr = JSON.stringify(chassisArr);
     console.log('serilizedchassisArr',serilizedchassisArr);
     localStorage.setItem('selectedChassisList', serilizedchassisArr);
-
-    var damageList = new Array();
-    var  serilizedDamageList = JSON.stringify(damageList);
-    localStorage.setItem('selectedDamageList', serilizedDamageList);
-    
-    var shortageList = new Array();
-    var  serilizedShortageList = JSON.stringify(shortageList);
-    localStorage.setItem('selectedShortageList', serilizedShortageList);
-
-    //var chassisNumber=$("input[name='select_for_chessisno[]']:checked").closest("td").siblings("td").text();
-    var chassisObj={
-        chassisno: chassisNumber
-    };
-    console.log('chassisObj',chassisObj);
-    var tpl = _.template($('#chassisTemplate').html());
-    $('#chassisDetail').append(tpl(chassisObj));
-}
-
-$(document).on('click', '.groupChassis', function(){ 
-    console.log('clicking groupChassis');
     showLoading();
     setTimeout(function(){
         $(".accordian_parent").show();
+        localStorage.removeItem('selectedCheckboxChassisArr');
         hideLoading();
     },1000)
 });
@@ -1590,7 +1721,7 @@ $(document).on('click', '#chassisProfileDetail', function(){
             }else if(type=="Shortage"){
                 chassisObj.chassisno=$('#chassisDetail').find('.acc_parent_block').eq(i).text();
                 chassisObj.type=type.toLowerCase();
-                chassisObj.shortage_brand_variant=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_4 option:selected').text();
+                chassisObj.shortage_brand_variant=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_4').val();
                 chassisObj.shortage_part=$('#'+tableId+' .damageShortageClauses').eq(j).find('.damageDesc_5').val();
                 chassisObj.quantity=$('#'+tableId+' .damageShortageClauses').eq(j).find('.shortageDesc').val();
                 // var imageID=$('#'+tableId+' .damageShortageClauses').find('.attchmentBlock img').eq(j).attr('id');
@@ -1655,7 +1786,7 @@ $(document).on('click', '#chassisProfileDetail', function(){
            // }else{
            //      validationFlag1=true;
            // }
-            if(chassisArray[i].shortage_brand_variant=="Select Shortage"){
+            if(chassisArray[i].shortage_brand_variant==""){
                 validationFlag1=false;
                 alert("Please fill the shortage_brand_variant");
             } else if(chassisArray[i].shortage_part==""){
@@ -1870,7 +2001,7 @@ $(document).on('change', '.damageDesc_1', function(){
             if(damageVal == damageArr[j]){
                 verifyFlag=false;
                 $('#'+damageId).attr("placeholder", "Select Damage").val('');
-                alert('This is alresdy selected, Please select another.');
+                alert('This is already selected, Please select another.');
             }
             if(j==parseInt(damageArrLength)-1 && verifyFlag==true){
                 verifyFlag6=true;
@@ -2014,8 +2145,7 @@ $(document).on('change', '.damageDesc_4', function(){
                 }
             });
          }
-         
-
+        
     }, 1000);
 
 });
