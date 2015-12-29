@@ -75,7 +75,7 @@
                 </div>
                 <div class="modal-footer truckLayout_actionBlk">
                     <button type="button" class="btn add_employee_saveBtn actAddEmployee deleteChassisDetail" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn groupChassis" data-dismiss="modal">Ok</button>
+                    <button type="button" class="btn groupChassis">Ok</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
                         <div class="damage_detail clearfix">
                             <div class='button'><input id="<%= chassisno %>" type="button" class="remove_all btn btn-warning" value="Remove All"/>
                             </div>
-                            <h4 id="1234truckLayout<%= chassisno %>">Damage Location<i class="fa fa-plus getChassisLabel plusStyle truckLayoutTable" data-toggle="modal" id="truckLayout<%= chassisno %>" data-target="#damageLocation"></i>
+                            <h4 id="1234truckLayout<%= chassisno %>" class="locationDetail" style="display:none;">Damage Location<i class="fa fa-plus getChassisLabel plusStyle truckLayoutTable" data-toggle="modal" id="truckLayout<%= chassisno %>" data-target="#damageLocation"></i>
                             </h4>
                             <div class="tableDetail">
                                 <div id="tableCreate<%= chassisno %>" class="damageShortageDetail">
@@ -174,7 +174,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close deleteDamageLocation" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Damage Location in Truck</h4>
                 </div>
                 <div class="modal-body clearfix">
@@ -225,8 +225,8 @@
                 
                 </div>
                 <div class="modal-footer truckLayout_actionBlk">
-                    <button type="button" class="btn add_employee_saveBtn actAddEmployee" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn actAddEmployee" data-dismiss="modal">Ok</button>
+                    <button type="button" class="btn add_employee_saveBtn actAddEmployee deleteDamageLocation" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn actAddEmployee addDamageLocation">Ok</button>
                 </div>
             </div>
 
@@ -515,7 +515,7 @@
                                             <!-- <label class="getChassisLabel">Search</label> -->
                                              <div class="col-md-2 col-sm-8 col-xs-2">
                                                   <i class="fa fa-plus plusStyle" id="chassisId"></i>
-                                                  <!-- <img src="img/ic_search.png" id="chassisId" /></i> -->
+                                                 <!--  <img src="img/ic_search.png" id="chassisId" /></i> -->
                                              </div>
                                            
                                             <!-- <label class="getChassisLabel">Scan</label> -->
@@ -931,7 +931,7 @@
                                                 </ul>
                                                <!--  <button type="submit">Save</button> -->
                                             </div>  
-                                            <button class="sendGRNbutton grnActionButton" style="display:none;">Send GRN</button>
+                                            <button class="sendGRNbutton grnActionButton save_sync" style="display:none;">Send GRN</button>
                                             <button class="printButton grnActionButton" id="create_pdf">Print</button>
                                             <button id="makePdf" style="display:none;"></button>
                                             <div style="display:none"><img id="logo" src="img/logo.png"></div>

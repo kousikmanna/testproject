@@ -69,6 +69,7 @@ var DBHandler = {
             //     }, onError);
             // });
             tx.executeSql('CREATE TABLE IF NOT EXISTS dealer ("dealer_name" VARCHAR, "dealer_code" VARCHAR, "pdi_manager" VARCHAR)');    
+            tx.executeSql('CREATE TABLE IF NOT EXISTS driver ("driver_name" VARCHAR, "driver_image" VARCHAR, "driver_signature" VARCHAR, "pdiManager_signature" VARCHAR)');
             console.log('dealer table');
             tx.executeSql('CREATE TABLE IF NOT EXISTS trip ("tripno" VARCHAR PRIMARY KEY, "created_date" DATETIME, "modified_date"  DATETIME, "total_distance" INTEGER, "truckno" VARCHAR)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS invoice ("invoiceno" VARCHAR PRIMARY KEY, "plant" VARCHAR, "created_date" DATETIME, "modified_date"  DATETIME, "billqty" DOUBLE, "tripno" VARCHAR)');
@@ -247,6 +248,15 @@ var DBHandler = {
             });
         });
     },
+    
+    getgrnDetail: function(table, callback){
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM " + table + " ORDER BY flag DESC LIMIT 1", [], function(tx, result) {
+                callback(result);
+            });
+        });
+
+    },
 
     getAllRecordsofChassis: function(table, flag, callback){
 
@@ -280,7 +290,7 @@ var DBHandler = {
         });
     },
     
-    getAllRecordsodDriver: function(table, callback){
+    getAllRecordsofDriver: function(table, callback){
         db.transaction(function(tx) {
 
             db.transaction(function(tx) {
@@ -291,6 +301,38 @@ var DBHandler = {
             });
         });
     },
+    saveDriverDetail: function(values, callback){
+        var obj={
+            driver_name: values.driver_name,
+            driver_image: values.driver_image,
+            driver_signature: values.driver_signature,
+            pdiManager_signature: values.pdiManager_signature
+        };
+       
+        var objValues = getDriverValues(obj);
+        var driverColumns = "('driver_name', 'driver_image', 'driver_signature', 'pdiManager_signature')";
+        
+        db.transaction(function(tx) {
+            tx.executeSql("INSERT OR REPLACE INTO driver " + driverColumns + " VALUES " + objValues,
+                objValues,
+                function(tx, result) {
+                    console.log("insertID", result.insertId,
+                    "rows affected", result.rowsAffected);
+                }, onError);
+        });
+    },
+
+    getDriverDetail: function(table, callback){
+        db.transaction(function(tx) {
+            db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
+                    callback(result);
+                });
+            });
+        });
+
+    },
+
     saveRecordofDealer: function(values, callback){
          console.log("values", values);
         //Date time fields in db
@@ -806,85 +848,117 @@ function getValuePlaceHolder(columns) {
 }
  
  function getTripValues1(obj) {
-        var tripno, created_date, modified_date, total_distance, truckno;
-        //checks for integer
-        tripno = obj.tripno;
-        console.log('tripno',tripno);
-        //checks for datetime
-        created_date = obj.created_date;
-        modified_date = obj.modified_date;
-        total_distance = obj.total_distance;
-        //checks for varchar
-        truckno = obj.truckno;
+    var tripno, created_date, modified_date, total_distance, truckno;
+    //checks for integer
+    tripno = obj.tripno;
+    console.log('tripno',tripno);
+    //checks for datetime
+    created_date = obj.created_date;
+    modified_date = obj.modified_date;
+    total_distance = obj.total_distance;
+    //checks for varchar
+    truckno = obj.truckno;
+
+
+    if (tripno == null || tripno == 'null' || tripno == '')
+        tripno = null;
+    else
+        tripno = "'" + tripno + "'";
     
+    if (created_date == null || created_date == 'null' || created_date == '')
+        created_date = null;
+    else
+        created_date = "'" + created_date + "'";
 
-        if (tripno == null || tripno == 'null' || tripno == '')
-            tripno = null;
-        else
-            tripno = "'" + tripno + "'";
-        
-        if (created_date == null || created_date == 'null' || created_date == '')
-            created_date = null;
-        else
-            created_date = "'" + created_date + "'";
+    if (modified_date == null || modified_date == 'null' || modified_date == '')
+        modified_date = null;
+    else
+        modified_date = "'" + modified_date + "'";
 
-        if (modified_date == null || modified_date == 'null' || modified_date == '')
-            modified_date = null;
-        else
-            modified_date = "'" + modified_date + "'";
+    if (total_distance == null || total_distance == 'null' || total_distance == '')
+        truckno = null;
+    
+    if (truckno == null || truckno == 'null' || truckno == '')
+        truckno = null;
+    else
+        truckno = "'" + truckno + "'";
 
-        if (total_distance == null || total_distance == 'null' || total_distance == '')
-            truckno = null;
-        
-        if (truckno == null || truckno == 'null' || truckno == '')
-            truckno = null;
-        else
-            truckno = "'" + truckno + "'";
+    var currentRow = "(" + tripno + ", " + created_date + ", " + modified_date + ", "+ total_distance + ", " + truckno + ")";
+    console.log(currentRow);
 
-        var currentRow = "(" + tripno + ", " + created_date + ", " + modified_date + ", "+ total_distance + ", " + truckno + ")";
-        console.log(currentRow);
+    return currentRow;
+}
 
-        return currentRow;
+function getDriverValues(obj){
+    var driver_name, driver_image, driver_signature, pdiManager_signature;
+    driver_name=obj.driver_name;
+    driver_image=obj.driver_image;
+    driver_signature=obj.driver_signature;
+    pdiManager_signature=obj.pdiManager_signature;
+    if (driver_name == null || driver_name == 'null' || driver_name == '')
+        driver_name = null;
+    else
+        driver_name = "'" + driver_name + "'";
+
+    if (driver_image == null || driver_image == 'null' || driver_image == '')
+        driver_image = null;
+    else
+        driver_image = "'" + driver_image + "'";
+
+    if (driver_signature == null || driver_signature == 'null' || driver_signature == '')
+        driver_signature = null;
+    else
+        driver_signature = "'" + driver_signature + "'";
+
+    if (pdiManager_signature == null || pdiManager_signature == 'null' || pdiManager_signature == '')
+        pdiManager_signature = null;
+    else
+        pdiManager_signature = "'" + pdiManager_signature + "'";
+
+    var currentRow = "(" + driver_name + ", " + driver_image + ", " + driver_signature + ", " + pdiManager_signature + ")";
+    console.log(currentRow);
+
+    return currentRow;
 }
 
 function getTripValues(obj) {
-        var tripno, created_date, modified_date, truckno;
-        //checks for integer
-        tripno = obj.tripno;
-        console.log('tripno',tripno);
-        //checks for datetime
-        created_date = obj.created_date;
-        modified_date = obj.modified_date;
-        //checks for varchar
-        truckno = obj.truckno;
-      
-        
+    var tripno, created_date, modified_date, truckno;
+    //checks for integer
+    tripno = obj.tripno;
+    console.log('tripno',tripno);
+    //checks for datetime
+    created_date = obj.created_date;
+    modified_date = obj.modified_date;
+    //checks for varchar
+    truckno = obj.truckno;
+  
+    
 
-        if (tripno == null || tripno == 'null' || tripno == '')
-            tripno = null;
-        else
-            tripno = "'" + tripno + "'";
-        
-        if (created_date == null || created_date == 'null' || created_date == '')
-            created_date = null;
-        else
-            created_date = "'" + created_date + "'";
+    if (tripno == null || tripno == 'null' || tripno == '')
+        tripno = null;
+    else
+        tripno = "'" + tripno + "'";
+    
+    if (created_date == null || created_date == 'null' || created_date == '')
+        created_date = null;
+    else
+        created_date = "'" + created_date + "'";
 
-        if (modified_date == null || modified_date == 'null' || modified_date == '')
-            modified_date = null;
-        else
-            modified_date = "'" + modified_date + "'";
+    if (modified_date == null || modified_date == 'null' || modified_date == '')
+        modified_date = null;
+    else
+        modified_date = "'" + modified_date + "'";
 
-        
-        if (truckno == null || truckno == 'null' || truckno == '')
-            truckno = null;
-        else
-            truckno = "'" + truckno + "'";
+    
+    if (truckno == null || truckno == 'null' || truckno == '')
+        truckno = null;
+    else
+        truckno = "'" + truckno + "'";
 
-        var currentRow = "(" + tripno + ", " + created_date + ", " + modified_date + ", " + truckno + ")";
-        console.log(currentRow);
+    var currentRow = "(" + tripno + ", " + created_date + ", " + modified_date + ", " + truckno + ")";
+    console.log(currentRow);
 
-        return currentRow;
+    return currentRow;
 }
 
 function getInvoiceValues(obj){

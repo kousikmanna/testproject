@@ -4300,19 +4300,25 @@ font-size: 18px;
 /*.reportingText{
     color: #ff0000;
 }*/
-
+.reportingText{
+    color: red;
+}
 .reportingText::-webkit-input-placeholder{
-     color:#999;
+     color:#999 !important;
+     opacity: 1;
 }
 .reportingText:-moz-placeholder{
-     color:#999;
+     color:#999 !important;
+     opacity: 1;
 }
 .reportingText::-moz-placeholder{
-     color:#999;
+     color:#999 !important;
+     opacity: 1;
 }
 .reportingText:-ms-input-placeholder{
-     color:#999;
+     color:#999 !important;
+     opacity: 1;
 }
-.reportingText:-webkit-text-fill-color:{
+/*.reportingText:-webkit-text-fill-color:{
     color:#999;
-} 
+} */
