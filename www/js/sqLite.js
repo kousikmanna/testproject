@@ -68,6 +68,11 @@ var DBHandler = {
 
             //     }, onError);
             // });
+            // db.transaction(function(tx) {
+            //     tx.executeSql("DROP TABLE driver", [], function(tx, result) {
+
+            //     }, onError);
+            // });
             tx.executeSql('CREATE TABLE IF NOT EXISTS dealer ("dealer_name" VARCHAR, "dealer_code" VARCHAR, "pdi_manager" VARCHAR)');    
             tx.executeSql('CREATE TABLE IF NOT EXISTS driver ("driver_name" VARCHAR, "driver_image" VARCHAR, "driver_signature" VARCHAR, "pdiManager_signature" VARCHAR)');
             console.log('dealer table');
@@ -262,7 +267,7 @@ var DBHandler = {
 
         db.transaction(function(tx) {
             tx.executeSql("SELECT * FROM " + table + " WHERE flag='"+ flag + "'", [], function(tx, result) {
-                console.log('getAllRecords result', result);
+                // console.log('getAllRecords result', result);
                 callback(result);
             });
         });
@@ -277,6 +282,17 @@ var DBHandler = {
                 callback(result);
             });
         });
+    },
+
+    getDriverDetail: function(table, callback){
+        // db.transaction(function(tx) {
+            db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
+                    callback(result);
+                });
+            });
+        // });
+
     },
 
     chassisDetails: function(table, condition, callback){
@@ -301,37 +317,27 @@ var DBHandler = {
             });
         });
     },
-    saveDriverDetail: function(values, callback){
+    saveDriverDetail: function(table, values, callback){
         var obj={
             driver_name: values.driver_name,
             driver_image: values.driver_image,
             driver_signature: values.driver_signature,
             pdiManager_signature: values.pdiManager_signature
         };
-       
+        console.log('obj',obj);
         var objValues = getDriverValues(obj);
         var driverColumns = "('driver_name', 'driver_image', 'driver_signature', 'pdiManager_signature')";
         
         db.transaction(function(tx) {
-            tx.executeSql("INSERT OR REPLACE INTO driver " + driverColumns + " VALUES " + objValues,
+            tx.executeSql("INSERT OR REPLACE INTO driver "+ driverColumns + " VALUES " + objValues,
                 objValues,
                 function(tx, result) {
-                    console.log("insertID", result.insertId,
-                    "rows affected", result.rowsAffected);
+                    console.log("insertID", result.insertId,"rows affected", result.rowsAffected);
+                    callback(result);
                 }, onError);
         });
     },
 
-    getDriverDetail: function(table, callback){
-        db.transaction(function(tx) {
-            db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
-                    callback(result);
-                });
-            });
-        });
-
-    },
 
     saveRecordofDealer: function(values, callback){
          console.log("values", values);

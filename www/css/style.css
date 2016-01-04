@@ -4322,3 +4322,9 @@ font-size: 18px;
 /*.reportingText:-webkit-text-fill-color:{
     color:#999;
 } */
+.cropped {
+    width: 80%;
+    height: 50vh;
+    margin: 0 10%; 
+    object-fit: cover;
+}

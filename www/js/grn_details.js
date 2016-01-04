@@ -1,8 +1,8 @@
 $(function() {
     document.addEventListener("deviceready", onDeviceReady, false);
 });
-
 function onDeviceReady() {
+     // $.noConflict()
      localStorage.setItem('countClick',1);
      localStorage.setItem('countClick2',1);
      localStorage.setItem('countClick3',1);
@@ -748,6 +748,7 @@ function onDeviceReady() {
             }
 
             if(validationFlag==true){
+                $('.locationDetail').show();
                 add_shortage_rows();
                 // $(function(){
                 //     $.ajax({
@@ -1055,9 +1056,7 @@ function onDeviceReady() {
          console.log('attachmentNumber',attachmentNumber);
          console.log('attachmentId',attachmentId);
         if(attachmentNumber<3){
-             // navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, encodingType: Camera.EncodingType.JPEG,
-             //    popoverOptions  : new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY),
-             //    destinationType: destinationType.DATA_URL, correctOrientation: true });
+
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, encodingType: Camera.EncodingType.JPEG,
             popoverOptions  : new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY),
             destinationType: destinationType.DATA_URL, sourceType : Camera.PictureSourceType.CAMERA, correctOrientation: true});
@@ -1069,7 +1068,7 @@ function onDeviceReady() {
      
                   // console.log('grnDetailImageNumber',grnDetailImageNumber);
                   var randomNumber=generateFlagNumber();
-                  $('#'+attachmentId).after( '<div class="damageShortageImage"><img style="display:none;width:60px;height:60px; padding:2px;" class ="image1234" id="showChassisImage'+randomNumber+'" src="" /><button class="imageDelete text-center" style="width:56px">Delete</button></div>');
+                  $('#'+attachmentId).after( '<div class="damageShortageImage"><img style="display:none;width:60px;height:60px; padding:2px;" class ="image1234" id="showChassisImage'+randomNumber+'" src="" /><button class="imageDelete text-center" id="'+generateFlagNumber()+'" style="width:56px">Delete</button></div>');
                  console.log('AttachmentofChassis');
                  var imageId="showChassisImage"+randomNumber;
                  console.log('AttachmentofChassisImageId', imageId);
@@ -1714,6 +1713,7 @@ $(document).on('click', '#chassisProfileDetail', function(){
     console.log('chassisCount',chassisCount);
     var chassisArray = new Array();
     flag=generateFlagNumber();
+    localStorage.setItem('flag',flag);
     console.log('flag create',flag);
     var validationFlag1;
     var validationFlag2;
@@ -1965,6 +1965,40 @@ function onFail(message) {
       alert('Failed because: ' + message);
 }
 
+$(document).on('click', '.image1234', function(){
+    console.log('clicking image');
+    var id=$(this).attr('id');
+    var smallImage = document.getElementById(id);
+    var imageData=smallImage.src;
+    $('#imagepopup').html('<img src="'+imageData+'" style="height:50%; width:50%; margin:0 auto; display:block" />');
+    $('#popup-window').modal('show');
+
+  
+});
+
+// $(document).on('click', '.imageDelete', function(){
+//     // alert("Image is deleting");
+//   $(this).parent().remove(); 
+// });
+
+$(document).on('click','.imageDelete', function(){
+    var id=$(this).attr('id');
+    localStorage.setItem('delete-image-button-id',id);
+    $('.deletebutton').html('<button type="button" id="yes_image" class="btn btn-success">Yes</button><button type="button" id="no_image" class="btn btn-success" data-dismiss="modal">No</button>');
+    $('#popup-window-image').modal('show');
+
+});
+
+$(document).on('click', '#yes_image', function(){
+    var id=localStorage.getItem('delete-image-button-id');
+    $('#popup-window-image').modal('hide');
+    $('#'+id).parent().remove(); 
+});
+
+$(document).on('click', '#no_grn', function(){
+    $('#send-grn').modal('hide');
+});
+
 $(document).on('click', '.AttachmentofVehical', function(){ 
     if(localStorage.getItem('imageNumber') > 10){
         alert('Maximum attachment number is exceed');
@@ -1978,7 +2012,7 @@ $(document).on('click', '.AttachmentofVehical', function(){
               // alert('select image');
               var grnDetailImageNumber=localStorage.getItem('imageNumber');
               console.log('grnDetailImageNumber',grnDetailImageNumber);
-              $( ".AttachmentofVehical" ).after( '<div class="grnImage"><img style="display:none;width:60px;height:60px; padding:2px;" class ="image1234" id="showVehicalImage'+grnDetailImageNumber+'" src="" /><button class="imageDelete text-center" style="width:56px">Delete</button></div>');
+              $( ".AttachmentofVehical" ).after( '<div class="grnImage"><img style="display:none; width:60px; height:60px; padding:2px;" class ="image1234" id="showVehicalImage'+grnDetailImageNumber+'" src=""/><button class="imageDelete text-center" id="'+generateFlagNumber()+'" style="width:56px">Delete</button></div>');
               console.log('AttachmentofVehical');
               var imageId="showVehicalImage"+grnDetailImageNumber;
               console.log('AttachmentofVehicalimageId', imageId);
@@ -1996,17 +2030,14 @@ $(document).on('click', '.AttachmentofVehical', function(){
 
 
 });
-$(document).on('click', '.imageDelete', function(){
-    // alert("Image is deleting");
-  $(this).parent().remove(); 
-});
+
 
 
 $(document).on('click', '.getPicture', function(){ 
 
     console.log('getPicture');
-    var imageId=$(this).siblings('img').attr('id');
-    console.log('driver image id', imageId);
+    // var imageId=$(this).siblings('img').attr('id');
+    // console.log('driver image id', imageId);
 
     //var popover = new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY);
 
@@ -2017,8 +2048,8 @@ $(document).on('click', '.getPicture', function(){
 
         function onPhotoDataSuccess(imageData) {
               console.log('onPhotoDataSuccess');
-             
-              var smallImage = document.getElementById(imageId);
+              $( ".getPicture" ).after( '<div class="grnImage"><img style="display:none; width:100px; height:100px; padding:2px;" class ="image1234" id="driverImage" src=""/><button class="imageDelete text-center" id="'+generateFlagNumber()+'" style="width:56px">Delete</button></div>');
+              var smallImage = document.getElementById('driverImage');
               console.log("document.getElementById(imageId)",smallImage);
               smallImage.style.display = 'block';
 

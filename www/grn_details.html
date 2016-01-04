@@ -29,6 +29,7 @@
     <link href="css/plugins/datatables/datatables.css" rel="stylesheet">
     <link href="css/plugins/jqueryui/jquery-ui.css" rel="stylesheet">
     <link href="css/jquery.signaturepad.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/plugins/zoom.css">
     <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/chosen.css">
@@ -931,7 +932,7 @@
                                                 </ul>
                                                <!--  <button type="submit">Save</button> -->
                                             </div>  
-                                            <button class="sendGRNbutton grnActionButton save_sync" style="display:none;">Send GRN</button>
+                                            <button class="sendGRNbutton grnActionButton saveSync" style="display:none;">Send GRN</button>
                                             <button class="printButton grnActionButton" id="create_pdf">Print</button>
                                             <button id="makePdf" style="display:none;"></button>
                                             <div style="display:none"><img id="logo" src="img/logo.png"></div>
@@ -956,6 +957,8 @@
 
     <!--<script src="js/jquery.min.js"></script> -->
     <script type="text/javascript" src="js/search/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/plugins/velocity.min.js"></script>
+    <script type="text/javascript" src="js/plugins/enhance.js"></script>
     <script type="text/javascript" src="js/search/jquery.mockjax.js"></script>
     <script type="text/javascript" src="js/search/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="js/search/countries.js"></script>
@@ -965,6 +968,8 @@
     <script type="text/javascript" src="js/plugins/jspdf.debug.js"></script>
     <script type="text/javascript" src="js/plugins/jspdf.plugin.autotable.js"></script>
     <script type="text/javascript" src="js/plugins/html2canvas.min.js"></script>
+    
+    <!--   <script src="js/plugins/magnify.cur"></script> -->
     <script src="js/chosen.js" type="text/javascript"></script>
     <script src="js/plugins/prism.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.signaturepad.min.js"></script>
@@ -977,6 +982,8 @@
 
     <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- <script type="text/javascript" src="js/plugins/jquery.magnifier.js"></script> -->
+     
     <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
     <script src="js/plugins/popupoverlay/defaults.js"></script>
     <!--BOOTSTRAP DATE PICKER SCRIPT-->
@@ -1018,6 +1025,46 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal image size large -->
+    <div class="modal fade" id="popup-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body" id="imagepopup">
+                
+               
+          </div>
+          <div class="modal-footer confirm-log-btns">
+           
+            <button type="button" style="width:100%" class="btn logout-window-btns" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Modal image delete popup -->
+     <div class="modal fade" id="popup-window-image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- <div class="modal-body" id="imagepopup">
+                
+               
+          </div>
+          <div class="modal-footer confirm-log-btns">
+           
+            <button type="button" style="width:100%" class="btn logout-window-btns" data-dismiss="modal">OK</button>
+          </div> -->
+            <div class="modal-body" id="logout-modal-img">
+                <h4 class="modal-title" id="myModalLabel"> Are you sure to delete the image</h4>
+            </div>
+             <div class="modal-footer confirm-log-btns deletebutton">
+                  <!--  <button type="button" id="yes_grn" class="btn btn-success">Yes</button>
+                   <button type="button" id="no_grn" class="btn btn-success" data-dismiss="modal">No</button> -->
+            </div>
+
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="send-grn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1214,6 +1261,9 @@
     <script type="text/javascript" src="js/version.js"></script>
     <script type="text/javascript" src="js/grn_details.js"></script>
     <script type="text/javascript" src="js/create_pdf.js"></script>
+    <script type="text/javascript" src="js/sync.js"></script>
+    <!-- -->
+    
 <div id="loading">
   <div class="txt"></div>
   <div class="bg"></div>
