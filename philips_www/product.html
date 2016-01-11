@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
+<title>Product  </title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/jquery.highlight-5.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/product.css">
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container m_p c_width">
+ 
+</div>
+</body>
+<script>
+ $.ajax({
+   url:"ajaxproduct.html",
+             success: function(data) {
+              // alert(data);
+              $('.m_p').empty();
+              //$("#cssfile").attr('href', 'css/product.css');
+              $('.m_p').append(data);
+             }
+             });
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+
+     $('#search').on('keyup', function(){
+            console.log($(this).val());
+                $('div.staff-container').unhighlight();
+                $('div.staff-container').highlight($(this).val());
+                var query = $('.search-query').val().toLowerCase();
+
+         $('div.staff-container').each(function(){      
+               var $this = $(this);
+               if($this.text().toLowerCase().indexOf(query) === -1){
+                console.log(query);
+               $('div.staff-container').highlight(query);
+                   $this.closest('div.staff-container').fadeOut();
+                 }
+              else { 
+                $this.closest('div.staff-container').fadeIn();
+                 }
+          });
+
+        });  
+});
+
+
+</script>
+</html>

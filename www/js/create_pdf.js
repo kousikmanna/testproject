@@ -1,5 +1,6 @@
 
-$(document).on('click', '#makePdf', function(){ 
+// $(document).on('click', '#makePdf', function(){ 
+ $(document).on('click', '.printButton', function(){ 
     var grnFlag=localStorage.getItem('grnFlag');
     var base64Data;
     console.log("generating pdf...");

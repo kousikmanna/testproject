@@ -1,0 +1,256 @@
+.border{
+	border:1px solid blue;
+}
+.header{
+	    padding: 1px;
+    margin: 0px;
+    color: blue;
+	font-weight:bold;
+}
+.m_p{
+	margin:0px;
+	padding:0px;
+
+
+}
+.c_width{
+   width: 100%;
+}
+.b_c{
+	background-color: #151B54;
+    /* margin-bottom: -7px; */
+    padding: 3px;
+    height: 35px;
+}
+.header1{
+	    padding: 1px;
+    margin: 0px;
+    font-size: 13px;
+    color:#fff;
+}
+.pad{
+	padding:5px;
+  margin-top: 4px;
+}
+.icon{
+	position: absolute;
+    left: 98%;
+    top: 24%;
+}
+/*.img1{
+	width:100px;
+}*/
+.tableborder,.tableborder > tbody > tr > td{
+border:none;
+border-top:none;
+}
+.removemargin{
+	margin:0px;
+}
+.removepad{
+  padding:0px;
+}
+.floatright{
+  float:right;
+  padding: 0px;
+}
+.icon_color{
+  color:#fff;
+  float:right;
+  padding: 7px 0px;
+}
+.rowpad{
+      padding: 35px 0px 0px;
+}
+
+.colpad{
+	padding:30px;
+}
+/*body{
+    margin-bottom:50px;
+}*/html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  /*font-family: "Helvetica Neue", Arial, sans-serif;*/
+}
+#footer{
+     position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*padding: 2rem;*/
+
+}
+.circle{
+  padding:5px 10px;
+  display: inline-block;
+  -moz-border-radius: 60px;
+  -webkit-border-radius: 60px;
+  border-radius: 60px;
+  -moz-box-shadow: 0px 0px 5px #337ab7;
+  -webkit-box-shadow: 0px 0px 5px #337ab7;
+  box-shadow: 0px 0px 5px #337ab7;
+color: #337ab7;
+}
+.font{
+	    /*margin-left: -60px;*/
+       vertical-align: middle;
+    font-style: italic;
+    margin: 8px 8px;
+    padding:4px;
+}
+  .tooltip-inner {
+    /*background-color:lightgrey;
+    color:black;*/
+    width: 300px; 
+}
+
+.time{
+  white-space: pre;
+  font-size: 12px;
+    margin-top: -29px;
+}
+.m_p1{
+      margin: 0px;
+    padding: 0px 0px 0px 9px;
+}
+.pl{
+      margin: 200px 0px;
+    border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    padding: 0px;
+  }
+
+
+@media only screen and (min-width : 320px) and (max-width : 480px) and (orientation : portrait) {
+    #p1{
+          margin: 28px 0px;
+          border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+    .icon{
+      left:92%;
+    }
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) and (orientation : landscape) {
+    #p1{
+          margin: 54px 0px !important;
+          border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+     .icon{
+      left:95%;
+    }
+}
+@media only screen and (min-width : 360px)and (max-width :640px) and (orientation : portrait) {
+
+    #p1{
+          margin: 35px 0px;
+          border-top: 2px solid rgba(128, 128, 128, 0.38);
+          border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+}
+@media only screen and (min-width : 360px)and (max-width :640px) and (orientation : landscape) {
+
+    /* CSS here */
+    #p1{
+          margin: 81px 0px;
+    }
+     .icon{
+      left:95%;
+    }
+}
+@media only screen and (min-width :768px)and (max-width :1024px) and (orientation : landscape) {
+    #p1{
+          margin: 145px 0px !important;
+           border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+
+    }
+    .icon{
+      left:97%;
+    }
+}
+@media only screen and (min-width :768px)and (max-width :1024px) and (orientation : portrait) {
+
+    /* CSS here */
+    #p1{
+          margin: 103px 0px;
+           border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+      .icon{
+    left:96%;
+  }
+}
+@media only screen and (min-width :800px)and (max-width :1280px) and (orientation : portrait) {
+
+    /* CSS here */
+    #p1{
+          margin: 108px 0px;
+           border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+    /*.icon{
+      left:97%;
+    }*/
+}
+@media only screen and (min-width :800px)and (max-width :1280px) and (orientation : landscape) {
+
+    /* CSS here */
+    #p1{
+          margin: 188px 0px;
+           border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+    .icon{
+      left:97%;
+    }
+}
+@media only screen and (min-width :980px)and (max-width :1280px) and (orientation : portrait) {
+
+    /* CSS here */
+    #p1{
+          margin: 138px 0px;
+           border-top: 2px solid rgba(128, 128, 128, 0.38);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.38);
+    }
+
+}
+
+.highlight {
+    color: red;  
+}
+   .imgwidth{
+  width:100%;
+}
+/*@media only screen and (min-width : 1224px) {
+ #p1{
+          margin: 200px 0px;
+    }
+  }
+*/
+/*@media (min-width: 1200px){
+   #p1{
+          margin: 197px 0px;
+    }
+    .icon{
+      left:98%;
+    }
+}
+.acolor{
+	color:#333;
+}

@@ -89,54 +89,63 @@ function details(result) {
     var resLen = result.rows.length;
     if(resLen == 0){
         alert('Please enter string which is matching with trip number');
-    }
-    var trip_invoice4;
-    console.log("resLen",  result.rows.length);
-    console.log("details", result);
-    DBHandler.getAllRecords2('invoice', invoiceDetails);
-    function invoiceDetails(result2) {
-        var resLen2 = result2.rows.length;
-                 
-        trip_invoice='<table class="table table-condensed table_trip_data" style="border-collapse:collapse;"><thead class="thead_trip"><tr><th>Trip No</th><th>Date</th><th>Truck No</th><th>Select</th><th>&nbsp;</th></tr></thead><tbody>';
-        console.log("invoiceDetails", result2);
-        for (var i = 0; i < resLen; i++) {
-            console.log("result.rows.item(i)",  result.rows.item(i));
-            var tripNumber=result.rows.item(i).tripno;
-            tripNumber=tripNumber.replace(/^0+/, '');
-            trip_invoice2='<tr data-toggle="collapse" id="100'+i+'" data-target="#demo'+i+'" class="accordion-toggle" id = "tripdetail"><td>'+tripNumber+'</td><td>'+result.rows.item(i).created_date+'</td><td>'+result.rows.item(i).truckno+'</td><td style="display:none;">'+result.rows.item(i).total_distance+'</td><td><input type="checkbox" id="1000'+i+'" name="select_for_trip1000'+i+'[]" class="select_for_trip"/></td><td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td></tr>';
-            var trip_invoice_i='';
-            var trip_invoice3;
-        
-            for(var j = 0; j < resLen2; j++){
-                console.log("result2.rows.item(j)",  result2.rows.item(j));
-                console.log("result2.rows.item(j).invoiceno",  result2.rows.item(j).invoiceno);
-                trip_invoice3='<tr><td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo'+i+'"><table class="table table-striped"><thead><th>Invoice No</th><th>Plant</th><th>Qty</th></thead><tbody>';
-                trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"></div></div></td></tr>';
-                if(result.rows.item(i).tripno === result2.rows.item(j).tripno){
-                   console.log("i..",i);
-                trip_invoice_i=trip_invoice_i + '<tr><td>'+result2.rows.item(j).invoiceno+'</td><td>'+result2.rows.item(j).plant+'</td><td>'+result2.rows.item(j).billqty+'</td><td><input type="checkbox" id="'+i+'" name="select_for_grn1000'+i+'[]" class="select_for_grn1000'+i+'" style="display:none;"/></td></tr>';
-                 console.log('trip_invoice_i',trip_invoice_i);
+    }else{
+        $("#pendingTrip").addClass('active');
+        $("#searchTripDetail").removeClass('active');
+        $("#profile").removeClass('active in');
+        $("#home").addClass('active in');
+        var countClick4=localStorage.getItem('countClick4');
+        //
+        var trip_invoice4;
+        console.log("resLen",  result.rows.length);
+        console.log("details", result);
+        DBHandler.getAllRecords2('invoice', invoiceDetails);
+        function invoiceDetails(result2) {
+            var resLen2 = result2.rows.length;
+                     
+            trip_invoice='<table class="table table-condensed table_trip_data" style="border-collapse:collapse;"><thead class="thead_trip"><tr><th>Trip No</th><th>Date</th><th>Truck No</th><th>Select</th><th>&nbsp;</th></tr></thead><tbody>';
+            console.log("invoiceDetails", result2);
+            for (var i = 0; i < resLen; i++) {
+                console.log("result.rows.item(i)",  result.rows.item(i));
+                var tripNumber=result.rows.item(i).tripno;
+                tripNumber=tripNumber.replace(/^0+/, '');
+                trip_invoice2='<tr data-toggle="collapse" id="100'+i+'" data-target="#demo'+i+'" class="accordion-toggle" id = "tripdetail"><td>'+tripNumber+'</td><td>'+result.rows.item(i).created_date+'</td><td>'+result.rows.item(i).truckno+'</td><td style="display:none;">'+result.rows.item(i).total_distance+'</td><td><input type="checkbox" id="1000'+i+'" name="select_for_trip1000'+i+'[]" class="select_for_trip"/></td><td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td></tr>';
+                var trip_invoice_i='';
+                var trip_invoice3;
+            
+                for(var j = 0; j < resLen2; j++){
+                    console.log("result2.rows.item(j)",  result2.rows.item(j));
+                    console.log("result2.rows.item(j).invoiceno",  result2.rows.item(j).invoiceno);
+                    trip_invoice3='<tr><td colspan="12" class="hiddenRow"><div class="accordian-body collapse" id="demo'+i+'"><table class="table table-striped"><thead><th>Invoice No</th><th>Plant</th><th>Qty</th></thead><tbody>';
+                    trip_invoice4='</tbody></table><div class="col-md-12 col-sm-12 col-xs-12 text-center"></div></div></td></tr>';
+                    if(result.rows.item(i).tripno === result2.rows.item(j).tripno){
+                       console.log("i..",i);
+                    trip_invoice_i=trip_invoice_i + '<tr><td>'+result2.rows.item(j).invoiceno+'</td><td>'+result2.rows.item(j).plant+'</td><td>'+result2.rows.item(j).billqty+'</td><td><input type="checkbox" id="'+i+'" name="select_for_grn1000'+i+'[]" class="select_for_grn1000'+i+'" style="display:none;"/></td></tr>';
+                     console.log('trip_invoice_i',trip_invoice_i);
+                    }
+                    if(j === resLen2-1){
+                       trip_invoice5 = trip_invoice5 + trip_invoice3+trip_invoice_i+trip_invoice4;
+                       trip_invoice2=trip_invoice2+trip_invoice5;
+                       trip_invoice6=trip_invoice6+trip_invoice2;
+                       // console.log('trip_invoice6',trip_invoice6);
+                    }
+                    
                 }
-                if(j === resLen2-1){
-                   trip_invoice5 = trip_invoice5 + trip_invoice3+trip_invoice_i+trip_invoice4;
-                   trip_invoice2=trip_invoice2+trip_invoice5;
-                   trip_invoice6=trip_invoice6+trip_invoice2;
-                   // console.log('trip_invoice6',trip_invoice6);
+
+               
+                if(i===resLen-1){
+                        trip_invoice=trip_invoice + trip_invoice6+'</tbody></table><div class="text-center"><button data-rel="1" class="createGrnButton" id="grnButton">Create GRN</button></div>';
+                       
                 }
-                
-            }
 
-           
-            if(i===resLen-1){
-                    trip_invoice=trip_invoice + trip_invoice6+'</tbody></table><div class="text-center"><button data-rel="1" class="createGrnButton" id="grnButton">Create GRN</button></div>';
-                   
             }
+            $("#tabledetail").append(trip_invoice);
+            hideLoading();
 
+            console.log('datatime', $.now());
         }
-        $("#tabledetail").append(trip_invoice);
-        hideLoading();
-
-        console.log('datatime', $.now());
+        
+        //
     }
     
 
@@ -156,13 +165,13 @@ function searchInvoiceCallback(result){
 $(document).on('click', '#datepicker1', function(){
     if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker1").val())) {
         $("#datepicker1").attr("placeholder", "From Date").val('');
-        alert("Invalid date");
+        // alert("Invalid date");
     }
 });
 $(document).on('click', '#datepicker2', function(){
     if(!/(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)/.test($("#datepicker2").val())) {
         $("#datepicker2").attr("placeholder", "To Date").val('');
-        alert("Invalid date");
+        // alert("Invalid date");
     }
 });
 $(document).on('click', '.createGrnButton', function(){ 
@@ -299,30 +308,45 @@ $(document).on('click', '.logoutModel', function(){
     
 
 });
+
+
 function logout_user() {
     window.location = "index.html";
 }
+
 
 $(document).on('click', '#searchTrip', function(){ 
     showLoading();
     localStorage.setItem('countNew', 2);
     var tripNumber = $('#tripNumber').val();
-    if(tripNumber){
-        var condition=" WHERE tripno LIKE '0000"+tripNumber+"%'" +" OR tripno LIKE '"+"%"+tripNumber+"'";
-        console.log('condition',condition);
+    var condition=" WHERE tripno LIKE '0000"+tripNumber+"%'" +" OR tripno LIKE '"+"%"+tripNumber+"'";
+    console.log('condition',condition);
+    // $("#pendingTrip").addClass('active');
+    // $("#searchTripDetail").removeClass('active');
+    // $("#profile").removeClass('active in');
+    // $("#home").addClass('active in');
+    // var countClick4=localStorage.getItem('countClick4');     
+    DBHandler.searchRecordsOfTrip('trip', condition, details);
+    // if(tripNumber){
+        
          // $('#tripDetailList').removeAttr("href"); 
          // $('#pendingTripDetail').attr("href", "#home"); 
-         $("#pendingTrip").addClass('active');
-         $("#searchTripDetail").removeClass('active');
-         $("#profile").removeClass('active in');
-          $("#home").addClass('active in');
+        // $("#pendingTrip").addClass('active');
+        // $("#searchTripDetail").removeClass('active');
+        // $("#profile").removeClass('active in');
+        // $("#home").addClass('active in');
 
-         var countClick4=localStorage.getItem('countClick4');
+        // var countClick4=localStorage.getItem('countClick4');
          
-        DBHandler.searchRecordsOfTrip('trip', condition, details);
-    }else{
-        alert('Please enter string which is matching with trip number');
-    }
+        // DBHandler.searchRecordsOfTrip('trip', condition, details);
+    // }else{
+        // alert('Please enter string which is matching with trip number');
+    //     $("#pendingTrip").addClass('active');
+    //     $("#searchTripDetail").removeClass('active');
+    //     $("#profile").removeClass('active in');
+    //     $("#home").addClass('active in');
+    //     DBHandler.searchRecordsOfTrip('trip', condition, details);
+    // }
     
 });
 

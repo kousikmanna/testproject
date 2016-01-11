@@ -20,7 +20,16 @@ a:active,
 a:focus {
     color: #34495e;
 }
-
+/*a, a:hover, a:active, a:focus, a:visited {
+color: #427fed;
+cursor: pointer;
+text-decoration: none;
+}*/
+.companyUrl{
+    color: #427fed;
+    cursor: pointer;
+    text-decoration: none;
+}
 @media(min-width:768px) {
     /*body {
         background: #34495e;
@@ -962,6 +971,21 @@ div.dataTables_filter label {
     padding: 0 15px;
 }
 
+.portlet-heading {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background: #F7F9FA;
+}
+.grnTab{
+    position: fixed;
+    top: 38px;
+    z-index: 10;
+    background: #D1D3D6;
+    width: 100%;
+    margin-left: 0;
+}
 .portlet .portlet-heading h4 {
     padding: 1px 0;
     font-size: 16px;
@@ -970,7 +994,16 @@ div.dataTables_filter label {
 .portlet .portlet-heading a {
     color: #fff;
 }
-
+.myTabContentClass{
+    margin-top: 78px;
+}
+.pos-fixed{
+    position: fixed;
+    top: 78px;
+    width: 100%;
+    background: #EEEFF0;
+    z-index: 10;
+}
 .portlet .portlet-heading a:hover,
 .portlet .portlet-heading a:active,
 .portlet .portlet-heading a:focus {
@@ -3889,25 +3922,63 @@ width: 100% !important;
     margin-top: 20px;
 }
 
+.chassisPrevious,
 .grnDetailsNext,
 .grnDetailsreport {
-    width: 120px;
+    width: 100px;
     height: 35px;
     background: #636363 none repeat scroll 0% 0%;
     color: #FFF;
-    border: medium none;
-    margin: 10px 0px;
+    /*border: medium none;*/
+    /*margin: 10px 0px;*/
     display: block;
     padding: 5px;
     margin: 0 auto;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
+    top: 0;
     font-size: 18px;
 }
-
+.showAllChassis{
+    width: 140px;
+    height: 35px;
+    background: #636363 none repeat scroll 0% 0%;
+    color: #FFF;
+    /*border: medium none;*/
+    /*margin: 10px 0px;*/
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+    /*margin-top: 10px;*/
+    top: 0;
+    font-size: 16px;
+    text-align: center;
+}
+.damageLocationText,
+.truckLayoutTable{
+    display:inline-block;
+}
+.damageLocationText{
+    background-color:rgb(238, 241, 238) !important;
+}
+.grnDetailsreport{
+    text-align: center;
+    /*margin-left: 42%;*/
+}
+.chassisPrevious{
+    text-decoration: none;
+}
 .grnDetailsNext:hover,
 .grnDetailsreport:hover {
     color: #fff;
     text-decoration: none;
+}
+.showAllChassis:hover{
+    color: #fff;
+    text-decoration: none;
+}
+.showAllChassis{
+    /*margin-left: 10%;*/
+    display: none;
 }
 
 .grnBasicDetailArea {
@@ -4082,12 +4153,10 @@ width: 100% !important;
      background:#DDD;
 }
 
-
 .truckLayout_actionBlk {
     height: 40px !important;
     padding: 0px !important;
 }
-
 
 
 .truckLayout_actionBlk button {
@@ -4116,10 +4185,10 @@ a.list-group-item:hover, a.list-group-item:focus, .nav-tabs > li > a:hover, .nav
 .go_back_arrow {
     cursor: pointer;
     cursor: pointer;
-float: left;
-margin-top: 10px;
-margin-left: 10px;
-font-size: 18px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 18px;
 }
 
 .signOutIcon {
@@ -4130,8 +4199,12 @@ font-size: 18px;
 
 .accordian_parent {
     display: none;
+    /*margin-top: 260px;*/
 }
 .acc_parent_block {
+    font-size: 16px;
+}
+.chassisBlockDetail{
     font-size: 16px;
 }
 
@@ -4175,11 +4248,42 @@ font-size: 18px;
 .damageDesc_4,
 .damageDesc_5,
 .shortageDesc
- {
-    width: 100%;
+ {  
+    width: 80%;
     height: 35px;
     margin-top: 10px;
 }
+.damageDesc_1,
+.damageDesc_4
+{
+    width: 80% !important;
+}
+.selectDamageIcon,
+.damageDesc_1{
+    display:inline-block;
+}
+
+.typeofDamageIcon,
+.damageDesc_2{
+    display:inline-block;
+}
+
+.causeofDamageIcon,
+.damageDesc_3{
+    display:inline-block;
+}
+
+.selectShortageIcon,
+.damageDesc_4{
+    display:inline-block;
+}
+
+.selectQuantityIcon,
+.shortageDesc{
+     display:inline-block;
+}
+
+
 .type, 
 .short_delete_row{
     display: inline-block;
@@ -4223,13 +4327,31 @@ font-size: 18px;
     padding: 0;
 }
 
-#damage_btn,
-#shortage_btn,
-.remove_chassis {
+.damage_btn,
+.shortage_btn,
+.allChassisShow
+ {
     background: #636363;
-    border: none;
     border-radius: 0;
+    display:inline-block;
+    color: #FFF
+   
 }
+
+.damage_btn{
+    float:left;
+    width:40%;
+    /*border-right: 4px solid #fff;*/
+}
+
+.shortage_btn{
+    float:right;
+    width:40%;
+    /*border-left: 4px solid #fff;*/
+}
+ .allChassisShow{
+    width:15%;
+ }
 .button {
     text-align: right;
 }
@@ -4237,14 +4359,19 @@ font-size: 18px;
 .chassis_block {
     padding-left: 0;
     padding-right: 0;
+    height: 7%;
 }
 
 .getChassisNumber,
 .chassis_heading {
-    padding: 15px;  
+    padding: 4px; 
 }
+.chassis_heading{
+    padding-left: 2.5%;
+}
+    
 
-.remove_chassis,
+
 .remove_all {
     width: 125px;
     height: 35px;
@@ -4270,11 +4397,16 @@ font-size: 18px;
     background: #EAE9E9;
     box-shadow: 1px 1px 1px 1px #ccc;
 }
-
+.remove_chassis,
+.downArrowImg,
+.upArrowImg{
+    width: 24px;
+    height: 24px;
+}
 .short_delete_row, 
 .dam_delete_row {
     margin-top: 6px;
-    font-size: 26px;
+    font-size: 18px;
 
 }
 .logoutBlock{
@@ -4296,6 +4428,13 @@ font-size: 18px;
 }
 #driverName{
     width: 90%;
+    height: 25px;
+    margin-top: 10px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #ccc;
+
 }
 /*.reportingText{
     color: #ff0000;
@@ -4328,3 +4467,146 @@ font-size: 18px;
     margin: 0 10%; 
     object-fit: cover;
 }
+/*.chassisPosition{
+    margin-top: 175px;
+}*/
+.chassisTemplateStyle{
+    margin-bottom: 10px;
+    /*border: 1px solid #ccc;*/
+    padding: 6px;
+    background: #EAE9E9;
+    /*box-shadow: 1px 1px 1px 1px #ccc;*/
+    /*margin-top: 94px;*/
+}
+
+#button-Previous-inside-chassis-tab,
+#button-Next-inside-chassis-tab
+{
+    display:inline-block;
+}
+#button-Previous-inside-chassis-tab{
+    float:left;
+}
+#button-Next-inside-chassis-tab{
+    float:right;
+}
+#chassisArrow{
+    float:right;
+}
+.chassis_heading,
+#chassisArrow{
+    display:inline-block;
+}
+.chassis_heading,
+#chassisArrow{
+    /*position: fixed;
+    top: 65px;*/
+}
+
+#searchChassisInput,
+#searchChassisIcon,
+#searchChassisIcon{
+    display:inline-block;
+}
+
+.locationDetail{
+    /*margin-left: 24%;*/
+    padding-bottom: 14.5px;
+    font-size: 22px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+
+
+.dam_delete_row {
+    width: 78px;
+    height: 34px;
+    background: #636363 none repeat scroll 0% 0%;
+    color: #FFF;
+    border: medium none;
+    margin: 10px 0px;
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    margin-right: 40%
+}
+
+#damageHeading{
+    background: #C4C0C0;
+    border-radius: 0;
+    text-align: center;
+    height: 40px;
+    font-size: 16px;
+    padding-top:2%;
+}
+
+.damageCameraLogo{
+  float: left;
+  margin-left: 6px !important;
+}
+.damageCameraLogo,.damageCameraLogoDesc{
+    display:inline-block;
+}
+.damageCameraLogoDesc{
+    float: left;
+    margin-left: 5%;
+}
+
+
+.short_delete_row {
+    width: 78px;
+    height: 34px;
+    background: #636363 none repeat scroll 0% 0%;
+    color: #FFF;
+    border: medium none;
+    margin: 10px 0px;
+    display: block;
+    padding: 5px;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    margin-right: 40%
+}
+
+#shortageHeading{
+    background: #C4C0C0;
+    border-radius: 0;
+    text-align: center;
+    height: 40px;
+    font-size: 16px;
+    padding-top:2%;
+}
+
+.shortageCameraLogo{
+  float: left;
+  margin-left: 6px !important;
+}
+.shortageCameraLogoDesc{
+    margin-left: 5%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.shortageCameraLogo,.shortageCameraLogoDesc{
+    display:inline-block;
+}
+.shortageCameraLogoDesc{
+    float: left;
+    margin-left: 5%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.attchmentBlock{
+    background: #EAE9E9;
+}
+
+
+
+

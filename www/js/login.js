@@ -3,10 +3,10 @@ $(function() {
 });
 
 function onDeviceReady() {
+    document.addEventListener("backbutton", function(e){ 
+        navigator.app.exitApp();
+    });
     $(".bajaj-footer").css("display", "block");
-    document.addEventListener("backbutton", function (e) {
-        e.preventDefault();
-    }, false );
     DBHandler.initDatabase();
 }
 

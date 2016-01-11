@@ -24,9 +24,11 @@ function validateLogin(username,password)
     if(username=='' && password=='')
         errorMsg="Please enter credentials"
     else if(username=='')
-        errorMsg="Please enter username"
+        // errorMsg="Please enter username"
+        errorMsg="Invalid credentials"
     else if(password=='')
-        errorMsg="Please enter password"
+        // errorMsg="Please enter password"
+        errorMsg="Invalid credentials"
     
     return errorMsg;
 }
