@@ -3,9 +3,13 @@
     var DBHandler = {
         /*
          * ------------------------ Initiate Database ------------------------
-         */
+        */
         initDatabase: function() {
             console.log('initDatabase function');
+           
+            if(window.sqlitePlugin){
+                console.log('Database');
+            }
             db = window.sqlitePlugin.openDatabase({
                 name: dbName,
                 createFromLocation: 1
@@ -24,7 +28,7 @@
 
         },
          
-        saveRecordsOfPrr_model: function(values, callback) {
+        saveRecordofPrr_model: function(values, callback) {
             console.log("values", values);
             var objValues = "";
             for (var i = 0; i < values.length; i++) {
@@ -50,7 +54,7 @@
 
         },
         
-        saveRecordsOfPrr_category: function(values, callback) {
+        saveRecordofPrr_category: function(values, callback) {
             console.log("values", values);
             var objValues = "";
 
@@ -77,7 +81,7 @@
 
         },
        
-        saveRecordsOfPrr_subcategory: function(values, callback) {
+        saveRecordofPrr_subcategory: function(values, callback) {
             console.log("values", values);
             var objValues = "";
 
@@ -103,7 +107,7 @@
 
         },
         
-        saveRecordsOfPrr_products: function(values, callback) {
+        saveRecordofPrr_products: function(values, callback) {
             console.log("values", values);
             var objValues = "";
 
@@ -127,8 +131,40 @@
 
         },
 
+        getRecordsFromTable: function(table, callback) {
+            console.log('table name',table);
+            console.log('getRecordsFromTable');
+            db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM " + table, [], function(tx, result) {
+                    callback(result);
+                });
+            });
+        },
 
+        getRecordsFromTableWithCondition: function(table, condition, callback) {
+            db.transaction(function(tx) {
+                tx.executeSql("SELECT * FROM " + table + condition, [], function(tx, result) {
+                    callback(result);
+                });
+            });
+        },
 
+        getRecordsWithCondition: function(table, condition, callback){
+            db.transaction(function(tx){
+                tx.executeSql("SELECT * FROM " + table + condition, [], function(tx, result){
+                    callback(result);
+                });
+            });
+
+        },
+
+        getRecords: function(table, data, callback){
+            db.transaction(function(tx){
+                tx.executeSql("SELECT * from " + table + "WHERE id=" + "'" + data + "'", [], function(tx, result){
+                    callback(result);
+                });
+            });
+        }
 
     };  
    

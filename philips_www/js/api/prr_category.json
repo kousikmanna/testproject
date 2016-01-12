@@ -1,0 +1,197 @@
+{
+  
+  "prr_category": [
+    {
+      "id": 1,
+      "category_name": "LED Spots",
+      "model_id": 1,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "category_name": "LED Tube",
+      "model_id": 1,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "category_name": "LED Candle",
+      "model_id": 1,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 4,
+      "category_name": "2*2 Luminaires",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 5,
+      "category_name": "4*1 Luminaires",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 6,
+      "category_name": "LED Batten",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 7,
+      "category_name": "Accessories",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 8,
+      "category_name": "LED Bulkhead",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 9,
+      "category_name": "LED Waterproof",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 10,
+      "category_name": "Conventional Batten",
+      "model_id": 3,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 11,
+      "category_name": "Conventional Water Proof",
+      "model_id": 3,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 12,
+      "category_name": "LED Streetlights",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 13,
+      "category_name": "LED Downlights",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 14,
+      "category_name": "LED Track lights",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 15,
+      "category_name": "LED Floodlights",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 16,
+      "category_name": "LED Post Top",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 17,
+      "category_name": "LED Bollard",
+      "model_id": 2,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 18,
+      "category_name": "CDM Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 19,
+      "category_name": "HPI Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 20,
+      "category_name": "SON Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 21,
+      "category_name": "PL-C Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 22,
+      "category_name": "PL-S Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 23,
+      "category_name": "PL-L Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    },
+    {
+      "id": 24,
+      "category_name": "MH Lamps",
+      "model_id": 4,
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": 1
+    }
+  ]
+}

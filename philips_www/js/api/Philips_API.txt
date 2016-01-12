@@ -1,0 +1,588 @@
+
+/*     API in JSON Format below for Prr_model Table */
+
+{
+  "prr_model": [
+    {
+      "id": "1",
+      "model_name": "LED Lamps",
+      "model_image": "",
+      "created_date": "",
+      "active": "1"
+    },
+    {
+      "id": "2",
+      "model_name": "LED Luminaires",
+      "model_image": "",
+      "created_date": "",
+      "active": "1"
+    },
+    {
+      "id": "3",
+      "model_name": "Conventional Luminaires",
+      "model_image": "",
+      "created_date": "",
+      "active": "1"
+    },
+    {
+      "id": "4",
+      "model_name": "Conventional Lamp",
+      "model_image": "",
+      "created_date": "",
+      "active": "1);"
+    }
+  ]
+}
+
+/*  finished */
+
+
+/*     API in JSON Format for Prr_Category Table */
+
+{
+  "prr_category": [
+    {
+      "id": "1",
+      "category_name": "LED Spots",
+      "model_id": "1",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "2",
+      "category_name": "LED Tube",
+      "model_id": "1",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "3",
+      "category_name": "LED Candle",
+      "model_id": "1",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "4",
+      "category_name": "2*2 Luminaires",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "5",
+      "category_name": "4*1 Luminaires",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "6",
+      "category_name": "LED Batten",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "7",
+      "category_name": "Accessories",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "8",
+      "category_name": "LED Bulkhead",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "9",
+      "category_name": "LED Waterproof",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "10",
+      "category_name": "Conventional Batten",
+      "model_id": "3",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "11",
+      "category_name": "Conventional Water Proof",
+      "model_id": "3",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "12",
+      "category_name": "LED Streetlights",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "13",
+      "category_name": "LED Downlights",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "14",
+      "category_name": "LED Track lights",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "15",
+      "category_name": "LED Floodlights",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "16",
+      "category_name": "LED Post Top",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "17",
+      "category_name": "LED Bollard",
+      "model_id": "2",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "18",
+      "category_name": "CDM Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "19",
+      "category_name": "HPI Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "20",
+      "category_name": "SON Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "21",
+      "category_name": "PL-C Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "22",
+      "category_name": "PL-S Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "23",
+      "category_name": "PL-L Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "24",
+      "category_name": "MH Lamps",
+      "model_id": "4",
+      "image_url": "",
+      "created_date": "2016-01-04",
+      "active": "1);"
+    }
+  ]
+}
+
+/*  Finished */
+
+
+/*     API in JSON Format below for Prr_Sub Category Table */
+
+
+{
+  "prr_subcategory": [
+    {
+      "id": "1",
+      "category_id": "1",
+      "subcategory_name": "GU10",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "2",
+      "category_id": "1",
+      "subcategory_name": "GU16",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "3",
+      "category_id": "1",
+      "subcategory_name": "MR16",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "4",
+      "category_id": "1",
+      "subcategory_name": "AR111",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "5",
+      "category_id": "1",
+      "subcategory_name": "PAR",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "6",
+      "category_id": "2",
+      "subcategory_name": "Essential LEDtube",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "7",
+      "category_id": "2",
+      "subcategory_name": "Master LEDtube",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "8",
+      "category_id": "3",
+      "subcategory_name": "LED Candle",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "9",
+      "category_id": "4",
+      "subcategory_name": "Green Square Gen 1",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "10",
+      "category_id": "4",
+      "subcategory_name": "Green Square Gen 2",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "11",
+      "category_id": "4",
+      "subcategory_name": "Surface Cirrus",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "12",
+      "category_id": "4",
+      "subcategory_name": "Full Glow",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "13",
+      "category_id": "5",
+      "subcategory_name": "Full Glow 4 x 1",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "14",
+      "category_id": "6",
+      "subcategory_name": "Endura LED Batten",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "15",
+      "category_id": "7",
+      "subcategory_name": "Accessory",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "16",
+      "category_id": "8",
+      "subcategory_name": "LED Bulkhead",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "17",
+      "category_id": "9",
+      "subcategory_name": "LED Waterproof",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "18",
+      "category_id": "10",
+      "subcategory_name": "TMC501",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "19",
+      "category_id": "11",
+      "subcategory_name": "TCW450",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "20",
+      "category_id": "12",
+      "subcategory_name": "GeenLine Smart",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "21",
+      "category_id": "12",
+      "subcategory_name": "GreenLine",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "22",
+      "category_id": "13",
+      "subcategory_name": "GreenLEDi",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "23",
+      "category_id": "13",
+      "subcategory_name": "GreenLED",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "24",
+      "category_id": "13",
+      "subcategory_name": "Green LED Spot",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "25",
+      "category_id": "13",
+      "subcategory_name": "GreenLED Surface Mounted",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "26",
+      "category_id": "13",
+      "subcategory_name": "GreenLEDUltima",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "27",
+      "category_id": "13",
+      "subcategory_name": "Cirrus Surface Mounted",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "28",
+      "category_id": "14",
+      "subcategory_name": "GreenAccent Pro - Track Mounted",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "29",
+      "category_id": "13",
+      "subcategory_name": "GreenAccent Pro - Recessed",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "30",
+      "category_id": "15",
+      "subcategory_name": "Uniflood",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "31",
+      "category_id": "15",
+      "subcategory_name": "TempoLED",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "32",
+      "category_id": "16",
+      "subcategory_name": "LED Post Top",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "33",
+      "category_id": "17",
+      "subcategory_name": "LED Bollard",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "34",
+      "category_id": "1",
+      "subcategory_name": "LED Spot",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "35",
+      "category_id": "18",
+      "subcategory_name": "CDM Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "36",
+      "category_id": "19",
+      "subcategory_name": "HPI Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "37",
+      "category_id": "20",
+      "subcategory_name": "SON Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "38",
+      "category_id": "21",
+      "subcategory_name": "PL-C Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "39",
+      "category_id": "22",
+      "subcategory_name": "PL-S Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "40",
+      "category_id": "23",
+      "subcategory_name": "PL-L Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1"
+    },
+    {
+      "id": "41",
+      "category_id": "24",
+      "subcategory_name": "MH Lamps",
+      "URL": "",
+      "created_date": "2016-01-04",
+      "active": "1);"
+    }
+  ]
+}
+
+/* Finished */
+
+
+
+
+
+
+
+
+
+

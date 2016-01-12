@@ -6,15 +6,31 @@
   <title>Philips</title>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
  -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery.highlight-5.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/slider.css" id="cssfile">
-<script src="js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="css/product.css"> -->
 
+<!-- <link rel="stylesheet" href="css/product.css"> -->
+<script type="text/template" id="prr_modelTemplate">    
+    <% for(var i=0; i<length; i++) {%>
+      <div class="row rowpad removemargin staff-container">
+        <a  class="acolor" href="productdetails.html">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m_p1">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 removepad">
+              <img class="img-responsive imgwidth" src="images/<%= resultData.item(i).model_image %>">
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pl" id="p1">
+              <div class="text">
+                <p class="font"><%= resultData.item(i).model_name %></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% }; %>
+</script>
 </head>
 <body>
   <div class="container m_p c_width">
@@ -59,19 +75,22 @@
             </div>
         </div>
     </div><!------end of second col-lg-12-->
-</div>    
+</div> 
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.highlight-5.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/plugin/underscore-min.js"></script>
 
-
-
-
-
-</body>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/custom/SQLitePlugin.js"></script>
+<script type="text/javascript" src="js/custom/sqLite.js"></script>
+<script type="text/javascript" src="js/custom/product.js"></script>
 <script>
 
 $(document).ready(function(){
    var height = $(window).height();  //getting windows height
   // alert(height);
-   jQuery('#myCarousel').css('height',height+'px');   //and setting height of carousel
+   $('#myCarousel').css('height',height+'px');   //and setting height of carousel
 });
 
 $(function () {
@@ -81,7 +100,7 @@ $(function () {
     $('#myCarousel').on('slid.bs.carousel', function (e) {
         if ($('.carousel-inner .item:last').hasClass('active')) {
             $('#myCarousel').carousel('pause');
-            setInterval("$('#myCarousel').carousel();",3000);
+            setInterval("$('#myCarousel').carousel();",1000);
              console.log('Before ajax request log');
             $.ajax({
                 url:"ajaxproduct.html",
@@ -91,6 +110,7 @@ $(function () {
                 $('.m_p').empty();
                 $("#cssfile").attr('href', 'css/product.css');
                 $('.m_p').append(data);
+                get_func();
                }
              });
             // .done(function() {
@@ -103,6 +123,6 @@ $(function () {
         }
     });
 });
-
 </script>
+</body>
 </html>
